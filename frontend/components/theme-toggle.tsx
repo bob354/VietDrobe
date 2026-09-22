@@ -1,57 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Sun, Moon } from "lucide-react";
 
+const subscribe = (notify: () => void) => {
+  window.addEventListener("vietdrobe-theme", notify);
+  return () => window.removeEventListener("vietdrobe-theme", notify);
+};
+const getSnapshot = () => document.documentElement.classList.contains("dark");
+const getServerSnapshot = () => false;
+
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem("theme");
-    if (
-      stored === "dark" ||
-      (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === "light" ? "dark" : "light";
-    setTheme(nextTheme);
-    localStorage.setItem("theme", nextTheme);
-    if (nextTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+  const dark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const toggle = () => {
+    const next = dark ? "light" : "dark";
+    document.documentElement.classList.toggle("dark", next === "dark");
+    localStorage.setItem("theme", next);
+    window.dispatchEvent(new Event("vietdrobe-theme"));
   };
-
-  if (!mounted) {
-    return (
-      <div className="w-8 h-8 rounded-xs border border-[#E7DFD3] dark:border-[#2E2A26]" />
-    );
-  }
-
-  return (
-    <button
-      onClick={toggleTheme}
-      type="button"
-      title={theme === "light" ? "Chuyển sang chế độ Sơn Mài (Tối)" : "Chuyển sang chế độ Bạch Ngọc (Sáng)"}
-      aria-label="Chuyển đổi giao diện sáng/tối"
-      className="relative flex items-center justify-center w-8 h-8 border border-[#E7DFD3] dark:border-[#2E2A26] bg-white/60 dark:bg-[#1C1A18]/80 text-[#78716C] dark:text-[#A8A29E] hover:text-[#1C1917] dark:hover:text-[#EAE5DC] hover:border-[#1C1917] dark:hover:border-[#EAE5DC] transition-all duration-300 group"
-    >
-      {theme === "light" ? (
-        <Moon className="w-4 h-4 stroke-[1.5] transition-transform duration-300 group-hover:-rotate-12" />
-      ) : (
-        <Sun className="w-4 h-4 stroke-[1.5] text-[#C5A880] transition-transform duration-300 group-hover:rotate-45" />
-      )}
-    </button>
-  );
+  return <button type="button" onClick={toggle} title={dark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"} aria-label="Chuyển đổi giao diện sáng/tối" className="relative flex items-center justify-center w-8 h-8 border border-[#D8D0C1] dark:border-[#485047] bg-white/60 dark:bg-[#232923]/80 text-[#625F56] dark:text-[#B7AFA0] hover:text-[#24251F] dark:hover:text-[#EEE8DC] transition-colors">{dark ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}</button>;
 }

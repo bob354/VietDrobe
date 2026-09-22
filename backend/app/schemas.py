@@ -210,6 +210,7 @@ class RentalCatalogItem(GarmentResponse):
 class RentalCalculateRequest(BaseModel):
     garment_ids: list[str]
     rental_days: int
+    quantities: dict[str, int] = Field(default_factory=dict)
 
 class RentalCalculateResponse(BaseModel):
     items: list[dict]

@@ -20,7 +20,7 @@ async def get_rental_catalog(db: AsyncSession = Depends(get_db)):
 
 @router.post("/calculate", response_model=RentalCalculateResponse)
 async def calculate_price(request: RentalCalculateRequest, db: AsyncSession = Depends(get_db)):
-    result = await RentalService.calculate_price(db, request.garment_ids, request.rental_days)
+    result = await RentalService.calculate_price(db, request.garment_ids, request.rental_days, request.quantities)
     return result
 
 @router.post("/book", response_model=RentalBookingResponse)

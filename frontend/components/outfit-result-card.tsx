@@ -21,16 +21,16 @@ export function OutfitResultCard({ outfit, pinnedGarmentIds = [], onSave }: Outf
   };
 
   return (
-    <div className="bg-white dark:bg-[#1C1A18] border border-[#E7DFD3] dark:border-[#2E2A26] p-6 sm:p-8 shadow-2xs relative transition-colors duration-200">
+    <div className="bg-white dark:bg-[#232923] border border-[#D8D0C1] dark:border-[#485047] p-6 sm:p-8 shadow-2xs relative transition-colors duration-200">
       {/* Top Title & Seal */}
-      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-[#E7DFD3] dark:border-[#2E2A26]">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-[#D8D0C1] dark:border-[#485047]">
         <div>
           {outfit.headline && (
-            <span className="text-[11px] font-serif uppercase tracking-widest text-[#9E2A2B] dark:text-[#D94142] block mb-1">
+            <span className="text-[11px] font-serif uppercase tracking-widest text-[#9F3B30] dark:text-[#D16F5D] block mb-1">
               — {outfit.headline}
             </span>
           )}
-          <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1C1917] dark:text-[#EAE5DC]">
+          <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#24251F] dark:text-[#EEE8DC]">
             {outfit.name}
           </h3>
         </div>
@@ -48,12 +48,12 @@ export function OutfitResultCard({ outfit, pinnedGarmentIds = [], onSave }: Outf
                 key={g.id || idx}
                 className={`relative flex flex-col items-center p-3 text-center transition-all ${
                   isPinned
-                    ? "bg-[#FAF1EE] dark:bg-[#2A1717] border-2 border-[#9E2A2B] dark:border-[#D94142] shadow-xs"
-                    : "bg-[#FAF7F2] dark:bg-[#24211E] border border-[#E7DFD3]/80 dark:border-[#2E2A26]"
+                    ? "bg-[#F4E9E3] dark:bg-[#382724] border-2 border-[#9F3B30] dark:border-[#D16F5D] shadow-xs"
+                    : "bg-[#F5F1E9] dark:bg-[#2C332C] border border-[#D8D0C1]/80 dark:border-[#485047]"
                 }`}
               >
                 {isPinned && (
-                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-10 text-[9px] font-serif uppercase tracking-widest bg-[#9E2A2B] dark:bg-[#D94142] text-[#FAF7F2] px-2 py-0.5 whitespace-nowrap shadow-xs">
+                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-10 text-[9px] font-serif uppercase tracking-widest bg-[#9F3B30] dark:bg-[#D16F5D] text-[#F5F1E9] px-2 py-0.5 whitespace-nowrap shadow-xs">
                     Món Tâm Điểm
                   </span>
                 )}
@@ -65,10 +65,10 @@ export function OutfitResultCard({ outfit, pinnedGarmentIds = [], onSave }: Outf
                     className="object-contain"
                   />
                 </div>
-                <span className="font-serif text-xs font-semibold text-[#1C1917] dark:text-[#EAE5DC] line-clamp-1">
+                <span className="font-serif text-xs font-semibold text-[#24251F] dark:text-[#EEE8DC] line-clamp-1">
                   {g.display_name}
                 </span>
-                <span className="text-[10px] text-[#A8A29E] dark:text-[#78716C] mt-0.5">
+                <span className="text-[10px] text-[#797468] dark:text-[#625F56] mt-0.5">
                   {g.primary_color || g.type}
                 </span>
               </div>
@@ -78,39 +78,39 @@ export function OutfitResultCard({ outfit, pinnedGarmentIds = [], onSave }: Outf
       </div>
 
       {/* Editorial Notes */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 border-t border-[#E7DFD3] dark:border-[#2E2A26] text-xs font-serif leading-relaxed">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 border-t border-[#D8D0C1] dark:border-[#485047] text-xs font-serif leading-relaxed">
         {outfit.ai_styling_tip && (
-          <div className="border-l-2 border-[#1C1917] dark:border-[#EAE5DC] pl-3">
-            <span className="text-[10px] uppercase tracking-widest text-[#78716C] dark:text-[#A8A29E] block mb-0.5 font-sans font-medium">
+          <div className="border-l-2 border-[#24251F] dark:border-[#EEE8DC] pl-3">
+            <span className="text-[10px] uppercase tracking-widest text-[#625F56] dark:text-[#B7AFA0] block mb-0.5 font-sans font-medium">
               Mẹo Diện Đồ
             </span>
-            <p className="text-[#44403C] dark:text-[#D6D0C7]">{outfit.ai_styling_tip}</p>
+            <p className="text-[#4A4C43] dark:text-[#D7D0C4]">{outfit.ai_styling_tip}</p>
           </div>
         )}
 
         {outfit.ai_cultural_note && (
-          <div className="border-l-2 border-[#9E2A2B] dark:border-[#D94142] pl-3">
-            <span className="text-[10px] uppercase tracking-widest text-[#9E2A2B] dark:text-[#D94142] block mb-0.5 font-sans font-medium">
+          <div className="border-l-2 border-[#9F3B30] dark:border-[#D16F5D] pl-3">
+            <span className="text-[10px] uppercase tracking-widest text-[#9F3B30] dark:text-[#D16F5D] block mb-0.5 font-sans font-medium">
               Điển Tích Văn Hóa
             </span>
-            <p className="text-[#44403C] dark:text-[#D6D0C7]">{outfit.ai_cultural_note}</p>
+            <p className="text-[#4A4C43] dark:text-[#D7D0C4]">{outfit.ai_cultural_note}</p>
           </div>
         )}
       </div>
 
       {/* Action footer */}
-      <div className="flex items-center justify-between pt-4 mt-2 border-t border-[#E7DFD3] dark:border-[#2E2A26] text-xs">
-        <span className="text-[11px] text-[#A8A29E] dark:text-[#78716C] font-serif">
-          Độ hài hòa màu sắc: <strong className="text-[#1C1917] dark:text-[#EAE5DC]">{Math.round((outfit.color_harmony_score || 0.9) * 100)}%</strong>
+      <div className="flex items-center justify-between pt-4 mt-2 border-t border-[#D8D0C1] dark:border-[#485047] text-xs">
+        <span className="text-[11px] text-[#797468] dark:text-[#625F56] font-serif">
+          Độ hài hòa màu sắc: <strong className="text-[#24251F] dark:text-[#EEE8DC]">{Math.round((outfit.color_harmony_score || 0.9) * 100)}%</strong>
         </span>
 
         <button
           onClick={handleSave}
-          className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#1C1917] dark:border-[#EAE5DC] text-[#1C1917] dark:text-[#EAE5DC] text-xs uppercase tracking-wider font-medium hover:bg-[#1C1917] dark:hover:bg-[#EAE5DC] hover:text-[#F9F6F0] dark:hover:text-[#121110] transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#24251F] dark:border-[#EEE8DC] text-[#24251F] dark:text-[#EEE8DC] text-xs uppercase tracking-wider font-medium hover:bg-[#24251F] dark:hover:bg-[#EEE8DC] hover:text-[#F9F6F0] dark:hover:text-[#121110] transition-colors"
         >
           {saved ? (
             <>
-              <Check className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#D94142]" /> Đã Lưu Thẻ
+              <Check className="w-3.5 h-3.5 text-[#9F3B30] dark:text-[#D16F5D]" /> Đã Lưu Thẻ
             </>
           ) : (
             <>

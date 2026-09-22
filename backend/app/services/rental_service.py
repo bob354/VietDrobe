@@ -8,7 +8,7 @@ from app.schemas import RentalBookingRequest
 
 class RentalService:
     @staticmethod
-    async def calculate_price(db: AsyncSession, garment_ids: list[str], rental_days: int) -> dict:
+    async def calculate_price(db: AsyncSession, garment_ids: list[str], rental_days: int, quantities: dict[str, int] | None = None) -> dict:
         if not garment_ids:
             return {"items": [], "subtotal": 0, "combo_discount_percent": 0, "discount_amount": 0, "deposit": 0, "total": 0}
             
@@ -20,14 +20,16 @@ class RentalService:
         deposit = 0.0
         
         for g in garments:
+            quantity = max(1, (quantities or {}).get(g.id, 1))
             price_per_day = g.rental_price_per_day or 0.0
-            item_total = price_per_day * rental_days
+            item_total = price_per_day * rental_days * quantity
             dep = g.deposit_per_item or 0.0
             
             items_detail.append({
                 "garment_id": g.id,
                 "display_name": g.display_name,
                 "price_per_day": price_per_day,
+                "quantity": quantity,
                 "item_total": item_total
             })
             
@@ -64,7 +66,7 @@ class RentalService:
         if rental_days <= 0:
             rental_days = 1
             
-        pricing = await RentalService.calculate_price(db, garment_ids, rental_days)
+        pricing = await RentalService.calculate_price(db, garment_ids, rental_days, {item.garment_id: item.quantity for item in data.garment_ids})
         
         booking = RentalBooking(
             customer_name=data.customer_name,

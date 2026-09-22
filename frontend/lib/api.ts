@@ -107,10 +107,10 @@ export const api = {
     return request<{ items: RentalCatalogItem[]; total: number }>("/rentals/catalog");
   },
 
-  async calculateRental(garment_ids: string[], rental_days: number): Promise<RentalCalculateResponse> {
+  async calculateRental(garment_ids: string[], rental_days: number, quantities: Record<string, number> = {}): Promise<RentalCalculateResponse> {
     return request<RentalCalculateResponse>("/rentals/calculate", {
       method: "POST",
-      body: JSON.stringify({ garment_ids, rental_days }),
+      body: JSON.stringify({ garment_ids, rental_days, quantities }),
     });
   },
 
@@ -120,7 +120,7 @@ export const api = {
     email?: string;
     rental_date: string;
     return_date: string;
-    items: { garment_id: string; size: string; quantity: number }[];
+    garment_ids: { garment_id: string; size: string; quantity: number }[];
     notes?: string;
   }): Promise<RentalBookingResponse> {
     return request<RentalBookingResponse>("/rentals/book", {

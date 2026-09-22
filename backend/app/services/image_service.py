@@ -10,12 +10,15 @@ class ImageService:
 
     def get_image_path(self, relative_path: str) -> Path:
         """Resolve full filesystem path for an image."""
-        # Sanitize relative path
         clean_path = relative_path.lstrip("/\\")
-        return self.storage_path / clean_path
+        source_path = self.storage_path / clean_path
+        cleaned_artwork = self.storage_path / "clean" / clean_path
+        return cleaned_artwork if cleaned_artwork.is_file() else source_path
 
     @staticmethod
     def get_public_url(relative_path: str) -> str:
-        """Return relative URL to serve image from API."""
+        """Return the preferred public URL for supplied garment artwork."""
         clean_path = relative_path.lstrip("/\\").replace("\\", "/")
-        return f"/api/v1/images/{clean_path}"
+        cleaned_artwork = Path(settings.storage_path) / "clean" / clean_path
+        served_path = f"clean/{clean_path}" if cleaned_artwork.is_file() else clean_path
+        return f"/api/v1/images/{served_path}"

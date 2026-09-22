@@ -20,11 +20,11 @@ export function RentalCartProvider({ children }: { children: ReactNode }) {
 
   const addToCart = (garment: Garment, size: string, quantity: number) => {
     setCartItems((prev) => {
-      const existing = prev.find((item) => item.garment.id === garment.id && item.size === size);
+      const existing = prev.find((item) => item.garment.id === garment.id);
       if (existing) {
         return prev.map((item) =>
-          item.garment.id === garment.id && item.size === size
-            ? { ...item, quantity: item.quantity + quantity }
+          item.garment.id === garment.id
+            ? { ...item, size, quantity: item.quantity + quantity }
             : item
         );
       }

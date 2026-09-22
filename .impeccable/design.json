@@ -1,0 +1,497 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-22T01:50:06.987Z",
+  "title": "Design System: VietDrobe",
+  "extensions": {
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home hero heading."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Interior page headings."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation and uppercase actions."
+      }
+    },
+    "shadows": [
+      {
+        "name": "hero-artwork",
+        "value": "18px 22px 40px rgba(32,39,31,.12)",
+        "purpose": "Lift for the home garment illustration."
+      },
+      {
+        "name": "garment-hover",
+        "value": "0 16px 30px rgba(28,31,25,.08)",
+        "purpose": "Hover feedback on garment cards."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "background .25s, color .25s, transform .25s",
+        "purpose": "Home button hover transitions."
+      },
+      {
+        "name": "card-image",
+        "value": "transform .4s ease",
+        "purpose": "Small garment image zoom on card hover."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "studio-stack",
+        "value": "1100px"
+      },
+      {
+        "name": "home-and-navigation-stack",
+        "value": "760px"
+      }
+    ],
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0115 84.6)",
+          "oklch(25% 0.0115 84.6)",
+          "oklch(35% 0.0115 84.6)",
+          "oklch(45% 0.0115 84.6)",
+          "oklch(55% 0.0115 84.6)",
+          "oklch(68% 0.0115 84.6)",
+          "oklch(82% 0.0115 84.6)",
+          "oklch(95% 0.0115 84.6)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0110 114.8)",
+          "oklch(25% 0.0110 114.8)",
+          "oklch(35% 0.0110 114.8)",
+          "oklch(45% 0.0110 114.8)",
+          "oklch(55% 0.0110 114.8)",
+          "oklch(68% 0.0110 114.8)",
+          "oklch(82% 0.0110 114.8)",
+          "oklch(95% 0.0110 114.8)"
+        ]
+      },
+      "paper-surface": {
+        "role": "neutral",
+        "displayName": "Paper Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0069 88.6)",
+          "oklch(25% 0.0069 88.6)",
+          "oklch(35% 0.0069 88.6)",
+          "oklch(45% 0.0069 88.6)",
+          "oklch(55% 0.0069 88.6)",
+          "oklch(68% 0.0069 88.6)",
+          "oklch(82% 0.0069 88.6)",
+          "oklch(95% 0.0069 88.6)"
+        ]
+      },
+      "paper-subtle": {
+        "role": "neutral",
+        "displayName": "Paper Subtle",
+        "tonalRamp": [
+          "oklch(15% 0.0144 84.6)",
+          "oklch(25% 0.0144 84.6)",
+          "oklch(35% 0.0144 84.6)",
+          "oklch(45% 0.0144 84.6)",
+          "oklch(55% 0.0144 84.6)",
+          "oklch(68% 0.0144 84.6)",
+          "oklch(82% 0.0144 84.6)",
+          "oklch(95% 0.0144 84.6)"
+        ]
+      },
+      "paper-border": {
+        "role": "neutral",
+        "displayName": "Paper Border",
+        "tonalRamp": [
+          "oklch(15% 0.0222 83.3)",
+          "oklch(25% 0.0222 83.3)",
+          "oklch(35% 0.0222 83.3)",
+          "oklch(45% 0.0222 83.3)",
+          "oklch(55% 0.0222 83.3)",
+          "oklch(68% 0.0222 83.3)",
+          "oklch(82% 0.0222 83.3)",
+          "oklch(95% 0.0222 83.3)"
+        ]
+      },
+      "paper-border-subtle": {
+        "role": "neutral",
+        "displayName": "Paper Border Subtle",
+        "tonalRamp": [
+          "oklch(15% 0.0178 81.3)",
+          "oklch(25% 0.0178 81.3)",
+          "oklch(35% 0.0178 81.3)",
+          "oklch(45% 0.0178 81.3)",
+          "oklch(55% 0.0178 81.3)",
+          "oklch(68% 0.0178 81.3)",
+          "oklch(82% 0.0178 81.3)",
+          "oklch(95% 0.0178 81.3)"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Text Secondary",
+        "tonalRamp": [
+          "oklch(15% 0.0145 91.6)",
+          "oklch(25% 0.0145 91.6)",
+          "oklch(35% 0.0145 91.6)",
+          "oklch(45% 0.0145 91.6)",
+          "oklch(55% 0.0145 91.6)",
+          "oklch(68% 0.0145 91.6)",
+          "oklch(82% 0.0145 91.6)",
+          "oklch(95% 0.0145 91.6)"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Text Muted",
+        "tonalRamp": [
+          "oklch(15% 0.0191 88.1)",
+          "oklch(25% 0.0191 88.1)",
+          "oklch(35% 0.0191 88.1)",
+          "oklch(45% 0.0191 88.1)",
+          "oklch(55% 0.0191 88.1)",
+          "oklch(68% 0.0191 88.1)",
+          "oklch(82% 0.0191 88.1)",
+          "oklch(95% 0.0191 88.1)"
+        ]
+      },
+      "seal-rust": {
+        "role": "primary",
+        "displayName": "Seal Rust",
+        "tonalRamp": [
+          "oklch(15% 0.1354 29.1)",
+          "oklch(25% 0.1354 29.1)",
+          "oklch(35% 0.1354 29.1)",
+          "oklch(45% 0.1354 29.1)",
+          "oklch(55% 0.1354 29.1)",
+          "oklch(68% 0.1354 29.1)",
+          "oklch(82% 0.1354 29.1)",
+          "oklch(95% 0.1354 29.1)"
+        ]
+      },
+      "seal-rust-border": {
+        "role": "primary",
+        "displayName": "Seal Rust Border",
+        "tonalRamp": [
+          "oklch(15% 0.1203 30.0)",
+          "oklch(25% 0.1203 30.0)",
+          "oklch(35% 0.1203 30.0)",
+          "oklch(45% 0.1203 30.0)",
+          "oklch(55% 0.1203 30.0)",
+          "oklch(68% 0.1203 30.0)",
+          "oklch(82% 0.1203 30.0)",
+          "oklch(95% 0.1203 30.0)"
+        ]
+      },
+      "seal-text": {
+        "role": "primary",
+        "displayName": "Seal Text",
+        "tonalRamp": [
+          "oklch(15% 0.0147 80.7)",
+          "oklch(25% 0.0147 80.7)",
+          "oklch(35% 0.0147 80.7)",
+          "oklch(45% 0.0147 80.7)",
+          "oklch(55% 0.0147 80.7)",
+          "oklch(68% 0.0147 80.7)",
+          "oklch(82% 0.0147 80.7)",
+          "oklch(95% 0.0147 80.7)"
+        ]
+      },
+      "deep-olive": {
+        "role": "secondary",
+        "displayName": "Deep Olive",
+        "tonalRamp": [
+          "oklch(15% 0.0210 142.4)",
+          "oklch(25% 0.0210 142.4)",
+          "oklch(35% 0.0210 142.4)",
+          "oklch(45% 0.0210 142.4)",
+          "oklch(55% 0.0210 142.4)",
+          "oklch(68% 0.0210 142.4)",
+          "oklch(82% 0.0210 142.4)",
+          "oklch(95% 0.0210 142.4)"
+        ]
+      },
+      "night-paper": {
+        "role": "neutral",
+        "displayName": "Night Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0083 153.2)",
+          "oklch(25% 0.0083 153.2)",
+          "oklch(35% 0.0083 153.2)",
+          "oklch(45% 0.0083 153.2)",
+          "oklch(55% 0.0083 153.2)",
+          "oklch(68% 0.0083 153.2)",
+          "oklch(82% 0.0083 153.2)",
+          "oklch(95% 0.0083 153.2)"
+        ]
+      },
+      "night-ink": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0169 88.0)",
+          "oklch(25% 0.0169 88.0)",
+          "oklch(35% 0.0169 88.0)",
+          "oklch(45% 0.0169 88.0)",
+          "oklch(55% 0.0169 88.0)",
+          "oklch(68% 0.0169 88.0)",
+          "oklch(82% 0.0169 88.0)",
+          "oklch(95% 0.0169 88.0)"
+        ]
+      },
+      "night-surface": {
+        "role": "neutral",
+        "displayName": "Night Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0139 145.2)",
+          "oklch(25% 0.0139 145.2)",
+          "oklch(35% 0.0139 145.2)",
+          "oklch(45% 0.0139 145.2)",
+          "oklch(55% 0.0139 145.2)",
+          "oklch(68% 0.0139 145.2)",
+          "oklch(82% 0.0139 145.2)",
+          "oklch(95% 0.0139 145.2)"
+        ]
+      },
+      "night-surface-subtle": {
+        "role": "neutral",
+        "displayName": "Night Surface Subtle",
+        "tonalRamp": [
+          "oklch(15% 0.0156 145.2)",
+          "oklch(25% 0.0156 145.2)",
+          "oklch(35% 0.0156 145.2)",
+          "oklch(45% 0.0156 145.2)",
+          "oklch(55% 0.0156 145.2)",
+          "oklch(68% 0.0156 145.2)",
+          "oklch(82% 0.0156 145.2)",
+          "oklch(95% 0.0156 145.2)"
+        ]
+      },
+      "night-border": {
+        "role": "neutral",
+        "displayName": "Night Border",
+        "tonalRamp": [
+          "oklch(15% 0.0179 142.1)",
+          "oklch(25% 0.0179 142.1)",
+          "oklch(35% 0.0179 142.1)",
+          "oklch(45% 0.0179 142.1)",
+          "oklch(55% 0.0179 142.1)",
+          "oklch(68% 0.0179 142.1)",
+          "oklch(82% 0.0179 142.1)",
+          "oklch(95% 0.0179 142.1)"
+        ]
+      },
+      "night-border-subtle": {
+        "role": "neutral",
+        "displayName": "Night Border Subtle",
+        "tonalRamp": [
+          "oklch(15% 0.0153 145.2)",
+          "oklch(25% 0.0153 145.2)",
+          "oklch(35% 0.0153 145.2)",
+          "oklch(45% 0.0153 145.2)",
+          "oklch(55% 0.0153 145.2)",
+          "oklch(68% 0.0153 145.2)",
+          "oklch(82% 0.0153 145.2)",
+          "oklch(95% 0.0153 145.2)"
+        ]
+      },
+      "night-text-primary": {
+        "role": "neutral",
+        "displayName": "Night Text Primary",
+        "tonalRamp": [
+          "oklch(15% 0.0173 84.6)",
+          "oklch(25% 0.0173 84.6)",
+          "oklch(35% 0.0173 84.6)",
+          "oklch(45% 0.0173 84.6)",
+          "oklch(55% 0.0173 84.6)",
+          "oklch(68% 0.0173 84.6)",
+          "oklch(82% 0.0173 84.6)",
+          "oklch(95% 0.0173 84.6)"
+        ]
+      },
+      "night-text-secondary": {
+        "role": "neutral",
+        "displayName": "Night Text Secondary",
+        "tonalRamp": [
+          "oklch(15% 0.0202 80.1)",
+          "oklch(25% 0.0202 80.1)",
+          "oklch(35% 0.0202 80.1)",
+          "oklch(45% 0.0202 80.1)",
+          "oklch(55% 0.0202 80.1)",
+          "oklch(68% 0.0202 80.1)",
+          "oklch(82% 0.0202 80.1)",
+          "oklch(95% 0.0202 80.1)"
+        ]
+      },
+      "night-text-muted": {
+        "role": "neutral",
+        "displayName": "Night Text Muted",
+        "tonalRamp": [
+          "oklch(15% 0.0223 88.8)",
+          "oklch(25% 0.0223 88.8)",
+          "oklch(35% 0.0223 88.8)",
+          "oklch(45% 0.0223 88.8)",
+          "oklch(55% 0.0223 88.8)",
+          "oklch(68% 0.0223 88.8)",
+          "oklch(82% 0.0223 88.8)",
+          "oklch(95% 0.0223 88.8)"
+        ]
+      },
+      "night-rust": {
+        "role": "primary",
+        "displayName": "Night Rust",
+        "tonalRamp": [
+          "oklch(15% 0.1272 31.6)",
+          "oklch(25% 0.1272 31.6)",
+          "oklch(35% 0.1272 31.6)",
+          "oklch(45% 0.1272 31.6)",
+          "oklch(55% 0.1272 31.6)",
+          "oklch(68% 0.1272 31.6)",
+          "oklch(82% 0.1272 31.6)",
+          "oklch(95% 0.1272 31.6)"
+        ]
+      },
+      "night-seal": {
+        "role": "primary",
+        "displayName": "Night Seal",
+        "tonalRamp": [
+          "oklch(15% 0.1294 30.3)",
+          "oklch(25% 0.1294 30.3)",
+          "oklch(35% 0.1294 30.3)",
+          "oklch(45% 0.1294 30.3)",
+          "oklch(55% 0.1294 30.3)",
+          "oklch(68% 0.1294 30.3)",
+          "oklch(82% 0.1294 30.3)",
+          "oklch(95% 0.1294 30.3)"
+        ]
+      },
+      "night-seal-border": {
+        "role": "primary",
+        "displayName": "Night Seal Border",
+        "tonalRamp": [
+          "oklch(15% 0.1132 30.6)",
+          "oklch(25% 0.1132 30.6)",
+          "oklch(35% 0.1132 30.6)",
+          "oklch(45% 0.1132 30.6)",
+          "oklch(55% 0.1132 30.6)",
+          "oklch(68% 0.1132 30.6)",
+          "oklch(82% 0.1132 30.6)",
+          "oklch(95% 0.1132 30.6)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(68% 0 0)",
+          "oklch(82% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "Solid Button",
+      "kind": "button",
+      "refersTo": "button-solid",
+      "description": "Ink filled editorial action with rust hover.",
+      "html": "<button class=\"ds-button-solid\">Khám phá tủ đồ <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-button-solid { display:inline-flex; align-items:center; justify-content:space-between; gap:30px; min-height:49px; padding:0 23px; border:0; border-radius:0; background:var(--foreground, #24251f); color:var(--background, #f5f1e9); font:700 11px/1.2 'Segoe UI',Arial,sans-serif; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:background .25s,color .25s,transform .25s; }.ds-button-solid:hover { background:var(--accent, #9f3b30); color:#fff; transform:translateY(-2px); }.ds-button-solid:focus-visible { outline:2px solid var(--accent, #9f3b30); outline-offset:3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Quiet secondary action with an ink reversal on hover.",
+      "html": "<button class=\"ds-button-outline\">Mở studio <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-button-outline { display:inline-flex; align-items:center; justify-content:space-between; gap:30px; min-height:49px; padding:0 20px; border:1px solid var(--foreground, #24251f); border-radius:0; background:transparent; color:var(--foreground, #24251f); font:700 11px/1.2 'Segoe UI',Arial,sans-serif; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:background .25s,color .25s; }.ds-button-outline:hover { background:var(--foreground, #24251f); color:var(--background, #f5f1e9); }.ds-button-outline:focus-visible { outline:2px solid var(--accent, #9f3b30); outline-offset:3px; }"
+    },
+    {
+      "name": "Studio Input",
+      "kind": "input",
+      "description": "Square bordered chat prompt field.",
+      "html": "<input class=\"ds-studio-input\" type=\"text\" placeholder=\"Nhập yêu cầu của bạn...\" aria-label=\"Yêu cầu phối đồ\" />",
+      "css": ".ds-studio-input { width:100%; max-width:320px; padding:10px 16px; border:1px solid var(--border, #d8d0c1); border-radius:0; background:#fff; color:var(--foreground, #24251f); font:400 14px/1.4 'Segoe UI',Arial,sans-serif; caret-color:var(--accent, #9f3b30); }.ds-studio-input:hover { border-color:var(--text-secondary, #625f56); }.ds-studio-input:focus-visible { border-color:var(--accent, #9f3b30); outline:2px solid var(--accent, #9f3b30); outline-offset:2px; }"
+    },
+    {
+      "name": "Prompt Chip",
+      "kind": "chip",
+      "description": "Pill shaped example question in the studio chat.",
+      "html": "<button class=\"ds-prompt-chip\">Nguồn gốc Áo Nhật Bình</button>",
+      "css": ".ds-prompt-chip { padding:6px 12px; border:1px solid var(--border, #d8d0c1); border-radius:9999px; background:#fff; color:var(--text-secondary, #625f56); font:400 12px/1.3 'Segoe UI',Arial,sans-serif; cursor:pointer; transition:color .2s,border-color .2s; }.ds-prompt-chip:hover { color:var(--accent, #9f3b30); border-color:var(--accent, #9f3b30); }.ds-prompt-chip:focus-visible { outline:2px solid var(--accent, #9f3b30); outline-offset:3px; }"
+    },
+    {
+      "name": "Garment Card",
+      "kind": "card",
+      "refersTo": "garment-card",
+      "description": "Image first garment tile with a quiet editorial caption.",
+      "html": "<button class=\"ds-garment-card\"><span class=\"ds-garment-art\" aria-hidden=\"true\"><span class=\"ds-garment-line\">Áo</span><span class=\"ds-garment-category\">Cổ phục</span></span><span class=\"ds-garment-details\"><strong>Áo Nhật Bình</strong><span>Trang phục truyền thống <em>Xem chi tiết</em></span></span></button>",
+      "css": ".ds-garment-card { display:flex; flex-direction:column; width:220px; padding:0; overflow:hidden; border:1px solid var(--border, #d8d0c1); border-radius:0; background:var(--surface, #fffdf8); color:var(--foreground, #24251f); text-align:left; cursor:pointer; transition:transform .2s,border-color .2s,box-shadow .2s; }.ds-garment-card:hover { transform:translateY(-3px); border-color:var(--accent, #9f3b30); box-shadow:0 16px 30px rgba(28,31,25,.08); }.ds-garment-card:focus-visible { outline:2px solid var(--accent, #9f3b30); outline-offset:3px; }.ds-garment-art { position:relative; display:grid; place-items:center; height:160px; background:var(--surface-subtle, #eee9df); }.ds-garment-line { font:italic 64px/1 'Cormorant Garamond',Cambria,Georgia,serif; color:var(--text-secondary, #625f56); }.ds-garment-category { position:absolute; top:12px; left:12px; padding:5px 8px; border:1px solid var(--border, #d8d0c1); background:var(--surface, #fffdf8); color:var(--accent, #9f3b30); font:700 9px/1 'Segoe UI',Arial,sans-serif; letter-spacing:.14em; text-transform:uppercase; }.ds-garment-details { display:flex; flex-direction:column; gap:10px; padding:17px 17px 20px; border-top:1px solid var(--border, #d8d0c1); }.ds-garment-details strong { font:600 16px/1.35 Cambria,Georgia,serif; }.ds-garment-details>span { display:flex; justify-content:space-between; gap:8px; color:var(--text-secondary, #625f56); font:400 11px/1.3 'Segoe UI',Arial,sans-serif; }.ds-garment-details em { color:var(--accent, #9f3b30); font-style:normal; }"
+    },
+    {
+      "name": "Desktop Navigation",
+      "kind": "nav",
+      "description": "Small editorial route links with a rust active underline.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Điều hướng chính\"><a href=\"#\" class=\"ds-nav-active\">Tủ đồ</a><a href=\"#\">AI Stylist</a><a href=\"#\">Studio</a><a href=\"#\">Đặt thuê</a></nav>",
+      "css": ".ds-nav { display:flex; align-items:center; gap:28px; border-bottom:1px solid var(--border, #d8d0c1); }.ds-nav a { padding:20px 0 18px; border-bottom:2px solid transparent; color:var(--text-secondary, #625f56); font:600 12px/1.2 'Segoe UI',Arial,sans-serif; letter-spacing:.06em; text-decoration:none; white-space:nowrap; transition:color .2s,border-color .2s; }.ds-nav a:hover,.ds-nav a.ds-nav-active { color:var(--foreground, #24251f); border-color:var(--accent, #9f3b30); }.ds-nav a:focus-visible { outline:2px solid var(--accent, #9f3b30); outline-offset:3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Living Wardrobe",
+    "overview": "VietDrobe presents Vietnamese traditional dress as something to explore, combine, and wear today. The interface uses the quiet structure of an editorial page: warm paper, deep ink, fine borders, open space, and expressive serif headings. Rust marks an action or selected state; olive supports the garment illustration and the darker atmosphere.\n\nThe catalog and rental path carry the same visual weight as guided styling. The studio has a working, three part composition, with chat given the widest default column. Garment illustrations and cultural context are the visual subject; the app does not use AI generated imagery.",
+    "keyCharacteristics": [
+      "Warm paper and ink in light mode; olive tinted dark surfaces in dark mode.",
+      "Self hosted Cormorant Garamond display type with a plain sans serif interface.",
+      "Square panels, fine borders, and selective rust emphasis.",
+      "Two equally visible journeys from the home page: browsing garments and AI styling."
+    ],
+    "rules": [
+      {
+        "name": "The Rust Signal Rule",
+        "body": "Use rust for purposeful emphasis such as selection, focus, and action feedback, rather than broad surface fills.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Use the display serif for identity and editorial hierarchy; use the sans serif for navigation, controls, and compact metadata.",
+        "section": "typography"
+      },
+      {
+        "name": "The Equal Entry Rule",
+        "body": "Home page routes to garment browsing and guided styling are parallel choices, neither hidden behind the other.",
+        "section": "layout"
+      },
+      {
+        "name": "The Quiet Surface Rule",
+        "body": "Keep resting cards and studio panels border led; reserve lift for hover or overlay hierarchy.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep browse and rent, and AI styling, equally easy to enter.",
+      "Do use supplied garment artwork and show garment identity and cultural context clearly.",
+      "Do pair rust emphasis with visible text or border changes so states remain legible in both themes.",
+      "Do preserve the chat first stack and its roomy desktop column in the studio."
+    ],
+    "donts": [
+      "Don't introduce AI generated images into the app.",
+      "Don't round ordinary cards, panels, buttons, or fields.",
+      "Don't use heavy resting shadows where a paper tone and thin border carry the separation."
+    ]
+  }
+}
