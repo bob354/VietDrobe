@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 1160" width="100%" height="100%" style="background:#FFFFFF; font-family:Arial, Helvetica, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <polyline points="0,1 9,5 0,9" fill="none" stroke="#000000" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <!-- Outer Frame -->
+  <rect x="20" y="20" width="940" height="1115" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="20" y="20" width="530" height="28" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="30" y="39" font-size="12" font-weight="bold" fill="#000000">act: Your Studio (3-Col Mix &amp; Match, AI Chat Queries &amp; Rental)</text>
+
+  <!-- Swimlane 1: Left Col: Catalog -->
+  <rect x="35" y="60" width="200" height="1060" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <line x1="35" y1="92" x2="235" y2="92" stroke="#000000" stroke-width="1.5"/>
+  <text x="135" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#000000">Col 1: Garment Catalog</text>
+
+  <!-- Swimlane 2: Middle Col: AI Stylist Chat -->
+  <rect x="235" y="60" width="275" height="1060" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <line x1="235" y1="92" x2="510" y2="92" stroke="#000000" stroke-width="1.5"/>
+  <text x="372" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#000000">Col 2: AI Stylist Chat (Queries &amp; Lore)</text>
+
+  <!-- Swimlane 3: Right Col: Minimal Canvas -->
+  <rect x="510" y="60" width="235" height="1060" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <line x1="510" y1="92" x2="745" y2="92" stroke="#000000" stroke-width="1.5"/>
+  <text x="627" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#000000">Col 3: Action Canvas</text>
+
+  <!-- Swimlane 4: Backend API & Services -->
+  <rect x="745" y="60" width="195" height="1060" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <line x1="745" y1="92" x2="940" y2="92" stroke="#000000" stroke-width="1.5"/>
+  <text x="842" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#000000">Backend API &amp; LLM</text>
+
+  <!-- Initial Node -->
+  <circle cx="135" cy="120" r="11" fill="#000000"/>
+  <line x1="135" y1="131" x2="135" y2="155" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 1: Browse Catalog -->
+  <rect x="50" y="155" width="170" height="42" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="135" y="173" text-anchor="middle" font-size="10" font-weight="bold" fill="#000000">Open Studio Page (/studio)</text>
+  <text x="135" y="188" text-anchor="middle" font-size="9" fill="#000000">Browse categories &amp; items</text>
+
+  <line x1="135" y1="197" x2="135" y2="230" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: Select Garment -->
+  <rect x="50" y="230" width="170" height="44" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="135" y="249" text-anchor="middle" font-size="10" font-weight="bold" fill="#000000">Click Garment Card</text>
+  <text x="135" y="264" text-anchor="middle" font-size="9" fill="#000000">Selects/toggles item in set</text>
+
+  <!-- Flow to Canvas (Right Col) -->
+  <path d="M 220 252 L 627 252 L 627 285" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Update Canvas State -->
+  <rect x="542" y="285" width="170" height="44" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="627" y="304" text-anchor="middle" font-size="10" font-weight="bold" fill="#000000">Update Canvas Outfit</text>
+  <text x="627" y="319" text-anchor="middle" font-size="9" fill="#000000">Render selectedGarments layer</text>
+
+  <!-- Flow to Backend Cultural Check -->
+  <path d="M 712 307 L 760 307" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Background Cultural Check -->
+  <rect x="760" y="288" width="165" height="40" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="842" y="305" text-anchor="middle" font-size="9" font-weight="bold" fill="#000000">POST /cultural/check</text>
+  <text x="842" y="319" text-anchor="middle" font-size="8" fill="#000000">Evaluate rules &amp; score</text>
+
+  <!-- Flow back to Canvas Inline Badge -->
+  <path d="M 842 328 L 842 365 L 627 365 L 627 380" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: Update Inline Badge -->
+  <rect x="542" y="380" width="170" height="38" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="627" y="397" text-anchor="middle" font-size="10" font-weight="bold" fill="#000000">Render Inline Badge</text>
+  <text x="627" y="411" text-anchor="middle" font-size="9" fill="#000000">"✓ XX% Chuẩn Mực"</text>
+
+  <!-- Real-time sync of Canvas to Middle Col: Chat Context -->
+  <path d="M 542 307 L 372 307 L 372 340" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="440" y="298" text-anchor="middle" font-size="8" fill="#666666">sync canvas context</text>
+
+  <!-- MIDDLE COLUMN: USER QUERIES HANDLING -->
+
+  <!-- Step 6: User Inputs Query in Chat -->
+  <rect x="250" y="340" width="245" height="54" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="372" y="358" text-anchor="middle" font-size="10" font-weight="bold" fill="#000000">User Sends Chat Query</text>
+  <text x="372" y="373" text-anchor="middle" font-size="9" fill="#000000">• Free question (lore, piece, pricing, etiquette)</text>
+  <text x="372" y="385" text-anchor="middle" font-size="9" fill="#000000">• OR click chips ("Đánh giá canvas", "Đi lễ chùa")</text>
+
+  <line x1="372" y1="394" x2="372" y2="425" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 7: Send POST /api/v1/chat with Context -->
+  <rect x="250" y="425" width="245" height="46" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="372" y="443" text-anchor="middle" font-size="10" font-weight="bold" fill="#000000">Send POST /api/v1/chat</text>
+  <text x="372" y="458" text-anchor="middle" font-size="9" fill="#000000">Pass messages + canvas_garment_ids</text>
+
+  <!-- Flow to Backend -->
+  <path d="M 495 448 L 760 448" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 8: Backend LLM Processing with Dynamic Context -->
+  <rect x="760" y="425" width="165" height="54" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="842" y="443" text-anchor="middle" font-size="9" font-weight="bold" fill="#000000">LLM Context Processing</text>
+  <text x="842" y="457" text-anchor="middle" font-size="8" fill="#000000">Inject 17 garments, rules, canvas,</text>
+  <text x="842" y="469" text-anchor="middle" font-size="8" fill="#000000">pricing; sliding window 6 turns</text>
+
+  <!-- Flow back to Middle Col Decision -->
+  <path d="M 842 479 L 842 515 L 372 515 L 372 535" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Decision: User Query Intent -->
+  <polygon points="372,535 445,560 372,585 299,560" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="372" y="564" text-anchor="middle" font-size="9" font-weight="bold" fill="#000000">Query Intent?</text>
+
+  <!-- Branch 1: Piece Lore / History / Pricing Q&A -->
+  <path d="M 299 560 L 250 560 L 250 620 L 270 620" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="255" y="552" font-size="8" fill="#000000">[Lore / Pricing]</text>
+
+  <rect x="270" y="602" width="160" height="48" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="350" y="620" text-anchor="middle" font-size="9" font-weight="bold" fill="#000000">Garment Lore &amp; Policy Q&amp;A</text>
+  <text x="350" y="634" text-anchor="middle" font-size="8" fill="#000000">Explains origins, materials, era</text>
+  <text x="350" y="644" text-anchor="middle" font-size="8" fill="#000000">details, or rental pricing/combos</text>
+
+  <!-- Branch 2: Canvas Critique / Etiquette Advice -->
+  <line x1="372" y1="585" x2="372" y2="675" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="378" y="610" font-size="8" fill="#000000">[Canvas Critique]</text>
+
+  <rect x="270" y="675" width="205" height="48" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="372" y="693" text-anchor="middle" font-size="9" font-weight="bold" fill="#000000">Canvas Critique &amp; Etiquette Feedback</text>
+  <text x="372" y="707" text-anchor="middle" font-size="8" fill="#000000">Evaluates current set on canvas against</text>
+  <text x="372" y="717" text-anchor="middle" font-size="8" fill="#000000">occasion (temple, prom, stage remix)</text>
+
+  <!-- Branch 3: Outfit Suggestion with Add-ons -->
+  <path d="M 445 560 L 485 560 L 485 620 L 455 620" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="450" y="552" font-size="8" fill="#000000">[Suggestion]</text>
+
+  <rect x="330" y="750" width="165" height="52" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="412" y="768" text-anchor="middle" font-size="9" font-weight="bold" fill="#000000">Suggest Complementary Items</text>
+  <text x="412" y="782" text-anchor="middle" font-size="8" fill="#000000">• Recommends items with IDs</text>
+  <text x="412" y="794" text-anchor="middle" font-size="8" fill="#000000">• Shows Etiquette Score (0-100)</text>
+
+  <path d="M 485 620 L 485 776 L 495 776" fill="none" stroke="#000000" stroke-width="1.5"/>
+
+  <!-- Step 9: 1-Click "Ghép vào Canvas" Action -->
+  <line x1="412" y1="802" x2="412" y2="835" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="305" y="835" width="200" height="42" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="405" y="853" text-anchor="middle" font-size="10" font-weight="bold" fill="#000000">Click "Ghép vào Canvas"</text>
+  <text x="405" y="867" text-anchor="middle" font-size="9" fill="#000000">Pushes recommended items to canvas</text>
+
+  <!-- Pushes to Canvas (Right Col) -->
+  <path d="M 505 856 L 627 856 L 627 890" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Merge Lore/Critique branches -->
+  <path d="M 350 650 L 350 815 L 305 815" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <path d="M 372 723 L 372 815" fill="none" stroke="#000000" stroke-width="1.5"/>
+
+  <!-- RIGHT COLUMN: ACTION & RENTAL -->
+
+  <!-- Step 10: Canvas Action Choice -->
+  <polygon points="627,890 685,912 627,934 569,912" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="627" y="916" text-anchor="middle" font-size="9" font-weight="bold" fill="#000000">Action Choice?</text>
+
+  <!-- Choice A: Save Bookmark -->
+  <path d="M 569 912 L 530 912 L 530 965 L 550 965" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="535" y="904" font-size="8" fill="#000000">[Bookmark]</text>
+  <rect x="550" y="950" width="135" height="32" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="617" y="970" text-anchor="middle" font-size="9" fill="#000000">Save to Local Lookbook</text>
+
+  <!-- Choice B: Rent Outfit -->
+  <line x1="627" y1="934" x2="627" y2="995" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="635" y="955" font-size="9" fill="#000000">[Đặt Thuê Set Này]</text>
+
+  <!-- Step 11: Open Rental Modal -->
+  <rect x="542" y="995" width="170" height="48" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="627" y="1013" text-anchor="middle" font-size="10" font-weight="bold" fill="#000000">Open Rental Modal</text>
+  <text x="627" y="1027" text-anchor="middle" font-size="8" fill="#000000">Select Sizes (S, M, L, XL) &amp; Days</text>
+  <text x="627" y="1037" text-anchor="middle" font-size="8" fill="#000000">Apply 15% combo discount &amp; 30% deposit</text>
+
+  <!-- Flow to Backend Rental Calculation -->
+  <path d="M 712 1019 L 760 1019" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 12: Backend Rental Booking -->
+  <rect x="760" y="1000" width="165" height="38" rx="8" ry="8" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <text x="842" y="1018" text-anchor="middle" font-size="9" font-weight="bold" fill="#000000">POST /rentals/calculate</text>
+  <text x="842" y="1030" text-anchor="middle" font-size="8" fill="#000000">Generate Demo Rental Receipt</text>
+
+  <!-- Flow back to End -->
+  <path d="M 842 1038 L 842 1070 L 627 1070 L 627 1085" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Final Node -->
+  <circle cx="627" cy="1100" r="14" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <circle cx="627" cy="1100" r="7" fill="#000000"/>
+
+</svg>

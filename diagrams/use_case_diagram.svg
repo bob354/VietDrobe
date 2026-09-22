@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="100%" height="100%" style="background:#FFFFFF; font-family:Arial, Helvetica, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <polyline points="0,1 9,5 0,9" fill="none" stroke="#000000" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <!-- Subsystem Boundary -->
+  <rect x="270" y="25" width="420" height="665" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <text x="290" y="52" font-size="12" font-style="italic" fill="#000000">«Subsystem»</text>
+  <text x="290" y="70" font-size="15" font-weight="bold" fill="#000000">Viet Phuc Remix Platform</text>
+
+  <!-- USE CASES -->
+  <!-- UC1 -->
+  <g id="uc-view-catalog">
+    <ellipse cx="480" cy="115" rx="145" ry="28" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"/>
+    <text x="480" y="119" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">Browse Catalog &amp; Garment Lore</text>
+  </g>
+
+  <!-- UC2 -->
+  <g id="uc-studio">
+    <ellipse cx="480" cy="205" rx="160" ry="32" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"/>
+    <text x="480" y="201" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">Mix &amp; Match in Studio</text>
+    <text x="480" y="217" text-anchor="middle" font-size="10" fill="#555555">(3-Col: Catalog | Chat | Canvas)</text>
+  </g>
+
+  <!-- UC3 -->
+  <g id="uc-chat">
+    <ellipse cx="480" cy="305" rx="155" ry="32" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"/>
+    <text x="480" y="301" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">Chat with AI Stylist</text>
+    <text x="480" y="317" text-anchor="middle" font-size="10" fill="#555555">(Dynamic Context: Catalog, Canvas, Rules)</text>
+  </g>
+
+  <!-- UC4 -->
+  <g id="uc-cultural-check">
+    <ellipse cx="480" cy="405" rx="150" ry="30" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"/>
+    <text x="480" y="401" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">Validate Cultural Guardrail</text>
+    <text x="480" y="417" text-anchor="middle" font-size="10" fill="#555555">(Inline Integrity Score &amp; Etiquette Tips)</text>
+  </g>
+
+  <!-- UC5 -->
+  <g id="uc-rental">
+    <ellipse cx="480" cy="505" rx="150" ry="30" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"/>
+    <text x="480" y="501" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">Book &amp; Rent Outfit</text>
+    <text x="480" y="517" text-anchor="middle" font-size="10" fill="#555555">(Size/Dates, 15% Combo, 30% Deposit)</text>
+  </g>
+
+  <!-- UC6 -->
+  <g id="uc-save">
+    <ellipse cx="480" cy="595" rx="140" ry="26" fill="#FFFFFF" stroke="#000000" stroke-width="1.8"/>
+    <text x="480" y="599" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">Bookmark / Save Outfit</text>
+  </g>
+
+  <!-- Include / Extend Relationships -->
+  <!-- UC2 includes UC4 -->
+  <path d="M 480 237 L 480 375" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <rect x="445" y="270" width="70" height="16" fill="#FFFFFF"/>
+  <text x="480" y="282" text-anchor="middle" font-size="10" fill="#000000">«include»</text>
+
+  <!-- UC2 includes UC3 -->
+  <path d="M 390 232 L 390 278" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <rect x="355" y="248" width="70" height="16" fill="#FFFFFF"/>
+  <text x="390" y="260" text-anchor="middle" font-size="10" fill="#000000">«include»</text>
+
+  <!-- UC2 extends to UC5 -->
+  <path d="M 430 235 L 395 480" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <rect x="380" y="445" width="65" height="16" fill="#FFFFFF"/>
+  <text x="412" y="457" text-anchor="middle" font-size="10" fill="#000000">«extend»</text>
+
+  <!-- UC2 extends to UC6 -->
+  <path d="M 480 237 L 480 569" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <rect x="447" y="542" width="65" height="16" fill="#FFFFFF"/>
+  <text x="480" y="554" text-anchor="middle" font-size="10" fill="#000000">«extend»</text>
+
+  <!-- ACTORS -->
+  <!-- Left: User -->
+  <g id="actor-user" transform="translate(85, 300)">
+    <circle cx="25" cy="15" r="14" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="29" x2="25" y2="70" stroke="#000000" stroke-width="2"/>
+    <line x1="0" y1="45" x2="50" y2="45" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="70" x2="5" y2="105" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="70" x2="45" y2="105" stroke="#000000" stroke-width="2"/>
+    <text x="25" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">User</text>
+    <text x="25" y="139" text-anchor="middle" font-size="10" fill="#666666">(Khách hàng)</text>
+  </g>
+
+  <!-- Right Actor 1: AI Provider Service -->
+  <g id="actor-llm" transform="translate(800, 180)">
+    <circle cx="25" cy="15" r="14" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="29" x2="25" y2="70" stroke="#000000" stroke-width="2"/>
+    <line x1="0" y1="45" x2="50" y2="45" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="70" x2="5" y2="105" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="70" x2="45" y2="105" stroke="#000000" stroke-width="2"/>
+    <text x="25" y="123" text-anchor="middle" font-size="11" font-style="italic" fill="#000000">«Service»</text>
+    <text x="25" y="137" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">AI Stylist Service</text>
+    <text x="25" y="151" text-anchor="middle" font-size="9" fill="#555555">Groq / OpenRouter / OpenAI</text>
+  </g>
+
+  <!-- Right Actor 2: Database & Assets -->
+  <g id="actor-db" transform="translate(800, 440)">
+    <circle cx="25" cy="15" r="14" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="29" x2="25" y2="70" stroke="#000000" stroke-width="2"/>
+    <line x1="0" y1="45" x2="50" y2="45" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="70" x2="5" y2="105" stroke="#000000" stroke-width="2"/>
+    <line x1="25" y1="70" x2="45" y2="105" stroke="#000000" stroke-width="2"/>
+    <text x="25" y="123" text-anchor="middle" font-size="11" font-style="italic" fill="#000000">«Database»</text>
+    <text x="25" y="137" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">SQLite &amp; Assets</text>
+    <text x="25" y="151" text-anchor="middle" font-size="9" fill="#555555">Garments, Rules, Rentals</text>
+  </g>
+
+  <!-- User Associations -->
+  <line x1="135" y1="310" x2="335" y2="120" stroke="#000000" stroke-width="1.5"/>
+  <line x1="135" y1="330" x2="320" y2="205" stroke="#000000" stroke-width="1.5"/>
+  <line x1="135" y1="350" x2="325" y2="305" stroke="#000000" stroke-width="1.5"/>
+  <line x1="135" y1="370" x2="330" y2="505" stroke="#000000" stroke-width="1.5"/>
+  <line x1="135" y1="390" x2="340" y2="595" stroke="#000000" stroke-width="1.5"/>
+
+  <!-- Service Associations -->
+  <line x1="635" y1="305" x2="800" y2="230" stroke="#000000" stroke-width="1.5"/>
+  <line x1="630" y1="405" x2="800" y2="250" stroke="#000000" stroke-width="1.5"/>
+  <line x1="625" y1="115" x2="800" y2="480" stroke="#000000" stroke-width="1.5"/>
+  <line x1="630" y1="405" x2="800" y2="490" stroke="#000000" stroke-width="1.5"/>
+  <line x1="630" y1="505" x2="800" y2="510" stroke="#000000" stroke-width="1.5"/>
+
+</svg>

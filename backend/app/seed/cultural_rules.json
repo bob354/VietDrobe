@@ -1,0 +1,29 @@
+[
+  {
+    "rule_type": "incompatible",
+    "condition": {
+      "garment_type": "ao_nhat_binh",
+      "with_category": "modern_bottom"
+    },
+    "message_vi": "Lưu ý văn hóa: Áo Nhật Bình là lễ phục trang trọng triều Nguyễn, nên kết hợp cùng quần lụa trắng hoặc chân váy dài truyền thống thay vì các loại quần ngắn/bó hiện đại.",
+    "severity": "warning"
+  },
+  {
+    "rule_type": "incompatible",
+    "condition": {
+      "garment_type": "ao_nhat_binh",
+      "gender_fit": "nam"
+    },
+    "message_vi": "Lịch sử phục trang: Áo Nhật Bình vốn là thường phục của bậc Hoàng hậu, Phi tần và Công chúa; lễ phục của mệnh phụ quý tộc nữ triều Nguyễn, không phải trang phục dành cho nam giới.",
+    "severity": "warning"
+  },
+  {
+    "rule_type": "incompatible",
+    "condition": {
+      "garment_type": "ao_tac",
+      "with_category": "modern_top"
+    },
+    "message_vi": "Áo Tấc là áo khoác ngoài trang trọng, không nên mặc thêm các loại áo hoodie/áo khoác hiện đại trùm ra ngoài làm mất phom thụng uy nghiêm.",
+    "severity": "warning"
+  }
+]
