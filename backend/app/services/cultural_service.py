@@ -33,8 +33,8 @@ class CulturalService:
             )
             score -= 0.2
 
-        # Rule 2: Áo dài/Áo tấc/Áo ngũ thân/Áo Nhật bình phải có trang phục dưới
-        tops_requiring_bottom = {"ao_tac", "ao_nhat_binh", "ao_ngu_than", "ao_giao_linh", "ao_dai"}
+        # Rule 2: Áo dài/Áo tấc/Áo ngũ thân/Áo Nhật bình/Áo Giao lĩnh/Áo Viên lĩnh/Áo Đối khâm phải có trang phục dưới
+        tops_requiring_bottom = {"ao_tac", "ao_nhat_binh", "ao_ngu_than", "ao_giao_linh", "ao_dai", "ao_vien_linh", "ao_doi_kham", "ao_tu_than"}
         has_top_requiring_bottom = bool(garment_types.intersection(tops_requiring_bottom))
         has_bottom = "traditional_bottom" in categories or "modern_bottom" in categories or "traditional_full" in categories
 

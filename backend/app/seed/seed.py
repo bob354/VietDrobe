@@ -43,6 +43,13 @@ COLOR_MAP = {
     "Màu chàm / Be": (160, 138, 112),
     "Nâu trầm": (88, 62, 40),
     "Đen bóng": (30, 30, 30),
+    "Xanh chàm": (42, 72, 105),
+    "Tím lục bình": (118, 78, 130),
+    "Đỏ son": (175, 42, 42),
+    "Đỏ thắm": (168, 28, 38),
+    "Vàng mơ": (218, 182, 110),
+    "Vàng kim": (202, 158, 42),
+    "Xanh ngọc": (48, 138, 128),
 }
 
 def draw_garment_silhouette(draw: ImageDraw.ImageDraw, g_type: str, cx: int, cy: int, color: tuple):
@@ -167,6 +174,68 @@ def draw_garment_silhouette(draw: ImageDraw.ImageDraw, g_type: str, cx: int, cy:
         draw.line([(cx - 65, cy), (cx - 95, cy - 10)], fill=(218, 165, 32), width=2)
         draw.line([(cx + 65, cy), (cx + 95, cy - 10)], fill=(218, 165, 32), width=2)
 
+    elif "vien_linh" in g_type:
+        # Round collar robe (Áo Viên Lĩnh)
+        draw.polygon([(cx - 28, cy - 85), (cx + 28, cy - 85), (cx + 70, cy + 95), (cx - 70, cy + 95)], fill=fill_color, outline=stroke_color, width=2)
+        draw.polygon([(cx - 26, cy - 80), (cx - 110, cy), (cx - 95, cy + 40), (cx - 30, cy - 25)], fill=fill_color, outline=stroke_color, width=2)
+        draw.polygon([(cx + 26, cy - 80), (cx + 110, cy), (cx + 95, cy + 40), (cx + 30, cy - 25)], fill=fill_color, outline=stroke_color, width=2)
+        draw.ellipse([cx - 20, cy - 95, cx + 20, cy - 65], outline=(245, 240, 230), width=3)
+        draw.line([(cx + 15, cy - 75), (cx + 35, cy - 50)], fill=(245, 240, 230), width=2)
+
+    elif "doi_kham" in g_type:
+        # Symmetrical parallel lapel robe (Áo Đối Khâm)
+        draw.polygon([(cx - 28, cy - 85), (cx + 28, cy - 85), (cx + 65, cy + 95), (cx - 65, cy + 95)], fill=fill_color, outline=stroke_color, width=2)
+        draw.polygon([(cx - 26, cy - 80), (cx - 110, cy - 10), (cx - 90, cy + 40), (cx - 32, cy - 20)], fill=fill_color, outline=stroke_color, width=2)
+        draw.polygon([(cx + 26, cy - 80), (cx + 110, cy - 10), (cx + 90, cy + 40), (cx + 32, cy - 20)], fill=fill_color, outline=stroke_color, width=2)
+        draw.line([(cx - 10, cy - 85), (cx - 10, cy + 95)], fill=(245, 240, 230), width=3)
+        draw.line([(cx + 10, cy - 85), (cx + 10, cy + 95)], fill=(245, 240, 230), width=3)
+
+    elif "ao_lot" in g_type or "trung_don" in g_type:
+        # Inner robe (Áo Trung Đơn)
+        draw.polygon([(cx - 24, cy - 85), (cx + 24, cy - 85), (cx + 50, cy + 95), (cx - 50, cy + 95)], fill=(245, 243, 238), outline=(210, 205, 195), width=2)
+        draw.polygon([(cx - 22, cy - 80), (cx - 95, cy + 10), (cx - 80, cy + 30), (cx - 26, cy - 30)], fill=(245, 243, 238), outline=(210, 205, 195), width=2)
+        draw.polygon([(cx + 22, cy - 80), (cx + 95, cy + 10), (cx + 80, cy + 30), (cx + 26, cy - 30)], fill=(245, 243, 238), outline=(210, 205, 195), width=2)
+        draw.line([(cx - 22, cy - 85), (cx + 15, cy - 25)], fill=(225, 220, 210), width=2)
+        draw.line([(cx + 22, cy - 85), (cx - 12, cy - 38)], fill=(225, 220, 210), width=2)
+
+    elif "thuong_quay" in g_type or "chan_vay" in g_type:
+        # Traditional pleated wrap skirt
+        draw.polygon([(cx - 30, cy - 70), (cx + 30, cy - 70), (cx + 60, cy + 95), (cx - 60, cy + 95)], fill=fill_color, outline=stroke_color, width=2)
+        draw.rectangle([cx - 32, cy - 75, cx + 32, cy - 65], fill=(245, 240, 225), outline=stroke_color, width=1)
+        for px in range(cx - 40, cx + 45, 16):
+            draw.line([(px, cy - 65), (int(cx + (px - cx) * 1.3), cy + 95)], fill=stroke_color, width=1)
+
+    elif "hai" in g_type:
+        # Traditional curved embroidered shoes
+        draw.polygon([(cx - 65, cy + 10), (cx - 50, cy - 15), (cx + 40, cy - 15), (cx + 65, cy - 5), (cx + 68, cy + 15), (cx - 65, cy + 15)], fill=fill_color, outline=stroke_color, width=2)
+        draw.arc([cx + 50, cy - 20, cx + 72, cy + 10], 0, 180, fill=(218, 165, 32), width=3)
+        draw.ellipse([cx, cy - 5, cx + 15, cy + 5], fill=(218, 165, 32))
+
+    elif "o_giay" in g_type or "du" in g_type:
+        # Traditional oiled paper umbrella
+        draw.chord([cx - 85, cy - 70, cx + 85, cy + 40], 180, 360, fill=fill_color, outline=stroke_color, width=2)
+        for a in range(200, 350, 25):
+            rad = a * 3.14159 / 180
+            draw.line([(cx, cy - 15), (cx + int(85 * (rad/2)), cy - 15 - int(55 * abs(rad - 4.71)))], fill=stroke_color, width=1)
+        draw.line([(cx, cy - 15), (cx, cy + 90)], fill=(120, 75, 40), width=4)
+        draw.arc([cx - 10, cy + 85, cx + 10, cy + 105], 0, 180, fill=(120, 75, 40), width=4)
+
+    elif "tram" in g_type:
+        # Hairpin with jade drop and tassel
+        draw.line([(cx - 70, cy + 60), (cx + 50, cy - 60)], fill=(218, 165, 32), width=4)
+        draw.ellipse([cx + 40, cy - 75, cx + 70, cy - 45], fill=fill_color, outline=(218, 165, 32), width=2)
+        draw.line([(cx + 55, cy - 45), (cx + 55, cy + 20)], fill=(178, 34, 34), width=2)
+        draw.ellipse([cx + 52, cy + 18, cx + 58, cy + 26], fill=(218, 165, 32))
+
+    elif "chuoi_ngoc" in g_type or "vong_co" in g_type:
+        # Pearl / Jade beaded necklace
+        import math
+        for deg in range(0, 360, 24):
+            rad = math.radians(deg)
+            bx = cx + int(55 * math.cos(rad))
+            by = cy + int(45 * math.sin(rad))
+            draw.ellipse([bx - 6, by - 6, bx + 6, by + 6], fill=fill_color, outline=(200, 190, 180), width=1)
+
     else:
         # Default elegant Eastern urn / emblem
         draw.ellipse([cx - 60, cy - 60, cx + 60, cy + 60], fill=fill_color, outline=stroke_color, width=2)
@@ -244,7 +313,9 @@ async def seed_database(force_regenerate_images: bool = False):
         await conn.run_sync(Base.metadata.create_all)
 
     async with async_session_maker() as session:
-        existing_count = (await session.execute(select(Garment))).scalars().first()
+        # Load existing garments map from DB
+        db_garments = {g.id: g for g in (await session.execute(select(Garment))).scalars().all()}
+        existing_rules_count = (await session.execute(select(CulturalRule))).scalars().first()
 
         garments_file = SEED_DIR / "garments.json"
         if garments_file.exists():
@@ -252,18 +323,41 @@ async def seed_database(force_regenerate_images: bool = False):
                 garment_data = json.load(f)
 
             for item in garment_data:
-                if not existing_count:
-                    cat = item.get("category", "")
-                    default_price = 100000
-                    if cat == "traditional_top": default_price = 150000
-                    elif cat == "traditional_bottom": default_price = 80000
-                    elif cat == "headwear": default_price = 50000
-                    elif cat == "footwear": default_price = 60000
-                    elif cat == "accessory": default_price = 40000
+                cat = item.get("category", "")
+                default_price = 100000
+                if cat == "traditional_top": default_price = 150000
+                elif cat == "traditional_bottom": default_price = 80000
+                elif cat == "headwear": default_price = 50000
+                elif cat == "footwear": default_price = 60000
+                elif cat == "accessory": default_price = 40000
 
-                    rental_price = item.get("rental_price_per_day", default_price)
-                    deposit = item.get("deposit_per_item", rental_price * 0.5)
+                rental_price = item.get("rental_price_per_day", default_price)
+                deposit = item.get("deposit_per_item", rental_price * 0.5)
 
+                if item["id"] in db_garments:
+                    g = db_garments[item["id"]]
+                    g.category = item["category"]
+                    g.type = item["type"]
+                    g.subtype = item.get("subtype")
+                    g.display_name = item["display_name"]
+                    g.display_name_en = item.get("display_name_en")
+                    g.image_path = item["image_path"]
+                    g.thumbnail_path = item.get("thumbnail_path", item["image_path"])
+                    g.primary_color = item.get("primary_color")
+                    g.colors = item.get("colors", [])
+                    g.pattern = item.get("pattern")
+                    g.material = item.get("material")
+                    g.era = item.get("era")
+                    g.region = item.get("region")
+                    g.gender_fit = item.get("gender_fit", "unisex")
+                    g.cultural_tier = item.get("cultural_tier")
+                    g.formality = item.get("formality")
+                    g.cultural_description = item.get("cultural_description")
+                    g.cultural_notes = item.get("cultural_notes")
+                    g.is_traditional = item.get("is_traditional", True)
+                    g.remix_tags = item.get("remix_tags", [])
+                    g.compatible_occasions = item.get("compatible_occasions", [])
+                else:
                     garment = Garment(
                         id=item["id"],
                         category=item["category"],
@@ -308,7 +402,7 @@ async def seed_database(force_regenerate_images: bool = False):
                     )
 
         # 2. Seed Cultural Rules if not present
-        if not existing_count:
+        if not existing_rules_count:
             rules_file = SEED_DIR / "cultural_rules.json"
             if rules_file.exists():
                 with open(rules_file, "r", encoding="utf-8") as f:

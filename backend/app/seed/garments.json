@@ -16,10 +16,16 @@
     "gender_fit": "unisex",
     "cultural_tier": "quy_toc",
     "formality": "trang_trong",
-    "cultural_description": "Áo Tấc (áo ngũ thân tay thụng) là lễ phục trang trọng thời nhà Nguyễn. Điểm đặc trưng là tay áo rộng thụng dài quá ngón tay, cổ đứng cài năm khuy tượng trưng cho đạo ngũ thường (Nhân, Lễ, Nghĩa, Trí, Tín) và năm thân áo tượng trưng cho ngũ thân phụ mẫu.",
+    "cultural_description": "Áo Tấc là một loại áo ngũ thân và được xem là biểu tượng của sự sang trọng và trang nghiêm nhất trong dòng áo ngũ thân. Đây là một loại trang phục đặc thù của thời Nguyễn, được sử dụng trong các dịp trang trọng cho cả nam và nữ, từ tầng lớp Quốc chủ đến thường dân có lịch sử hình thành khoảng trên dưới 300 năm, gắn liền với công cuộc cải cách và định chế trang phục ở Đàng Trong của Chúa Nguyễn Phúc Khoát. Tên gọi “Áo Tấc” vốn bắt nguồn từ phần viền áo rộng đúng một tấc (khoảng 4cm).",
     "cultural_notes": {
+      "y_nghia_ten_goi": "Bắt nguồn từ phần viền áo rộng đúng một tấc (khoảng 4cm)",
       "tay_ao": "Tay thụng rộng khi chắp tay tạo thành chữ 'Nhất', biểu thị sự khiêm cung và trang nghiêm",
-      "khuy_cai": "5 cúc bằng kim loại hoặc đá quý tượng trưng cho ngũ thường"
+      "khuy_cai": "5 cúc bằng kim loại hoặc đá quý tượng trưng cho ngũ thường (Nhân - Lễ - Nghĩa - Trí - Tín)",
+      "cac_lop_phoi": [
+        "Lớp 1: 1 áo lót trong và 1 quần dài",
+        "Lớp 2: Áo Tấc"
+      ],
+      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
     },
     "is_traditional": true,
     "remix_tags": ["thanh_lich", "tet", "ky_yeu"],
@@ -62,16 +68,23 @@
     "era": "nguyen",
     "region": "trung_bo",
     "gender_fit": "nu",
-    "cultural_tier": "hoang_gia",
-    "formality": "dai_le",
-    "cultural_description": "Áo Nhật Bình là thường phục của bậc Hoàng tộc và lễ phục của mệnh phụ triều Nguyễn. Tên gọi xuất phát từ dải cổ áo chữ nhật to bản trước ngực, hai bên tà cố định dải ngũ hành rực rỡ tượng trưng cho trời đất vạn vật.",
+    "cultural_tier": "hoang_toc",
+    "formality": "le_phuc",
+    "cultural_description": "Áo Nhật Bình là một loại trang phục dành cho nữ giới thuộc hoàng tộc và tầng lớp quý tộc dưới triều nhà Nguyễn (1802–1945). Đây là một loại lễ phục được sử dụng trong các dịp quan trọng như Tết Nguyên Đán, cưới hỏi, hoặc các buổi thiết triều. Áo nổi bật với thiết kế hình chữ nhật và các hoa văn cung đình tinh xảo, thể hiện địa vị cao quý của người mặc. Tên gọi “Nhật Bình” bắt nguồn từ phần cổ áo có hình chữ nhật (Nhật) và bố cục cân đối, hòa bình (Bình)",
     "cultural_notes": {
-      "co_ao": "Cổ áo khoét vuông hình chữ nhật (Nhật Bình) ghép vải ngũ sắc ngũ hành",
-      "dai_ngu_hanh": "Kim - Mộc - Thủy - Hỏa - Thổ hòa hợp"
+      "co_ao": "Cổ áo khoét vuông hình chữ nhật (Nhật Bình)",
+      "y_nghia_ten_goi": "Bắt nguồn từ phần cổ áo có hình chữ nhật (Nhật) và bố cục cân đối, hòa bình (Bình)",
+      "dai_ngu_hanh": "Kim - Mộc - Thủy - Hỏa - Thổ hòa hợp",
+      "cac_lop_phoi": [
+        "Lớp 1: 1 áo lót trong và 1 quần dài",
+        "Lớp 2: thường quây (chân váy)",
+        "Lớp 3: áo khoác nhật bình"
+      ],
+      "phu_kien_phoi_cung": ["khăn vấn", "hài", "trâm cài tóc", "vòng cổ", "chuỗi hạt", "quạt", "ô"]
     },
     "is_traditional": true,
     "remix_tags": ["y2k", "artistic", "thanh_lich"],
-    "compatible_occasions": ["tet", "le_hoi", "tiec_cuoi"]
+    "compatible_occasions": ["tet", "cuoi_hoi", "thiet_trieu"]
   },
   {
     "id": "garment-ngu-than-tay-chen-nam",
@@ -90,10 +103,19 @@
     "gender_fit": "nam",
     "cultural_tier": "binh_dan",
     "formality": "thuong_phuc",
-    "cultural_description": "Áo ngũ thân tay chẽn là tiền thân của chiếc áo dài nam hiện đại. Ống tay áo ôm gọn gàng tạo vẻ đĩnh đạc, nhanh nhẹn, rất hợp phối phong cách đường phố (streetwear) cùng sneaker.",
+    "cultural_description": "Áo ngũ thân là loại áo dài truyền thống, xuất hiện từ thế kỷ XVIII và được xem là tiền thân của áo dài hiện đại. Đặc trưng của áo là năm thân vải tượng trưng cho nhân – nghĩa – lễ – trí – tín, cùng cổ đứng, hàng cúc cài bên phải. Phiên bản áo ngũ thân tay chẽn có ống tay hẹp, gọn gàng hơn, thường được các nho sinh, quan viên, trí thức và cả phụ nữ sử dụng trong sinh hoạt hàng ngày cũng như lễ hội.",
+    "cultural_notes": {
+      "y_nghia": "Năm thân vải tượng trưng cho nhân – nghĩa – lễ – trí – tín và ngũ thân phụ mẫu",
+      "ong_tay": "Ống tay hẹp gọn gàng, năng động đĩnh đạc",
+      "cac_lop_phoi": [
+        "Lớp 1: 1 áo lót trong và 1 quần dài",
+        "Lớp 2: Áo Ngũ Thân Tay Chẽn"
+      ],
+      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+    },
     "is_traditional": true,
     "remix_tags": ["streetwear", "minimalist", "dao_pho"],
-    "compatible_occasions": ["dao_pho", "tet", "ky_yeu"]
+    "compatible_occasions": ["dao_pho", "tet", "ky_yeu", "le_hoi"]
   },
   {
     "id": "garment-giao-linh-le",
@@ -110,9 +132,19 @@
     "era": "le",
     "region": "bac_bo",
     "gender_fit": "unisex",
-    "cultural_tier": "dan_gian",
+    "cultural_tier": "toan_dan",
     "formality": "thuong_phuc",
-    "cultural_description": "Giao lĩnh (áo cổ chéo) thịnh hành từ thời Lý - Trần - Lê. Vạt áo bên trái đè lên vạt bên phải, mang đậm chất phong trần lãng tử cổ phong Đại Việt.",
+    "cultural_description": "Áo giao lĩnh là một loại cổ phục có lịch sử lâu đời ở Việt Nam, xuất hiện qua nhiều thời kỳ và đặc biệt phổ biến trong thời Lý, Trần, Lê. Áo có đặc điểm nổi bật là hai vạt phía trước giao nhau, tạo thành phần cổ chéo. Áo được sử dụng cho cả nam và nữ, xuất hiện ở nhiều tầng lớp xã hội từ vua chúa, quý tộc, quan lại đến thường dân. Trong lịch sử, áo giao lĩnh có thể được sử dụng làm thường phục và cũng xuất hiện trong một số hoàn cảnh lễ nghi, nghi thức, lễ tế. Đến thế kỷ XVIII, sau những cải cách y phục ở Đàng Trong dưới thời chúa Nguyễn Phúc Khoát, các kiểu áo cổ đứng như áo ngũ thân dần trở nên phổ biến hơn và áo giao lĩnh giảm vai trò trong đời sống. Tên gọi “Giao Lĩnh” bắt nguồn từ đặc điểm của phần cổ áo: “Giao” có nghĩa là “chéo”, còn “Lĩnh” có nghĩa là “cổ áo”, vì vậy “Giao Lĩnh” có thể hiểu là “áo có cổ chéo”.",
+    "cultural_notes": {
+      "y_nghia_ten_goi": "Giao có nghĩa là chéo, Lĩnh có nghĩa là cổ áo — áo có cổ chéo",
+      "co_ao": "Hai vạt phía trước giao nhau tạo thành phần cổ chéo đối xứng",
+      "cac_lop_phoi": [
+        "Lớp 1: Áo lót trong và 1 quần dài",
+        "Lớp 2: Thường quây / Chân váy",
+        "Lớp 3: Áo Giao Lĩnh"
+      ],
+      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+    },
     "is_traditional": true,
     "remix_tags": ["minimalist", "y2k", "dao_pho"],
     "compatible_occasions": ["dao_pho", "ky_yeu", "le_hoi"]
@@ -199,7 +231,7 @@
     "region": "toan_quoc",
     "gender_fit": "unisex",
     "cultural_tier": "hien_dai",
-    "formality": "casual",
+    "formality": "thuong_phuc",
     "cultural_description": "Món đồ đại diện cho phong cách Gen Z đương đại, phối cùng áo ngũ thân tay chẽn tạo nên nét tương phản phóng khoáng, nổi loạn nhưng tôn trọng phom áo.",
     "is_traditional": false,
     "remix_tags": ["streetwear", "y2k", "dao_pho"],
@@ -287,7 +319,7 @@
     "region": "toan_quoc",
     "gender_fit": "unisex",
     "cultural_tier": "hien_dai",
-    "formality": "casual",
+    "formality": "thuong_phuc",
     "cultural_description": "Đôi giày thể thao trắng kinh điển của người trẻ Việt, tạo bước đi tự tin, êm ái khi diện cùng áo tấc dạo phố cả ngày.",
     "is_traditional": false,
     "remix_tags": ["streetwear", "dao_pho"],
@@ -331,7 +363,7 @@
     "region": "bac_bo",
     "gender_fit": "unisex",
     "cultural_tier": "hien_dai",
-    "formality": "casual",
+    "formality": "thuong_phuc",
     "cultural_description": "Sự kết hợp hoàn hảo giữa nét vẽ mộc mạc dân gian và chiếc túi vải tiện lợi mang theo bình nước, máy ảnh của Gen Z.",
     "is_traditional": false,
     "remix_tags": ["streetwear", "y2k", "dao_pho"],
@@ -375,10 +407,226 @@
     "region": "toan_quoc",
     "gender_fit": "unisex",
     "cultural_tier": "hien_dai",
-    "formality": "casual",
+    "formality": "thuong_phuc",
     "cultural_description": "Điểm nhấn 'chất lừ' mang hơi thở thập niên 70s-90s, cực kỳ được các bạn trẻ ưa chuộng khi chụp lookbook Việt phục đường phố.",
     "is_traditional": false,
     "remix_tags": ["streetwear", "y2k"],
     "compatible_occasions": ["dao_pho", "ky_yeu"]
+  },
+  {
+    "id": "garment-vien-linh-ly-tran-le",
+    "category": "traditional_top",
+    "type": "ao_vien_linh",
+    "subtype": "co_tron",
+    "display_name": "Áo Viên Lĩnh Cổ Tròn Thời Lý - Lê",
+    "display_name_en": "Round-Collar Vien Linh Robe",
+    "image_path": "garments/vien_linh.png",
+    "primary_color": "Xanh chàm",
+    "colors": ["Xanh chàm", "Trắng ngà"],
+    "pattern": "Dệt chìm hoa văn mây tản và hoa thị cổ truyền",
+    "material": "Tơ tằm dệt thủ công",
+    "era": "ly_tran_le",
+    "region": "toan_quoc",
+    "gender_fit": "unisex",
+    "cultural_tier": "toan_dan",
+    "formality": "trang_trong",
+    "cultural_description": "Áo Viên lĩnh là một loại cổ phục có lịch sử lâu đời ở Việt Nam, được sử dụng qua nhiều thời kỳ trong lịch sử, đặc biệt được ghi nhận trong các giai đoạn Lý, Trần, Lê và tiếp tục có những biến thể về sau. Tên gọi “Viên lĩnh” bắt nguồn từ đặc điểm của phần cổ áo: “Viên” có nghĩa là “tròn”, còn “Lĩnh” có nghĩa là “cổ áo”, vì vậy “Viên lĩnh” có thể hiểu là “áo có cổ tròn”. Đặc điểm nhận diện nổi bật của áo là phần cổ tròn khép kín quanh cổ, khác với cổ chéo của áo giao lĩnh. Áo Viên lĩnh được sử dụng cho cả nam và nữ, với kiểu dáng, chất liệu và cách phối thay đổi tùy thời kỳ và đối tượng sử dụng. Trong lịch sử, kiểu áo này không chỉ dành riêng cho tầng lớp quý tộc mà có thể xuất hiện ở nhiều tầng lớp xã hội.",
+    "cultural_notes": {
+      "y_nghia_ten_goi": "Viên có nghĩa là tròn, Lĩnh có nghĩa là cổ áo — áo có cổ tròn",
+      "co_ao": "Cổ tròn khép kín quanh cổ, cài khuy bên vai phải",
+      "cac_lop_phoi": [
+        "Lớp 1: Áo lót trong và 1 quần dài",
+        "Lớp 2: Thường quây / Chân váy",
+        "Lớp 3: Áo Viên Lĩnh"
+      ],
+      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+    },
+    "is_traditional": true,
+    "remix_tags": ["minimalist", "artistic", "dao_pho"],
+    "compatible_occasions": ["le_hoi", "ky_yeu", "tet", "dao_pho"]
+  },
+  {
+    "id": "garment-doi-kham-dai-viet",
+    "category": "traditional_top",
+    "type": "ao_doi_kham",
+    "subtype": "vat_doi_xung",
+    "display_name": "Áo Đối Khâm Cổ Đại Việt",
+    "display_name_en": "Parallel-Lapel Doi Kham Robe",
+    "image_path": "garments/doi_kham.png",
+    "primary_color": "Tím lục bình",
+    "colors": ["Tím lục bình", "Hồng sen"],
+    "pattern": "Viền thêu hoa văn đối xứng chữ Y/V",
+    "material": "Gấm tơ lụa mềm",
+    "era": "le",
+    "region": "toan_quoc",
+    "gender_fit": "unisex",
+    "cultural_tier": "toan_dan",
+    "formality": "trang_trong",
+    "cultural_description": "Áo Đối Khâm xuất hiện từ thời kỳ phong kiến và phổ biến trong các triều đại Lý (thế kỷ 11-13), Trần (thế kỷ 13-14), Lê (thế kỷ 15-18), và Nguyễn (thế kỷ 19-20). Đây là loại trang phục thường được mặc bởi người dân thường, quan lại và tầng lớp quý tộc trong triều đình. Tùy dạng thức và thời kỳ, áo Đối khâm có thể được sử dụng trong sinh hoạt thường ngày hoặc những dịp cần ăn mặc chỉnh tề. Tên gọi \"Đối Khâm\" bắt nguồn từ kiểu dáng đặc trưng của áo, với phần cổ áo chéo nhau và đối xứng, tạo thành hình chữ \"Y\" hoặc chữ \"V\".",
+    "cultural_notes": {
+      "y_nghia_ten_goi": "Đối Khâm bắt nguồn từ hai vạt áo đối xứng tạo hình chữ Y hoặc V",
+      "co_ao": "Cổ áo đối xứng song song, xẻ dọc phía trước ngực",
+      "cac_lop_phoi": [
+        "Lớp 1: 1 áo lót trong và 1 quần dài",
+        "Lớp 2: thường quây (chân váy)",
+        "Lớp 3: áo Đối Khâm"
+      ],
+      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+    },
+    "is_traditional": true,
+    "remix_tags": ["y2k", "artistic", "thanh_lich"],
+    "compatible_occasions": ["dao_pho", "le_hoi", "ky_yeu", "tet"]
+  },
+  {
+    "id": "garment-ao-lot-trung-don",
+    "category": "traditional_top",
+    "type": "ao_lot_trong",
+    "subtype": "trung_don",
+    "display_name": "Áo Lót Trong Cổ Phục (Trung Đơn)",
+    "display_name_en": "Traditional Inner Robe (Trung Don)",
+    "image_path": "garments/ao_lot_trong.png",
+    "primary_color": "Trắng tinh",
+    "colors": ["Trắng tinh", "Trắng ngà"],
+    "pattern": "Trơn thuần khiết",
+    "material": "Vải bông mộc hoặc lụa tơ sống thoáng mát",
+    "era": "toan_quoc",
+    "region": "toan_quoc",
+    "gender_fit": "unisex",
+    "cultural_tier": "toan_dan",
+    "formality": "thuong_phuc",
+    "cultural_description": "Lớp 1 nền tảng: Áo lót trong (áo trung đơn) mặc sát người bên trong áo chính (Áo Tấc, Nhật Bình, Ngũ Thân, Giao Lĩnh, Viên Lĩnh, Đối Khâm). Vừa giúp thấm mồ hôi bảo quản áo khoác lễ phục, vừa để lộ viền cổ áo trắng thanh nhã tạo chuẩn mực thẩm mỹ cổ điển.",
+    "cultural_notes": {
+      "vai_tro": "Lớp lót định hình phom và giữ gìn lễ phục bên ngoài sạch sẽ",
+      "lop_phoi": "Lớp 1 kết hợp cùng quần dài"
+    },
+    "is_traditional": true,
+    "remix_tags": ["minimalist", "basic"],
+    "compatible_occasions": ["tet", "ky_yeu", "le_hoi", "tiec_cuoi", "dao_pho"]
+  },
+  {
+    "id": "garment-thuong-quay-chan-vay",
+    "category": "traditional_bottom",
+    "type": "thuong_quay",
+    "subtype": "chan_vay_xep_li",
+    "display_name": "Thường Quây Xếp Ly Truyền Thống",
+    "display_name_en": "Traditional Pleated Wrap Skirt",
+    "image_path": "garments/thuong_quay.png",
+    "primary_color": "Đỏ son",
+    "colors": ["Đỏ son", "Đen tuyền", "Xanh lam"],
+    "pattern": "Xếp ly dọc thanh thoát, dải đai lưng buộc",
+    "material": "Lụa phi sa cao cấp",
+    "era": "le",
+    "region": "toan_quoc",
+    "gender_fit": "nu",
+    "cultural_tier": "toan_dan",
+    "formality": "trang_trong",
+    "cultural_description": "Lớp 2: Thường quây (chân váy xếp ly) là hạ y truyền thống quây ngoài quần dài, mặc bên trong lớp áo khoác ngoài như Giao Lĩnh, Viên Lĩnh, Đối Khâm, Nhật Bình. Tạo nên tà váy tha thướt, uyển chuyển và kín đáo cho nữ giới xưa.",
+    "cultural_notes": {
+      "vai_tro": "Lớp phối hạ y lớp thứ 2 tạo độ xòe và bồng bềnh thanh nhã",
+      "lop_phoi": "Lớp 2 quây ngoài quần dài, buông rủ chấm gót"
+    },
+    "is_traditional": true,
+    "remix_tags": ["artistic", "thanh_lich"],
+    "compatible_occasions": ["tet", "ky_yeu", "le_hoi", "tiec_cuoi"]
+  },
+  {
+    "id": "garment-hai-theu-cung-dinh",
+    "category": "footwear",
+    "type": "hai_theu",
+    "subtype": "hai_mui_cong",
+    "display_name": "Hài Thêu Mũi Cong Cung Đình",
+    "display_name_en": "Royal Embroidered Shoes",
+    "image_path": "garments/hai_theu.png",
+    "primary_color": "Đỏ thắm",
+    "colors": ["Đỏ thắm", "Vàng kim"],
+    "pattern": "Thêu hoa sen và mây cuộn kim tuyến",
+    "material": "Gấm bọc cốt, đế vải ép thủ công",
+    "era": "nguyen",
+    "region": "trung_bo",
+    "gender_fit": "unisex",
+    "cultural_tier": "quy_toc",
+    "formality": "le_phuc",
+    "cultural_description": "Hài thêu truyền thống mũi cong thanh tao, đế nhẹ êm ái, là phụ kiện chân kinh điển đi cùng Áo Tấc, Nhật Bình, Giao Lĩnh, Viên Lĩnh và Ngũ Thân trong các dịp lễ tiết và cưới hỏi trang trọng.",
+    "cultural_notes": {
+      "mui_hai": "Mũi cong nhẹ thanh thoát, tôn dáng đi đài các trang nghiêm"
+    },
+    "is_traditional": true,
+    "remix_tags": ["thanh_lich", "artistic"],
+    "compatible_occasions": ["tet", "tiec_cuoi", "le_hoi"]
+  },
+  {
+    "id": "garment-o-giay-dau",
+    "category": "accessory",
+    "type": "o_giay_dau",
+    "subtype": "du_xoe",
+    "display_name": "Ô Giấy Dầu Cổ Phong Vẽ Hoa Mai",
+    "display_name_en": "Traditional Oiled Paper Umbrella",
+    "image_path": "garments/o_giay_dau.png",
+    "primary_color": "Vàng mơ",
+    "colors": ["Vàng mơ", "Đỏ thắm"],
+    "pattern": "Vẽ hoa mai thủy mặc trên nền giấy dầu",
+    "material": "Nan tre tự nhiên bọc giấy dầu truyền thống",
+    "era": "toan_quoc",
+    "region": "toan_quoc",
+    "gender_fit": "unisex",
+    "cultural_tier": "dan_gian",
+    "formality": "trang_trong",
+    "cultural_description": "Ô (dù) giấy dầu nan tre thủ công truyền thống, vừa che nắng mưa vừa là phụ kiện đạo cụ hoàn hảo tạo vẻ thơ mộng, lãng tử khi dạo phố, chụp ảnh kỷ yếu cùng cổ phục.",
+    "cultural_notes": {
+      "chat_lieu": "Khung tre dẻo dai bọc giấy dầu tự nhiên chống nước"
+    },
+    "is_traditional": true,
+    "remix_tags": ["artistic", "dao_pho"],
+    "compatible_occasions": ["dao_pho", "ky_yeu", "tet", "le_hoi"]
+  },
+  {
+    "id": "garment-tram-cai-toc-ngoc",
+    "category": "accessory",
+    "type": "tram_cai_toc",
+    "subtype": "tram_cai",
+    "display_name": "Trâm Cài Tóc Phượng Hoàng Cẩn Ngọc",
+    "display_name_en": "Imperial Jade & Phoenix Hairpin",
+    "image_path": "garments/tram_cai_toc.png",
+    "primary_color": "Vàng kim",
+    "colors": ["Vàng kim", "Xanh ngọc bích"],
+    "pattern": "Chạm khắc chim phượng ngậm ngọc và hoa sen",
+    "material": "Bạc mạ vàng, ngọc bích, tua rua rủ",
+    "era": "nguyen",
+    "region": "trung_bo",
+    "gender_fit": "nu",
+    "cultural_tier": "quy_toc",
+    "formality": "trang_trong",
+    "cultural_description": "Trâm cài tóc chạm khắc tinh xảo điểm xuyết tua rua rủ nhẹ bên tóc mai, dùng cố định búi tóc hoặc cài lên mấn khi phối cùng Áo Tấc, Nhật Bình, Giao Lĩnh.",
+    "cultural_notes": {
+      "tua_rua": "Tua rua đung đưa theo từng bước chân uyển chuyển"
+    },
+    "is_traditional": true,
+    "remix_tags": ["artistic", "thanh_lich"],
+    "compatible_occasions": ["tet", "tiec_cuoi", "ky_yeu", "le_hoi"]
+  },
+  {
+    "id": "garment-chuoi-ngoc-deo-co",
+    "category": "accessory",
+    "type": "chuoi_ngoc",
+    "subtype": "vong_co",
+    "display_name": "Chuỗi Hạt Ngọc Bích Cung Đình",
+    "display_name_en": "Imperial Jade Pearl Necklace",
+    "image_path": "garments/chuoi_ngoc.png",
+    "primary_color": "Xanh ngọc",
+    "colors": ["Xanh ngọc", "Trắng xà cừ"],
+    "pattern": "Hạt ngọc tròn đều xâu chuỗi, khóa bạc",
+    "material": "Hạt ngọc bích tự nhiên và ngọc trai",
+    "era": "nguyen",
+    "region": "trung_bo",
+    "gender_fit": "unisex",
+    "cultural_tier": "quy_toc",
+    "formality": "trang_trong",
+    "cultural_description": "Chuỗi ngọc đeo cổ quý phái buông rủ trước ngực, là điểm nhấn sang trọng khi phối cùng cổ áo vuông Nhật Bình, cổ đứng Áo Tấc hay cổ chéo Giao Lĩnh.",
+    "cultural_notes": {
+      "y_nghia": "Biểu trưng cho sự thanh cao, tôn quý và phú quý cát tường"
+    },
+    "is_traditional": true,
+    "remix_tags": ["thanh_lich", "y2k"],
+    "compatible_occasions": ["tet", "tiec_cuoi", "le_hoi", "ky_yeu"]
   }
 ]
