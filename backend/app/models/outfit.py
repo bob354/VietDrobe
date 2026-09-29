@@ -59,7 +59,7 @@ class OutfitItem(Base):
         String(36), ForeignKey("outfits.id", ondelete="CASCADE"), nullable=False
     )
     garment_id: Mapped[str] = mapped_column(
-        String(36), ForeignKey("garments.id", ondelete="CASCADE"), nullable=False
+        String(100), ForeignKey("inventory_items.item_id", ondelete="CASCADE"), nullable=False
     )
     layer_order: Mapped[int] = mapped_column(Integer, default=0)
 

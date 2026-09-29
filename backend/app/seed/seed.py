@@ -3,11 +3,11 @@ import logging
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-from sqlalchemy import select
+from sqlalchemy import inspect, select, text
 from app.config import get_settings
 from app.database import async_session_maker
 from app.models.cultural_rule import CulturalRule
-from app.models.garment import Garment
+from app.models.garment import Garment, GarmentType
 
 logger = logging.getLogger("vietphuc-seed")
 settings = get_settings()
@@ -311,95 +311,95 @@ async def seed_database(force_regenerate_images: bool = False):
     from app.database import Base, engine
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+        has_legacy_garments = await conn.run_sync(
+            lambda sync_conn: inspect(sync_conn).has_table("garments")
+        )
 
     async with async_session_maker() as session:
-        # Load existing garments map from DB
+        db_types = {
+            row.type_id: row
+            for row in (await session.execute(select(GarmentType))).scalars().all()
+        }
         db_garments = {g.id: g for g in (await session.execute(select(Garment))).scalars().all()}
         existing_rules_count = (await session.execute(select(CulturalRule))).scalars().first()
 
-        garments_file = SEED_DIR / "garments.json"
-        if garments_file.exists():
-            with open(garments_file, "r", encoding="utf-8") as f:
-                garment_data = json.load(f)
+        with open(SEED_DIR / "garment_types.json", encoding="utf-8") as f:
+            type_data = json.load(f)
+        for item in type_data:
+            type_id = item["type_id"]
+            if type_id in db_types:
+                continue
+            garment_type = GarmentType(
+                type_id=type_id,
+                name_vi=item["name_vi"],
+                name_en=item.get("name_en"),
+                category=item["category"],
+                subtype=item.get("subtype"),
+                era=item.get("era"),
+                region=item.get("region"),
+                gender_fit=item.get("gender_fit", "unisex"),
+                cultural_tier=item.get("cultural_tier"),
+                formality=item.get("formality"),
+                cultural_description=item.get("cultural_description"),
+                historical_lore=item.get("historical_lore"),
+                cultural_notes=item.get("cultural_notes"),
+                rules=item.get("rules", []),
+                is_traditional=item.get("is_traditional", True),
+                remix_tags=item.get("remix_tags", []),
+                compatible_occasions=item.get("compatible_occasions", []),
+            )
+            session.add(garment_type)
+            db_types[type_id] = garment_type
 
-            for item in garment_data:
-                cat = item.get("category", "")
-                default_price = 100000
-                if cat == "traditional_top": default_price = 150000
-                elif cat == "traditional_bottom": default_price = 80000
-                elif cat == "headwear": default_price = 50000
-                elif cat == "footwear": default_price = 60000
-                elif cat == "accessory": default_price = 40000
+        legacy_rows = {}
+        if has_legacy_garments:
+            legacy_rows = {
+                row["id"]: row
+                for row in (await session.execute(text("SELECT * FROM garments"))).mappings().all()
+            }
 
-                rental_price = item.get("rental_price_per_day", default_price)
-                deposit = item.get("deposit_per_item", rental_price * 0.5)
+        with open(SEED_DIR / "inventory_items.json", encoding="utf-8") as f:
+            inventory_data = json.load(f)
+        for item in inventory_data:
+            item_id = item["item_id"]
+            parent_type_id = item["parent_type_id"]
+            if parent_type_id not in db_types:
+                raise ValueError(f"Unknown garment type: {parent_type_id}")
+            if item_id in db_garments:
+                continue
 
-                if item["id"] in db_garments:
-                    g = db_garments[item["id"]]
-                    g.category = item["category"]
-                    g.type = item["type"]
-                    g.subtype = item.get("subtype")
-                    g.display_name = item["display_name"]
-                    g.display_name_en = item.get("display_name_en")
-                    g.image_path = item["image_path"]
-                    g.thumbnail_path = item.get("thumbnail_path", item["image_path"])
-                    g.primary_color = item.get("primary_color")
-                    g.colors = item.get("colors", [])
-                    g.pattern = item.get("pattern")
-                    g.material = item.get("material")
-                    g.era = item.get("era")
-                    g.region = item.get("region")
-                    g.gender_fit = item.get("gender_fit", "unisex")
-                    g.cultural_tier = item.get("cultural_tier")
-                    g.formality = item.get("formality")
-                    g.cultural_description = item.get("cultural_description")
-                    g.cultural_notes = item.get("cultural_notes")
-                    g.is_traditional = item.get("is_traditional", True)
-                    g.remix_tags = item.get("remix_tags", [])
-                    g.compatible_occasions = item.get("compatible_occasions", [])
-                else:
-                    garment = Garment(
-                        id=item["id"],
-                        category=item["category"],
-                        type=item["type"],
-                        subtype=item.get("subtype"),
-                        display_name=item["display_name"],
-                        display_name_en=item.get("display_name_en"),
-                        image_path=item["image_path"],
-                        thumbnail_path=item.get("thumbnail_path", item["image_path"]),
-                        primary_color=item.get("primary_color"),
-                        colors=item.get("colors", []),
-                        pattern=item.get("pattern"),
-                        material=item.get("material"),
-                        era=item.get("era"),
-                        region=item.get("region"),
-                        gender_fit=item.get("gender_fit", "unisex"),
-                        cultural_tier=item.get("cultural_tier"),
-                        formality=item.get("formality"),
-                        cultural_description=item.get("cultural_description"),
-                        cultural_notes=item.get("cultural_notes"),
-                        is_traditional=item.get("is_traditional", True),
-                        remix_tags=item.get("remix_tags", []),
-                        compatible_occasions=item.get("compatible_occasions", []),
-                        is_preset=True,
-                        rental_price_per_day=rental_price,
-                        deposit_per_item=deposit,
-                        available_sizes=item.get("available_sizes", ["S", "M", "L", "XL"]),
-                        stock_quantity=item.get("stock_quantity", 3),
-                    )
-                    session.add(garment)
+            legacy = legacy_rows.get(item_id)
+            garment = Garment(
+                id=item_id,
+                parent_type_id=parent_type_id,
+                display_name=item["display_name"],
+                display_name_en=item.get("display_name_en"),
+                image_path=item["image_path"],
+                thumbnail_path=item.get("thumbnail_path", item["image_path"]),
+                primary_color=item.get("primary_color"),
+                colors=item.get("colors", []),
+                pattern=item.get("pattern"),
+                material=item.get("material"),
+                is_preset=item.get("is_preset", True),
+                rental_price_per_day=(legacy["rental_price_per_day"] if legacy else item.get("rental_price_per_day")),
+                deposit_per_item=(legacy["deposit_per_item"] if legacy else item.get("deposit_per_item")),
+                available_sizes=(json.loads(legacy["available_sizes"]) if legacy and legacy["available_sizes"] else item.get("available_sizes", [])),
+                stock_quantity=(legacy["stock_quantity"] if legacy else item.get("stock_quantity", 1)),
+            )
+            session.add(garment)
+            db_garments[item_id] = garment
 
-                # Generate or regenerate image asset
-                img_full_path = DATA_DIR / item["image_path"].lstrip("/\\")
-                if force_regenerate_images or not img_full_path.exists():
-                    generate_placeholder_image(
-                        img_full_path,
-                        title=item["display_name"],
-                        color_name=item.get("primary_color", "Màu tự nhiên"),
-                        era=item.get("era", "nguyen"),
-                        g_type=item.get("type", ""),
-                        is_traditional=item.get("is_traditional", True),
-                    )
+            image_file = DATA_DIR / item["image_path"].lstrip("/\\")
+            if force_regenerate_images or not image_file.exists():
+                garment_type = db_types[parent_type_id]
+                generate_placeholder_image(
+                    image_file,
+                    title=item["display_name"],
+                    color_name=item.get("primary_color", "Màu tự nhiên"),
+                    era=garment_type.era or "nguyen",
+                    g_type=parent_type_id,
+                    is_traditional=garment_type.is_traditional,
+                )
 
         # 2. Seed Cultural Rules if not present
         if not existing_rules_count:

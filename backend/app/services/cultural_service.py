@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.cultural_rule import CulturalRule
-from app.models.garment import Garment
+from app.models.garment import Garment, GarmentType
 from app.schemas import CulturalCheckResponse, CulturalLoreResponse, CulturalViolation
 from app.services.ai_service import AIService, load_prompt
 
@@ -129,17 +129,17 @@ class CulturalService:
 
     async def get_lore(self, garment_type: str) -> CulturalLoreResponse | None:
         result = await self.db.execute(
-            select(Garment).where(Garment.type == garment_type).limit(1)
+            select(GarmentType).where(GarmentType.type_id == garment_type)
         )
-        garment = result.scalar_one_or_none()
-        if not garment:
+        garment_type_record = result.scalar_one_or_none()
+        if not garment_type_record:
             return None
 
         return CulturalLoreResponse(
-            garment_type=garment.type,
-            display_name=garment.display_name,
-            era=garment.era,
-            region=garment.region,
-            cultural_description=garment.cultural_description,
-            cultural_notes=garment.cultural_notes,
+            garment_type=garment_type_record.type_id,
+            display_name=garment_type_record.name_vi,
+            era=garment_type_record.era,
+            region=garment_type_record.region,
+            cultural_description=garment_type_record.cultural_description,
+            cultural_notes=garment_type_record.cultural_notes,
         )

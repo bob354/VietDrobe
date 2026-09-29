@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from app.database import async_session_maker
-from app.models.garment import Garment
+from app.models.garment import Garment, GarmentType
 from app.models.cultural_rule import CulturalRule
 from app.schemas import ChatRequest, ChatResponse, GarmentSuggestion, CulturalCardInfo
 from app.services.ai_service import AIService, load_prompt
@@ -19,20 +19,29 @@ async def get_db():
 
 @router.post("", response_model=ChatResponse)
 async def chat_with_assistant(request: ChatRequest, db: AsyncSession = Depends(get_db)):
-    # 1. Load Garment Catalog
+    # 1. Load cultural knowledge once per type, then physical inventory.
     result = await db.execute(select(Garment))
     garments = result.scalars().all()
+    type_result = await db.execute(select(GarmentType))
+    garment_types = type_result.scalars().all()
     garment_map = {g.id: g for g in garments}
     
-    catalog_lines = []
+    catalog_lines = ["KIẾN THỨC LOẠI TRANG PHỤC:"]
+    for garment_type in garment_types:
+        catalog_lines.append(
+            f"- {garment_type.type_id} | {garment_type.name_vi} | "
+            f"Thời kỳ: {garment_type.era or 'Chưa rõ'} | "
+            f"Mô tả văn hóa: {garment_type.cultural_description or 'Không có'}"
+        )
+    catalog_lines.append("KHO MẪU CÓ THỂ THUÊ:")
     for g in garments:
         price_str = f"{int(g.rental_price_per_day):,}đ/ngày" if g.rental_price_per_day else "150,000đ/ngày"
         deposit_str = f"{int(g.deposit_per_item):,}đ" if g.deposit_per_item else "45,000đ"
         sizes = ", ".join(g.available_sizes) if isinstance(g.available_sizes, list) else "S, M, L, XL"
         catalog_lines.append(
-            f"- ID: {g.id} | Tên: {g.display_name} | Loại: {g.category} ({g.type}) | "
-            f"Thời kỳ: {g.era or 'Chưa rõ'} | Giá thuê: {price_str} | Cọc: {deposit_str} | Size: {sizes} | "
-            f"Mô tả văn hóa: {g.cultural_description or 'Không có'}"
+            f"- ID: {g.id} | Tên: {g.display_name} | Loại: {g.parent_type_id} | "
+            f"Màu: {g.primary_color or 'Chưa rõ'} | Chất liệu: {g.material or 'Chưa rõ'} | "
+            f"Giá thuê: {price_str} | Cọc: {deposit_str} | Size: {sizes}"
         )
     catalog_str = "\n".join(catalog_lines)
 

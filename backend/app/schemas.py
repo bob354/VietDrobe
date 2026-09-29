@@ -11,10 +11,37 @@ def _none_to_list(v):
 # Garment Schemas
 # ============================================================
 
+class GarmentTypeResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    type_id: str
+    name_vi: str
+    name_en: str | None = None
+    category: str
+    subtype: str | None = None
+    era: str | None = None
+    region: str | None = None
+    gender_fit: str | None = None
+    cultural_tier: str | None = None
+    formality: str | None = None
+    cultural_description: str | None = None
+    historical_lore: str | None = None
+    cultural_notes: dict | None = None
+    rules: list = Field(default_factory=list)
+    is_traditional: bool = True
+    remix_tags: list[str] = Field(default_factory=list)
+    compatible_occasions: list[str] = Field(default_factory=list)
+
+    @field_validator("rules", "remix_tags", "compatible_occasions", mode="before")
+    @classmethod
+    def coerce_none_to_list(cls, value):
+        return _none_to_list(value)
+
 class GarmentResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: str
+    parent_type_id: str
     category: str
     type: str
     subtype: str | None = None

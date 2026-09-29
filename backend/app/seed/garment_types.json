@@ -1,16 +1,10 @@
 [
   {
-    "id": "garment-ao-tac-do",
+    "type_id": "ao_tac",
+    "name_vi": "Áo Tấc",
+    "name_en": "Ao Tac Robe",
     "category": "traditional_top",
-    "type": "ao_tac",
     "subtype": "tay_thung",
-    "display_name": "Áo Tấc Đỏ Điều Thêu Họa Tiết",
-    "display_name_en": "Imperial Red Ao Tac Robe",
-    "image_path": "garments/ao_tac_do.png",
-    "primary_color": "Đỏ điều",
-    "colors": ["Đỏ điều", "Vàng kim"],
-    "pattern": "Họa tiết hoa văn mây sóng thủy ba",
-    "material": "Gấm tơ tằm thượng hạng",
     "era": "nguyen",
     "region": "trung_bo",
     "gender_fit": "unisex",
@@ -25,46 +19,34 @@
         "Lớp 1: 1 áo lót trong và 1 quần dài",
         "Lớp 2: Áo Tấc"
       ],
-      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+      "phu_kien_phoi_cung": [
+        "hài",
+        "ô",
+        "vòng cổ",
+        "quạt",
+        "trâm cài tóc",
+        "chuỗi ngọc"
+      ]
     },
     "is_traditional": true,
-    "remix_tags": ["thanh_lich", "tet", "ky_yeu"],
-    "compatible_occasions": ["tet", "ky_yeu", "tiec_cuoi", "le_hoi"]
+    "remix_tags": [
+      "thanh_lich",
+      "tet",
+      "ky_yeu"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "ky_yeu",
+      "tiec_cuoi",
+      "le_hoi"
+    ]
   },
   {
-    "id": "garment-ao-tac-xanh",
+    "type_id": "ao_nhat_binh",
+    "name_vi": "Áo Nhật Bình",
+    "name_en": "Nhat Binh Robe",
     "category": "traditional_top",
-    "type": "ao_tac",
-    "subtype": "tay_thung",
-    "display_name": "Áo Tấc Xanh Cổ Vịt Nhã Nhặn",
-    "display_name_en": "Teal Blue Ao Tac Robe",
-    "image_path": "garments/ao_tac_xanh.png",
-    "primary_color": "Xanh cổ vịt",
-    "colors": ["Xanh cổ vịt", "Trắng ngà"],
-    "pattern": "Dệt chìm hoa cúc dây",
-    "material": "Lụa Vạn Phúc mềm mại",
-    "era": "nguyen",
-    "region": "trung_bo",
-    "gender_fit": "unisex",
-    "cultural_tier": "trung_luu",
-    "formality": "trang_trong",
-    "cultural_description": "Phiên bản áo tấc với sắc xanh cổ vịt thanh nhã, tượng trưng cho hành Mộc (sự sinh sôi, tươi trẻ). Rất được học sinh, sinh viên yêu thích cho dịp kỷ yếu hoặc dạo phố đón xuân.",
-    "is_traditional": true,
-    "remix_tags": ["minimalist", "ky_yeu", "dao_pho"],
-    "compatible_occasions": ["ky_yeu", "tet", "dao_pho"]
-  },
-  {
-    "id": "garment-nhat-binh-hoang-cung",
-    "category": "traditional_top",
-    "type": "ao_nhat_binh",
     "subtype": "le_phuc_nu",
-    "display_name": "Áo Nhật Bình Cung Đình Thêu Phượng",
-    "display_name_en": "Royal Nhat Binh Robe",
-    "image_path": "garments/nhat_binh.png",
-    "primary_color": "Vàng hoàng yến",
-    "colors": ["Vàng hoàng yến", "Đỏ", "Xanh ngũ sắc"],
-    "pattern": "Thêu phượng ổ, hoa mẫu đơn và dải ngũ hành",
-    "material": "Sa đoạn dệt chỉ vàng kim",
     "era": "nguyen",
     "region": "trung_bo",
     "gender_fit": "nu",
@@ -80,24 +62,34 @@
         "Lớp 2: thường quây (chân váy)",
         "Lớp 3: áo khoác nhật bình"
       ],
-      "phu_kien_phoi_cung": ["khăn vấn", "hài", "trâm cài tóc", "vòng cổ", "chuỗi hạt", "quạt", "ô"]
+      "phu_kien_phoi_cung": [
+        "khăn vấn",
+        "hài",
+        "trâm cài tóc",
+        "vòng cổ",
+        "chuỗi hạt",
+        "quạt",
+        "ô"
+      ]
     },
     "is_traditional": true,
-    "remix_tags": ["y2k", "artistic", "thanh_lich"],
-    "compatible_occasions": ["tet", "cuoi_hoi", "thiet_trieu"]
+    "remix_tags": [
+      "y2k",
+      "artistic",
+      "thanh_lich"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "cuoi_hoi",
+      "thiet_trieu"
+    ]
   },
   {
-    "id": "garment-ngu-than-tay-chen-nam",
+    "type_id": "ao_ngu_than",
+    "name_vi": "Áo Ngũ Thân",
+    "name_en": "Five-part Robe",
     "category": "traditional_top",
-    "type": "ao_ngu_than",
     "subtype": "tay_chen",
-    "display_name": "Áo Ngũ Thân Tay Chẽn Nam Đen Tuyền",
-    "display_name_en": "Men's Fitted Ngu Than Robe",
-    "image_path": "garments/ngu_than_nam.png",
-    "primary_color": "Đen tuyền",
-    "colors": ["Đen", "Xám tro"],
-    "pattern": "Trơn tối giản, dệt gân chìm",
-    "material": "Đũi tơ tằm thô mộc",
     "era": "nguyen",
     "region": "toan_quoc",
     "gender_fit": "nam",
@@ -111,24 +103,34 @@
         "Lớp 1: 1 áo lót trong và 1 quần dài",
         "Lớp 2: Áo Ngũ Thân Tay Chẽn"
       ],
-      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+      "phu_kien_phoi_cung": [
+        "hài",
+        "ô",
+        "vòng cổ",
+        "quạt",
+        "trâm cài tóc",
+        "chuỗi ngọc"
+      ]
     },
     "is_traditional": true,
-    "remix_tags": ["streetwear", "minimalist", "dao_pho"],
-    "compatible_occasions": ["dao_pho", "tet", "ky_yeu", "le_hoi"]
+    "remix_tags": [
+      "streetwear",
+      "minimalist",
+      "dao_pho"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "tet",
+      "ky_yeu",
+      "le_hoi"
+    ]
   },
   {
-    "id": "garment-giao-linh-le",
+    "type_id": "ao_giao_linh",
+    "name_vi": "Áo Giao Lĩnh",
+    "name_en": "Giao Linh Robe",
     "category": "traditional_top",
-    "type": "ao_giao_linh",
     "subtype": "co_cheo",
-    "display_name": "Áo Giao Lĩnh Thời Lê Tơ Sống",
-    "display_name_en": "Le Dynasty Cross-collar Robe",
-    "image_path": "garments/giao_linh.png",
-    "primary_color": "Trắng ngà",
-    "colors": ["Trắng ngà", "Be"],
-    "pattern": "Trơn thuần khiết",
-    "material": "Lụa tơ sống thoáng mát",
     "era": "le",
     "region": "bac_bo",
     "gender_fit": "unisex",
@@ -143,288 +145,321 @@
         "Lớp 2: Thường quây / Chân váy",
         "Lớp 3: Áo Giao Lĩnh"
       ],
-      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+      "phu_kien_phoi_cung": [
+        "hài",
+        "ô",
+        "vòng cổ",
+        "quạt",
+        "trâm cài tóc",
+        "chuỗi ngọc"
+      ]
     },
     "is_traditional": true,
-    "remix_tags": ["minimalist", "y2k", "dao_pho"],
-    "compatible_occasions": ["dao_pho", "ky_yeu", "le_hoi"]
+    "remix_tags": [
+      "minimalist",
+      "y2k",
+      "dao_pho"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "ky_yeu",
+      "le_hoi"
+    ]
   },
   {
-    "id": "garment-tu-than-bac-bo",
+    "type_id": "ao_tu_than",
+    "name_vi": "Áo Tứ Thân",
+    "name_en": "Four-part Robe",
     "category": "traditional_top",
-    "type": "ao_tu_than",
     "subtype": "dan_gian",
-    "display_name": "Áo Tứ Thân Nâu Sồng Vạt Buộc",
-    "display_name_en": "Northern Folk Tu Than Dress",
-    "image_path": "garments/tu_than.png",
-    "primary_color": "Nâu sồng",
-    "colors": ["Nâu sồng", "Hồng cánh sen"],
-    "pattern": "Phối yếm đào bên trong",
-    "material": "Vải thô nhuộm củ nâu truyền thống",
     "era": "folk",
     "region": "bac_bo",
     "gender_fit": "nu",
     "cultural_tier": "dan_gian",
     "formality": "le_hoi",
     "cultural_description": "Trang phục biểu tượng của phụ nữ vùng đồng bằng Bắc Bộ, thường mặc trong hội Lim, hát Quan họ. Phía sau gồm 2 thân áo ghép sống lưng, phía trước là 2 thân buông dài buộc lại trước bụng.",
+    "cultural_notes": null,
     "is_traditional": true,
-    "remix_tags": ["y2k", "artistic", "le_hoi"],
-    "compatible_occasions": ["le_hoi", "ky_yeu"]
+    "remix_tags": [
+      "y2k",
+      "artistic",
+      "le_hoi"
+    ],
+    "compatible_occasions": [
+      "le_hoi",
+      "ky_yeu"
+    ]
   },
   {
-    "id": "garment-quan-phi-lua-trang",
+    "type_id": "quan_phi_lua",
+    "name_vi": "Quần Phi Lụa",
+    "name_en": "Silk Trousers",
     "category": "traditional_bottom",
-    "type": "quan_phi_lua",
     "subtype": "ong_rong",
-    "display_name": "Quần Phi Lụa Trắng Ống Rộng",
-    "display_name_en": "White Silk Wide-leg Pants",
-    "image_path": "garments/quan_phi_trang.png",
-    "primary_color": "Trắng ngọc",
-    "colors": ["Trắng ngọc"],
-    "pattern": "Trơn bóng mượt",
-    "material": "Lụa phi bóng cao cấp",
     "era": "nguyen",
     "region": "toan_quoc",
     "gender_fit": "unisex",
     "cultural_tier": "binh_dan",
     "formality": "trang_trong",
     "cultural_description": "Quần truyền thống đáy sâu, ống suông rộng thoải mái, giúp tà áo Việt phục bay bổng uyển chuyển khi sải bước.",
+    "cultural_notes": null,
     "is_traditional": true,
-    "remix_tags": ["minimalist", "thanh_lich"],
-    "compatible_occasions": ["tet", "ky_yeu", "le_hoi", "tiec_cuoi"]
+    "remix_tags": [
+      "minimalist",
+      "thanh_lich"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "ky_yeu",
+      "le_hoi",
+      "tiec_cuoi"
+    ]
   },
   {
-    "id": "garment-quan-lua-den",
+    "type_id": "quan_lua_den",
+    "name_vi": "Quần Lụa Đen",
+    "name_en": "Black Silk Pants",
     "category": "traditional_bottom",
-    "type": "quan_lua_den",
     "subtype": "ong_suong",
-    "display_name": "Quần Lụa Đen Lãnh Mỹ A",
-    "display_name_en": "Black Silk Flowing Pants",
-    "image_path": "garments/quan_lua_den.png",
-    "primary_color": "Đen huyền",
-    "colors": ["Đen huyền"],
-    "pattern": "Bề mặt đanh mượt",
-    "material": "Lụa dệt tự nhiên",
     "era": "toan_quoc",
     "region": "nam_bo",
     "gender_fit": "unisex",
     "cultural_tier": "binh_dan",
     "formality": "thuong_phuc",
     "cultural_description": "Quần lụa đen huyền thoại của xứ Nam Bộ, tạo độ tương phản mạnh mẽ và cực kỳ tôn dáng khi phối cùng các sắc áo màu nổi.",
+    "cultural_notes": null,
     "is_traditional": true,
-    "remix_tags": ["streetwear", "minimalist"],
-    "compatible_occasions": ["dao_pho", "tet", "ky_yeu"]
+    "remix_tags": [
+      "streetwear",
+      "minimalist"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "tet",
+      "ky_yeu"
+    ]
   },
   {
-    "id": "garment-quan-jeans-ong-suong",
+    "type_id": "quan_jeans_remix",
+    "name_vi": "Quần Jeans Ống Suông Remix",
+    "name_en": "Remix Wide-leg Jeans",
     "category": "modern_bottom",
-    "type": "quan_jeans_remix",
     "subtype": "baggy_vintage",
-    "display_name": "Quần Jeans Xanh Ống Suông Vintage (Remix)",
-    "display_name_en": "Vintage Baggy Jeans",
-    "image_path": "garments/jeans_remix.png",
-    "primary_color": "Xanh denim",
-    "colors": ["Xanh denim wash"],
-    "pattern": "Mài nhẹ cổ điển",
-    "material": "Denim 100% cotton",
     "era": "modern",
     "region": "toan_quoc",
     "gender_fit": "unisex",
     "cultural_tier": "hien_dai",
     "formality": "thuong_phuc",
     "cultural_description": "Món đồ đại diện cho phong cách Gen Z đương đại, phối cùng áo ngũ thân tay chẽn tạo nên nét tương phản phóng khoáng, nổi loạn nhưng tôn trọng phom áo.",
+    "cultural_notes": null,
     "is_traditional": false,
-    "remix_tags": ["streetwear", "y2k", "dao_pho"],
-    "compatible_occasions": ["dao_pho", "ky_yeu"]
+    "remix_tags": [
+      "streetwear",
+      "y2k",
+      "dao_pho"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "ky_yeu"
+    ]
   },
   {
-    "id": "garment-man-do-gam",
+    "type_id": "man_gam",
+    "name_vi": "Mấn Gấm",
+    "name_en": "Brocade Headband",
     "category": "headwear",
-    "type": "man_gam",
     "subtype": "phu_kien_dau",
-    "display_name": "Mấn Gấm Đỏ Khuy Ngọc",
-    "display_name_en": "Imperial Red Headdress",
-    "image_path": "garments/man_do.png",
-    "primary_color": "Đỏ điều",
-    "colors": ["Đỏ điều", "Vàng"],
-    "pattern": "Vải gấm hoa chìm",
-    "material": "Gấm bọc cốt",
     "era": "nguyen",
     "region": "trung_bo",
     "gender_fit": "nu",
     "cultural_tier": "quy_toc",
     "formality": "trang_trong",
     "cultural_description": "Mấn xếp nhiều vòng đội đầu giúp khuôn mặt phụ nữ Việt thêm phần thanh tú, phúc hậu.",
+    "cultural_notes": null,
     "is_traditional": true,
-    "remix_tags": ["thanh_lich", "tet"],
-    "compatible_occasions": ["tet", "ky_yeu", "tiec_cuoi"]
+    "remix_tags": [
+      "thanh_lich",
+      "tet"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "ky_yeu",
+      "tiec_cuoi"
+    ]
   },
   {
-    "id": "garment-khan-dong-nam",
+    "type_id": "khan_dong",
+    "name_vi": "Khăn Đóng / Khăn Xếp",
+    "name_en": "Folded Turban",
     "category": "headwear",
-    "type": "khan_dong",
     "subtype": "khan_xep",
-    "display_name": "Khăn Đóng Nam Đen Tuyền",
-    "display_name_en": "Men's Black Turban",
-    "image_path": "garments/khan_dong.png",
-    "primary_color": "Đen tuyền",
-    "colors": ["Đen"],
-    "pattern": "Xếp nếp chữ Nhân hoặc Nhất",
-    "material": "Vải the mỏng bọc khung",
     "era": "nguyen",
     "region": "toan_quoc",
     "gender_fit": "nam",
     "cultural_tier": "toan_dan",
     "formality": "trang_trong",
     "cultural_description": "Khăn đóng đội đầu cho nam giới tạo vẻ trí thức nho nhã của những chàng tú tài xưa.",
+    "cultural_notes": null,
     "is_traditional": true,
-    "remix_tags": ["thanh_lich", "ky_yeu"],
-    "compatible_occasions": ["ky_yeu", "tet", "tiec_cuoi"]
+    "remix_tags": [
+      "thanh_lich",
+      "ky_yeu"
+    ],
+    "compatible_occasions": [
+      "ky_yeu",
+      "tet",
+      "tiec_cuoi"
+    ]
   },
   {
-    "id": "garment-non-quai-thao",
+    "type_id": "non_quai_thao",
+    "name_vi": "Nón Quai Thao",
+    "name_en": "Quai Thao Hat",
     "category": "headwear",
-    "type": "non_quai_thao",
     "subtype": "non_ba_tam",
-    "display_name": "Nón Quai Thao Duyên Dáng",
-    "display_name_en": "Quai Thao Folk Hat",
-    "image_path": "garments/non_quai_thao.png",
-    "primary_color": "Vàng rơm",
-    "colors": ["Vàng rơm", "Đỏ tím"],
-    "pattern": "Lá gồi đan thủ công phẳng phiu",
-    "material": "Lá gồi và quai tơ tằm",
     "era": "folk",
     "region": "bac_bo",
     "gender_fit": "nu",
     "cultural_tier": "dan_gian",
     "formality": "le_hoi",
     "cultural_description": "Nón ba tầm quai thao rộng vành, phụ kiện linh hồn của các liền chị quan họ Kinh Bắc.",
+    "cultural_notes": null,
     "is_traditional": true,
-    "remix_tags": ["artistic", "le_hoi"],
-    "compatible_occasions": ["le_hoi", "ky_yeu"]
+    "remix_tags": [
+      "artistic",
+      "le_hoi"
+    ],
+    "compatible_occasions": [
+      "le_hoi",
+      "ky_yeu"
+    ]
   },
   {
-    "id": "garment-sneaker-trang-remix",
+    "type_id": "sneaker_trang",
+    "name_vi": "Sneaker Trắng Remix",
+    "name_en": "White Modern Sneaker",
     "category": "footwear",
-    "type": "sneaker_trang",
     "subtype": "chunky_minimal",
-    "display_name": "Sneaker Trắng Biti's Hunter Remix",
-    "display_name_en": "White Chunky Sneaker",
-    "image_path": "garments/sneaker_trang.png",
-    "primary_color": "Trắng tinh",
-    "colors": ["Trắng"],
-    "pattern": "Minimalist thể thao",
-    "material": "Da tổng hợp & đế cao su",
     "era": "modern",
     "region": "toan_quoc",
     "gender_fit": "unisex",
     "cultural_tier": "hien_dai",
     "formality": "thuong_phuc",
     "cultural_description": "Đôi giày thể thao trắng kinh điển của người trẻ Việt, tạo bước đi tự tin, êm ái khi diện cùng áo tấc dạo phố cả ngày.",
+    "cultural_notes": null,
     "is_traditional": false,
-    "remix_tags": ["streetwear", "dao_pho"],
-    "compatible_occasions": ["dao_pho", "tet", "ky_yeu"]
+    "remix_tags": [
+      "streetwear",
+      "dao_pho"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "tet",
+      "ky_yeu"
+    ]
   },
   {
-    "id": "garment-guoc-moc-truyen-thong",
+    "type_id": "guoc_moc",
+    "name_vi": "Guốc Mộc Cổ Truyền",
+    "name_en": "Traditional Wooden Clogs",
     "category": "footwear",
-    "type": "guoc_moc",
     "subtype": "guoc_go",
-    "display_name": "Guốc Mộc Quai Ngang Khảm Hoa",
-    "display_name_en": "Traditional Wooden Clogs",
-    "image_path": "garments/guoc_moc.png",
-    "primary_color": "Gỗ tự nhiên",
-    "colors": ["Nâu gỗ", "Đỏ nhung"],
-    "pattern": "Quai nhung đỏ thêu chỉ vàng",
-    "material": "Gỗ xoan đào nhẹ",
     "era": "nguyen",
     "region": "toan_quoc",
     "gender_fit": "nu",
     "cultural_tier": "dan_gian",
     "formality": "trang_trong",
     "cultural_description": "Guốc mộc tạo nên âm thanh lách cách thanh thoát quen thuộc trong các con ngõ cổ Hội An và Hà Nội xưa.",
+    "cultural_notes": null,
     "is_traditional": true,
-    "remix_tags": ["thanh_lich", "tet"],
-    "compatible_occasions": ["tet", "ky_yeu", "tiec_cuoi"]
+    "remix_tags": [
+      "thanh_lich",
+      "tet"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "ky_yeu",
+      "tiec_cuoi"
+    ]
   },
   {
-    "id": "garment-tui-tote-dong-ho",
+    "type_id": "tui_tote",
+    "name_vi": "Túi Tote Họa Tiết Dân Gian",
+    "name_en": "Folk Art Canvas Tote",
     "category": "accessory",
-    "type": "tui_tote",
     "subtype": "canvas_print",
-    "display_name": "Túi Tote Canvas In Tranh Đông Hồ (Remix)",
-    "display_name_en": "Dong Ho Folk Art Tote Bag",
-    "image_path": "garments/tui_tote.png",
-    "primary_color": "Màu chàm / Be",
-    "colors": ["Be", "Đỏ điều", "Chàm"],
-    "pattern": "In tranh Lợn Âm Dương hoặc Mục Đồng Đọc Sách",
-    "material": "Vải bố canvas thô dày",
     "era": "modern",
     "region": "bac_bo",
     "gender_fit": "unisex",
     "cultural_tier": "hien_dai",
     "formality": "thuong_phuc",
     "cultural_description": "Sự kết hợp hoàn hảo giữa nét vẽ mộc mạc dân gian và chiếc túi vải tiện lợi mang theo bình nước, máy ảnh của Gen Z.",
+    "cultural_notes": null,
     "is_traditional": false,
-    "remix_tags": ["streetwear", "y2k", "dao_pho"],
-    "compatible_occasions": ["dao_pho", "ky_yeu", "tet"]
+    "remix_tags": [
+      "streetwear",
+      "y2k",
+      "dao_pho"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "ky_yeu",
+      "tet"
+    ]
   },
   {
-    "id": "garment-quat-tram-huong",
+    "type_id": "quat_tram",
+    "name_vi": "Quạt Trầm Hương",
+    "name_en": "Agarwood Scented Fan",
     "category": "accessory",
-    "type": "quat_tram",
     "subtype": "quat_xep",
-    "display_name": "Quạt Xếp Trầm Hương Khắc Thơ",
-    "display_name_en": "Carved Agarwood Hand Fan",
-    "image_path": "garments/quat_tram.png",
-    "primary_color": "Nâu trầm",
-    "colors": ["Nâu trầm", "Tua rua đỏ"],
-    "pattern": "Khắc rỗng hoa sen và trăng nước",
-    "material": "Gỗ thơm tự nhiên",
     "era": "nguyen",
     "region": "trung_bo",
     "gender_fit": "unisex",
     "cultural_tier": "quy_toc",
     "formality": "trang_trong",
     "cultural_description": "Phụ kiện tạo nét duyên dáng, e ấp khi che nghiêng khuôn mặt chụp ảnh kỷ niệm.",
+    "cultural_notes": null,
     "is_traditional": true,
-    "remix_tags": ["thanh_lich", "artistic"],
-    "compatible_occasions": ["tet", "ky_yeu", "le_hoi"]
+    "remix_tags": [
+      "thanh_lich",
+      "artistic"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "ky_yeu",
+      "le_hoi"
+    ]
   },
   {
-    "id": "garment-kinh-ram-retro-remix",
+    "type_id": "kinh_ram",
+    "name_vi": "Kính Râm Retro Remix",
+    "name_en": "Retro Sunglasses",
     "category": "accessory",
-    "type": "kinh_ram",
     "subtype": "round_shades",
-    "display_name": "Kính Râm Gọng Tròn Đen Retro (Remix)",
-    "display_name_en": "Retro Round Sunglasses",
-    "image_path": "garments/kinh_ram.png",
-    "primary_color": "Đen bóng",
-    "colors": ["Đen", "Vàng kim"],
-    "pattern": "Trơn tối giản",
-    "material": "Kim loại mạ vàng & tròng phân cực",
     "era": "modern",
     "region": "toan_quoc",
     "gender_fit": "unisex",
     "cultural_tier": "hien_dai",
     "formality": "thuong_phuc",
     "cultural_description": "Điểm nhấn 'chất lừ' mang hơi thở thập niên 70s-90s, cực kỳ được các bạn trẻ ưa chuộng khi chụp lookbook Việt phục đường phố.",
+    "cultural_notes": null,
     "is_traditional": false,
-    "remix_tags": ["streetwear", "y2k"],
-    "compatible_occasions": ["dao_pho", "ky_yeu"]
+    "remix_tags": [
+      "streetwear",
+      "y2k"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "ky_yeu"
+    ]
   },
   {
-    "id": "garment-vien-linh-ly-tran-le",
+    "type_id": "ao_vien_linh",
+    "name_vi": "Áo Viên Lĩnh",
+    "name_en": "Round-collar Robe",
     "category": "traditional_top",
-    "type": "ao_vien_linh",
     "subtype": "co_tron",
-    "display_name": "Áo Viên Lĩnh Cổ Tròn Thời Lý - Lê",
-    "display_name_en": "Round-Collar Vien Linh Robe",
-    "image_path": "garments/vien_linh.png",
-    "primary_color": "Xanh chàm",
-    "colors": ["Xanh chàm", "Trắng ngà"],
-    "pattern": "Dệt chìm hoa văn mây tản và hoa thị cổ truyền",
-    "material": "Tơ tằm dệt thủ công",
     "era": "ly_tran_le",
     "region": "toan_quoc",
     "gender_fit": "unisex",
@@ -439,24 +474,34 @@
         "Lớp 2: Thường quây / Chân váy",
         "Lớp 3: Áo Viên Lĩnh"
       ],
-      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+      "phu_kien_phoi_cung": [
+        "hài",
+        "ô",
+        "vòng cổ",
+        "quạt",
+        "trâm cài tóc",
+        "chuỗi ngọc"
+      ]
     },
     "is_traditional": true,
-    "remix_tags": ["minimalist", "artistic", "dao_pho"],
-    "compatible_occasions": ["le_hoi", "ky_yeu", "tet", "dao_pho"]
+    "remix_tags": [
+      "minimalist",
+      "artistic",
+      "dao_pho"
+    ],
+    "compatible_occasions": [
+      "le_hoi",
+      "ky_yeu",
+      "tet",
+      "dao_pho"
+    ]
   },
   {
-    "id": "garment-doi-kham-dai-viet",
+    "type_id": "ao_doi_kham",
+    "name_vi": "Áo Đối Khâm",
+    "name_en": "Parallel-collar Robe",
     "category": "traditional_top",
-    "type": "ao_doi_kham",
     "subtype": "vat_doi_xung",
-    "display_name": "Áo Đối Khâm Cổ Đại Việt",
-    "display_name_en": "Parallel-Lapel Doi Kham Robe",
-    "image_path": "garments/doi_kham.png",
-    "primary_color": "Tím lục bình",
-    "colors": ["Tím lục bình", "Hồng sen"],
-    "pattern": "Viền thêu hoa văn đối xứng chữ Y/V",
-    "material": "Gấm tơ lụa mềm",
     "era": "le",
     "region": "toan_quoc",
     "gender_fit": "unisex",
@@ -471,24 +516,34 @@
         "Lớp 2: thường quây (chân váy)",
         "Lớp 3: áo Đối Khâm"
       ],
-      "phu_kien_phoi_cung": ["hài", "ô", "vòng cổ", "quạt", "trâm cài tóc", "chuỗi ngọc"]
+      "phu_kien_phoi_cung": [
+        "hài",
+        "ô",
+        "vòng cổ",
+        "quạt",
+        "trâm cài tóc",
+        "chuỗi ngọc"
+      ]
     },
     "is_traditional": true,
-    "remix_tags": ["y2k", "artistic", "thanh_lich"],
-    "compatible_occasions": ["dao_pho", "le_hoi", "ky_yeu", "tet"]
+    "remix_tags": [
+      "y2k",
+      "artistic",
+      "thanh_lich"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "le_hoi",
+      "ky_yeu",
+      "tet"
+    ]
   },
   {
-    "id": "garment-ao-lot-trung-don",
+    "type_id": "ao_lot_trong",
+    "name_vi": "Áo Lót Trung Đơn",
+    "name_en": "Inner White Robe",
     "category": "traditional_top",
-    "type": "ao_lot_trong",
     "subtype": "trung_don",
-    "display_name": "Áo Lót Trong Cổ Phục (Trung Đơn)",
-    "display_name_en": "Traditional Inner Robe (Trung Don)",
-    "image_path": "garments/ao_lot_trong.png",
-    "primary_color": "Trắng tinh",
-    "colors": ["Trắng tinh", "Trắng ngà"],
-    "pattern": "Trơn thuần khiết",
-    "material": "Vải bông mộc hoặc lụa tơ sống thoáng mát",
     "era": "toan_quoc",
     "region": "toan_quoc",
     "gender_fit": "unisex",
@@ -500,21 +555,24 @@
       "lop_phoi": "Lớp 1 kết hợp cùng quần dài"
     },
     "is_traditional": true,
-    "remix_tags": ["minimalist", "basic"],
-    "compatible_occasions": ["tet", "ky_yeu", "le_hoi", "tiec_cuoi", "dao_pho"]
+    "remix_tags": [
+      "minimalist",
+      "basic"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "ky_yeu",
+      "le_hoi",
+      "tiec_cuoi",
+      "dao_pho"
+    ]
   },
   {
-    "id": "garment-thuong-quay-chan-vay",
+    "type_id": "thuong_quay",
+    "name_vi": "Thường Quây / Chân Váy",
+    "name_en": "Wrap Skirt / Lower Garment",
     "category": "traditional_bottom",
-    "type": "thuong_quay",
     "subtype": "chan_vay_xep_li",
-    "display_name": "Thường Quây Xếp Ly Truyền Thống",
-    "display_name_en": "Traditional Pleated Wrap Skirt",
-    "image_path": "garments/thuong_quay.png",
-    "primary_color": "Đỏ son",
-    "colors": ["Đỏ son", "Đen tuyền", "Xanh lam"],
-    "pattern": "Xếp ly dọc thanh thoát, dải đai lưng buộc",
-    "material": "Lụa phi sa cao cấp",
     "era": "le",
     "region": "toan_quoc",
     "gender_fit": "nu",
@@ -526,21 +584,23 @@
       "lop_phoi": "Lớp 2 quây ngoài quần dài, buông rủ chấm gót"
     },
     "is_traditional": true,
-    "remix_tags": ["artistic", "thanh_lich"],
-    "compatible_occasions": ["tet", "ky_yeu", "le_hoi", "tiec_cuoi"]
+    "remix_tags": [
+      "artistic",
+      "thanh_lich"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "ky_yeu",
+      "le_hoi",
+      "tiec_cuoi"
+    ]
   },
   {
-    "id": "garment-hai-theu-cung-dinh",
+    "type_id": "hai_theu",
+    "name_vi": "Hài Thêu Cung Đình",
+    "name_en": "Embroidered Court Slippers",
     "category": "footwear",
-    "type": "hai_theu",
     "subtype": "hai_mui_cong",
-    "display_name": "Hài Thêu Mũi Cong Cung Đình",
-    "display_name_en": "Royal Embroidered Shoes",
-    "image_path": "garments/hai_theu.png",
-    "primary_color": "Đỏ thắm",
-    "colors": ["Đỏ thắm", "Vàng kim"],
-    "pattern": "Thêu hoa sen và mây cuộn kim tuyến",
-    "material": "Gấm bọc cốt, đế vải ép thủ công",
     "era": "nguyen",
     "region": "trung_bo",
     "gender_fit": "unisex",
@@ -551,21 +611,22 @@
       "mui_hai": "Mũi cong nhẹ thanh thoát, tôn dáng đi đài các trang nghiêm"
     },
     "is_traditional": true,
-    "remix_tags": ["thanh_lich", "artistic"],
-    "compatible_occasions": ["tet", "tiec_cuoi", "le_hoi"]
+    "remix_tags": [
+      "thanh_lich",
+      "artistic"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "tiec_cuoi",
+      "le_hoi"
+    ]
   },
   {
-    "id": "garment-o-giay-dau",
+    "type_id": "o_giay_dau",
+    "name_vi": "Ô Giấy Dầu Cổ Phong",
+    "name_en": "Oiled Paper Umbrella",
     "category": "accessory",
-    "type": "o_giay_dau",
     "subtype": "du_xoe",
-    "display_name": "Ô Giấy Dầu Cổ Phong Vẽ Hoa Mai",
-    "display_name_en": "Traditional Oiled Paper Umbrella",
-    "image_path": "garments/o_giay_dau.png",
-    "primary_color": "Vàng mơ",
-    "colors": ["Vàng mơ", "Đỏ thắm"],
-    "pattern": "Vẽ hoa mai thủy mặc trên nền giấy dầu",
-    "material": "Nan tre tự nhiên bọc giấy dầu truyền thống",
     "era": "toan_quoc",
     "region": "toan_quoc",
     "gender_fit": "unisex",
@@ -576,21 +637,23 @@
       "chat_lieu": "Khung tre dẻo dai bọc giấy dầu tự nhiên chống nước"
     },
     "is_traditional": true,
-    "remix_tags": ["artistic", "dao_pho"],
-    "compatible_occasions": ["dao_pho", "ky_yeu", "tet", "le_hoi"]
+    "remix_tags": [
+      "artistic",
+      "dao_pho"
+    ],
+    "compatible_occasions": [
+      "dao_pho",
+      "ky_yeu",
+      "tet",
+      "le_hoi"
+    ]
   },
   {
-    "id": "garment-tram-cai-toc-ngoc",
+    "type_id": "tram_cai_toc",
+    "name_vi": "Trâm Cài Tóc Khảm Ngọc",
+    "name_en": "Jade Hairpin",
     "category": "accessory",
-    "type": "tram_cai_toc",
     "subtype": "tram_cai",
-    "display_name": "Trâm Cài Tóc Phượng Hoàng Cẩn Ngọc",
-    "display_name_en": "Imperial Jade & Phoenix Hairpin",
-    "image_path": "garments/tram_cai_toc.png",
-    "primary_color": "Vàng kim",
-    "colors": ["Vàng kim", "Xanh ngọc bích"],
-    "pattern": "Chạm khắc chim phượng ngậm ngọc và hoa sen",
-    "material": "Bạc mạ vàng, ngọc bích, tua rua rủ",
     "era": "nguyen",
     "region": "trung_bo",
     "gender_fit": "nu",
@@ -601,21 +664,23 @@
       "tua_rua": "Tua rua đung đưa theo từng bước chân uyển chuyển"
     },
     "is_traditional": true,
-    "remix_tags": ["artistic", "thanh_lich"],
-    "compatible_occasions": ["tet", "tiec_cuoi", "ky_yeu", "le_hoi"]
+    "remix_tags": [
+      "artistic",
+      "thanh_lich"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "tiec_cuoi",
+      "ky_yeu",
+      "le_hoi"
+    ]
   },
   {
-    "id": "garment-chuoi-ngoc-deo-co",
+    "type_id": "chuoi_ngoc",
+    "name_vi": "Chuỗi Ngọc Đeo Cổ",
+    "name_en": "Pearl Beads Necklace",
     "category": "accessory",
-    "type": "chuoi_ngoc",
     "subtype": "vong_co",
-    "display_name": "Chuỗi Hạt Ngọc Bích Cung Đình",
-    "display_name_en": "Imperial Jade Pearl Necklace",
-    "image_path": "garments/chuoi_ngoc.png",
-    "primary_color": "Xanh ngọc",
-    "colors": ["Xanh ngọc", "Trắng xà cừ"],
-    "pattern": "Hạt ngọc tròn đều xâu chuỗi, khóa bạc",
-    "material": "Hạt ngọc bích tự nhiên và ngọc trai",
     "era": "nguyen",
     "region": "trung_bo",
     "gender_fit": "unisex",
@@ -626,7 +691,15 @@
       "y_nghia": "Biểu trưng cho sự thanh cao, tôn quý và phú quý cát tường"
     },
     "is_traditional": true,
-    "remix_tags": ["thanh_lich", "y2k"],
-    "compatible_occasions": ["tet", "tiec_cuoi", "le_hoi", "ky_yeu"]
+    "remix_tags": [
+      "thanh_lich",
+      "y2k"
+    ],
+    "compatible_occasions": [
+      "tet",
+      "tiec_cuoi",
+      "le_hoi",
+      "ky_yeu"
+    ]
   }
 ]
