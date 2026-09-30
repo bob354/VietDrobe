@@ -9,12 +9,7 @@ from app.models.types import JSONType
 
 
 class CulturalRule(Base):
-    """Rule-based cultural validation checks.
-
-    These rules are evaluated BEFORE calling AI, providing fast and
-    deterministic guardrails. AI is called as a secondary layer for
-    nuanced checks not captured by rules.
-    """
+    """Data-driven cultural validation rules for garment combinations."""
 
     __tablename__ = "cultural_rules"
 

@@ -1,6 +1,6 @@
 # VietDrobe
 
-> Nền tảng số hóa, trải nghiệm thời trang di sản và dịch vụ cho thuê cổ phục Việt Nam thông minh dành cho thế hệ trẻ, tích hợp  Stylist,và hệ thống thẩm định chuẩn mực văn hóa.
+> Nền tảng số hóa, trải nghiệm thời trang di sản và dịch vụ cho thuê cổ phục Việt Nam dành cho thế hệ trẻ, với tìm kiếm ngữ nghĩa và thẩm định chuẩn mực văn hóa.
 
 ---
 
@@ -10,7 +10,7 @@
 1. **Khảo cứu & chiêm ngưỡng di sản**: Tiếp cận thông tin chuẩn xác về phom dáng, hoa văn, điển tích, niên đại và ý nghĩa của 17 cổ phục tiêu biểu.
 2. **Sáng tạo & phối đồ đa phong cách**: Phối ngẫu linh hoạt cổ phục (Áo Tấc, Nhật Bình, Ngũ Thân, Giao Lĩnh...) cùng phụ kiện hiện đại (Sneaker, Jeans ống suông, Túi tote Đông Hồ, Kính râm retro) theo bối cảnh sự kiện thực tế (Tết, Kỷ yếu, Dạo phố, Dạ tiệc, Lễ hội).
 3. **Bảo tồn chuẩn mực**: Đảm bảo tính tôn nghiêm và giá trị cội nguồn nhờ thuật toán tự động kiểm định văn hóa, ngăn ngừa các lỗi sai phạm phẩm hàm, giới tính, niên đại hoặc thuần phong mỹ tục.
-4. **Dịch vụ cho thuê cổ phục thông minh**: Tích hợp hoàn chỉnh mô hình kinh doanh cho thuê trang phục di sản, cho phép chọn size, số lượng, ngày thuê, tự động tính giá linh hoạt, chiết khấu combo 15% cho set đồ AI và quản lý đơn đặt cọc minh bạch.
+4. **Dịch vụ cho thuê cổ phục**: Tích hợp mô hình cho thuê trang phục di sản, cho phép chọn size, số lượng, ngày thuê, tính giá, chiết khấu combo 15% và quản lý tiền đặt cọc.
 
 ---
 
@@ -19,11 +19,12 @@
 ### Tủ Đồ Di Sản & Kho Phục Trang Cho Thuê 
 - **17 phục trang chuẩn hóa**: Chia theo nhóm chi tiết (*Áo Cổ Phục, Quần & Váy Lụa, Mấn & Nón, Guốc & Sneaker, Phụ Kiện*).
 
-### AI Stylist
-- **Phối đồ theo bối cảnh**: 5 sự kiện (*Tết, Kỷ yếu, Dạo phố, Lễ hội, Hỷ sự*) kết hợp 4 phong cách (*Streetwear, Minimalist, Y2K Folk-Fusion, Cổ phong thanh lịch*).
-- **Bảo chứng văn hóa & Báo giá**: Tự động đánh giá độ hài hòa màu sắc (Color Harmony), điểm bảo chứng văn hóa (Cultural Integrity) và ước tính tổng chi phí thuê set đồ.
-- **Fallback Heuristic Engine**: Cơ chế dự phòng nội suy thông minh, đảm bảo **luôn luôn trả về 3 công thức phối đồ hoàn chỉnh** ngay cả khi không có kết nối Internet hoặc chưa cấu hình AI API Key.
-- **Hỗ trợ ghim món đồ (Pinned Garments)**: Cố định một hoặc nhiều món yêu thích làm tâm điểm cho mọi gợi ý.
+### Tìm Kiếm Trang Phục Theo Ngữ Nghĩa
+- **Tìm theo bối cảnh và phong cách**: Quiz kết hợp dịp diện, phong cách, giới tính và món đồ ghim thành truy vấn để tìm các mẫu gần nghĩa trong kho.
+- **Embeddings hai lớp dữ liệu**: Mỗi SKU vật lý được embed cùng thông tin văn hóa từ loại trang phục cha; kết quả trả về ảnh và thông tin của SKU tương ứng.
+- **Chạy cục bộ, không cần API key**: SentenceTransformer tạo embeddings và ChromaDB tìm kiếm vector. Không dùng LLM.
+- **Gợi ý theo bộ**: Vector search lấy các SKU phù hợp; hệ thống ghép món chính với quần/váy phù hợp và kiểm tra quy tắc văn hóa trước khi hiển thị bộ trang phục. Đây là bước phối theo danh mục và quy tắc, không phải outfit mẫu cố định.
+- **Hỗ trợ ghim món đồ**: Món được ghim được giữ trong mỗi bộ gợi ý hợp lệ khi còn hàng.
 
 ### Mix & Match Studio Canvas 
 - **Không gian phối đồ trực quan**: Kéo thả, chọn lọc trang phục tự do trên nền Canvas mỹ thuật.
@@ -44,6 +45,7 @@
 | **ORM / DB** | SQLAlchemy 2.0 (Async) + aiosqlite | Quản lý dữ liệu bất đồng bộ (Garments, CulturalRules, Rentals, Bookings) |
 | **Validation** | Pydantic v2 | Kiểm định dữ liệu vào/ra nghiêm ngặt |
 | **Image Engine** | Pillow (PIL) | Sinh thẻ tranh di sản truyền thống và hoa văn tự động |
+| **Semantic Search** | SentenceTransformers + ChromaDB | Tạo embeddings cục bộ và truy xuất SKU theo độ tương đồng ngữ nghĩa |
 | **Container** | Docker & Docker Compose | Đóng gói và triển khai môi trường đồng nhất |
 
 ### Mô hình dữ liệu kho phục trang
@@ -55,7 +57,7 @@ Kho được tách thành hai lớp để không lặp tri thức văn hóa gi�
 | `GarmentType` | `backend/app/seed/garment_types.json` | `type_id`, tên gọi, niên đại, tri thức lịch sử, quy tắc văn hóa và metadata RAG. Mỗi loại chỉ có một bản ghi. |
 | `InventoryItem` | `backend/app/seed/inventory_items.json` | `item_id`, `parent_type_id`, ảnh, màu, chất liệu, size, giá, tiền cọc và tồn kho của SKU thực tế. |
 
-Ví dụ: `ao_tac` là một `GarmentType`; `garment-ao-tac-do` và `garment-ao-tac-xanh` là hai `InventoryItem` cùng tham chiếu về loại này. RAG chỉ cần embed `GarmentType`.
+Ví dụ: `ao_tac` là một `GarmentType`; `garment-ao-tac-do` và `garment-ao-tac-xanh` là hai `InventoryItem` cùng tham chiếu về loại này. Mỗi `InventoryItem` được embed riêng cùng thông tin từ `GarmentType` cha để tìm được đúng biến thể mà vẫn giữ tri thức văn hóa.
 
 ---
 
@@ -68,8 +70,8 @@ Ví dụ: `ao_tac` là một `GarmentType`; `garment-ao-tac-do` và `garment-ao-
 | `GET` | `/api/v1/garment-types` | Tri thức văn hóa dùng chung theo loại trang phục |
 | `GET` | `/api/v1/garments/{id}` | Chi tiết một món phục trang di sản |
 | `POST` | `/api/v1/cultural/check` | Thẩm định độ tương thích văn hóa của set đồ (Cultural Guardrail) |
-| `POST` | `/api/v1/outfits/suggest` | Gợi ý 3 công thức phối đồ theo bối cảnh qua AI hoặc Heuristic Fallback |
-| `POST` | `/api/v1/chat` | Trợ lý hội thoại AI đa lượt (hỗ trợ ngữ cảnh Canvas & tư vấn giá thuê) |
+| `POST` | `/api/v1/outfits/suggest` | Tìm SKU bằng semantic search, ghép thành bộ theo danh mục và kiểm tra quy tắc văn hóa |
+| `POST` | `/api/v1/chat` | Tìm SKU bằng mô tả ngữ nghĩa, có thể kết hợp ngữ cảnh Canvas |
 | `GET` | `/api/v1/rentals/catalog` | Danh mục phục trang cho thuê cùng phân loại size và tồn kho |
 | `POST` | `/api/v1/rentals/calculate` | Tính toán tiền thuê, chiết khấu Combo 15% và tiền cọc theo số ngày |
 | `POST` | `/api/v1/rentals/book` | Tạo đơn đặt thuê mới và lưu trữ vào database |
@@ -97,7 +99,7 @@ docker compose up --build
 Sau khi khởi chạy thành công:
 - **Giao diện người dùng (Frontend)**: [http://localhost:3000](http://localhost:3000)
   - Khảo cứu di sản: `/catalog`
-  - Gợi ý AI Stylist: `/suggest`
+  - Tìm trang phục theo ngữ nghĩa: `/suggest`
   - Studio phối đồ: `/studio`
   - Đặt thuê trang phục: `/rent`
 - **Tài liệu API Swagger (Backend)**: [http://localhost:8000/docs](http://localhost:8000/docs)
@@ -128,7 +130,9 @@ py -m pip install -r requirements.txt
 py -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-> *Ghi chú:* Để tích hợp OpenAI/LLM thực tế, tạo file `backend/.env` từ `.env.example` và điền `AI_API_KEY`. Nếu không có API Key, hệ thống sẽ tự động chuyển sang Fallback Heuristic Engine mà không gặp lỗi.
+> *Ghi chú:* Không cần API key. Embedding model chạy cục bộ qua SentenceTransformers; ChromaDB lưu chỉ mục dưới `backend/data/chroma` và tự đồng bộ `inventory_items.json` cùng `garment_types.json` khi tìm kiếm. Lần đầu tiên cần tải model nếu model chưa có trong cache cục bộ.
+
+Quiz và tìm kiếm trong studio dùng semantic vector search trực tiếp. Hệ thống trả về dữ liệu SKU và thông tin văn hóa từ loại cha thay vì sinh câu trả lời hay công thức phối đồ.
 
 #### Bước 2: Khởi động Frontend
 

@@ -1,18 +1,14 @@
-import logging
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.cultural_rule import CulturalRule
 from app.models.garment import Garment, GarmentType
 from app.schemas import CulturalCheckResponse, CulturalLoreResponse, CulturalViolation
-from app.services.ai_service import AIService, load_prompt
-
-logger = logging.getLogger(__name__)
 
 class CulturalService:
     def __init__(self, db: AsyncSession):
         self.db = db
-        self.ai = AIService()
+        self._db_rules: list[CulturalRule] | None = None
 
     async def check_combination(self, garments: list[Garment]) -> CulturalCheckResponse:
         violations: list[CulturalViolation] = []
@@ -48,10 +44,11 @@ class CulturalService:
             score -= 0.5
 
         # Rule 3: Database rules evaluation
-        rules_res = await self.db.execute(select(CulturalRule))
-        db_rules = rules_res.scalars().all()
+        if self._db_rules is None:
+            rules_res = await self.db.execute(select(CulturalRule))
+            self._db_rules = list(rules_res.scalars().all())
 
-        for rule in db_rules:
+        for rule in self._db_rules:
             cond = rule.condition or {}
             target_type = cond.get("garment_type")
             incompatible_cat = cond.get("with_category")
@@ -89,34 +86,6 @@ class CulturalService:
                     )
                 )
                 score -= 0.25 if rule.severity == "error" else 0.1
-
-        # Check with AI if key is available and no fatal errors yet
-        if not any(v.severity == "error" for v in violations) and self.ai.api_key:
-            items_desc = "\n".join(
-                [f"- {g.display_name} ({g.type}, {g.category}, {g.era or 'Hiện đại'})" for g in garments]
-            )
-            prompt = load_prompt("cultural_check").replace("{items_text}", items_desc)
-            ai_res = await self.ai.generate_json(
-                system_prompt="You are an expert cultural advisor and researcher specializing in Vietnamese traditional attire.",
-                user_prompt=prompt,
-            )
-            if ai_res and isinstance(ai_res, dict):
-                for v in ai_res.get("violations", []):
-                    if isinstance(v, dict):
-                        violations.append(
-                            CulturalViolation(
-                                severity=v.get("severity", "info"),
-                                message=v.get("message", ""),
-                            )
-                        )
-                if "score" in ai_res:
-                    try:
-                        ai_score = float(str(ai_res["score"]).replace("%", ""))
-                        if ai_score > 1:
-                            ai_score = ai_score / 100.0
-                        score = min(score, ai_score)
-                    except (ValueError, TypeError):
-                        pass
 
         final_score = max(0.0, min(1.0, score))
         is_valid = not any(v.severity == "error" for v in violations)

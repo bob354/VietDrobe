@@ -53,9 +53,6 @@ export interface Outfit {
   color_harmony_score?: number;
   cultural_integrity_score?: number;
   cultural_warning?: string;
-  ai_highlights: string[];
-  ai_styling_tip?: string;
-  ai_cultural_note?: string;
   source: string;
   items: OutfitItem[];
   created_at?: string;
@@ -66,12 +63,18 @@ export interface SuggestRequest {
   style: string;
   gender?: string;
   pinned_garment_ids?: string[];
-  ai_provider?: string;
-  ai_model?: string;
 }
 
 export interface SuggestResponse {
-  outfits: Outfit[];
+  outfits: SuggestedOutfit[];
+}
+
+export interface SuggestedOutfit {
+  id: string;
+  name: string;
+  items: Garment[];
+  cultural_integrity_score: number;
+  cultural_warning?: string;
 }
 
 export interface CulturalViolation {
@@ -99,24 +102,8 @@ export interface ChatContext {
   canvas_garment_ids?: string[];
 }
 
-export interface GarmentSuggestion {
-  garment_id: string;
-  display_name: string;
-  reason: string;
-  etiquette_score?: number;
-}
-
-export interface CulturalCardInfo {
-  title: string;
-  description: string;
-  era?: string;
-}
-
 export interface ChatResponse {
-  reply: string;
-  suggestions: GarmentSuggestion[];
-  cultural_cards: CulturalCardInfo[];
-  etiquette_tips: string[];
+  items: Garment[];
 }
 
 // ============ Rental Types ============

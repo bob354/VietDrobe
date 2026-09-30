@@ -21,7 +21,7 @@ class Outfit(Base):
     style_tag: Mapped[str | None] = mapped_column(String(50))
     gender: Mapped[str | None] = mapped_column(String(20))
 
-    # AI analysis results
+    # Legacy optional analysis fields retained for existing database records.
     color_harmony_score: Mapped[float | None] = mapped_column(Float)
     cultural_integrity_score: Mapped[float | None] = mapped_column(Float)
     cultural_warning: Mapped[str | None] = mapped_column(Text)
@@ -31,7 +31,7 @@ class Outfit(Base):
 
     source: Mapped[str] = mapped_column(
         String(20), default="user_created"
-    )  # "ai_suggested" | "user_created"
+    )  # "suggested" | "user_created"
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime, server_default=func.now()

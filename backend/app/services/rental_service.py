@@ -39,8 +39,7 @@ class RentalService:
         combo_discount_percent = 0.0
         if len(garments) >= 3:
             combo_discount_percent = 15.0
-            # For simplicity, we just use 15% discount for 3+ items. 
-            # Differentiating "AI-suggested set" requires more context, keeping it basic or assuming standard discount.
+            # Apply the same discount to every rental with at least three garments.
             
         discount_amount = subtotal * (combo_discount_percent / 100.0)
         total = subtotal - discount_amount

@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { RefreshCw, ArrowRight, Pin, X } from "lucide-react";
 import { api } from "@/lib/api";
-import { Outfit, Garment } from "@/lib/types";
-import { OutfitResultCard } from "@/components/outfit-result-card";
+import { Garment, SuggestedOutfit } from "@/lib/types";
+import { GarmentCard } from "@/components/garment-card";
 
 const OCCASIONS = [
   { id: "tet", label: "Du Xuân Đón Tết", desc: "Dạo phố hoa, lễ Tết gia đình, lễ hội đầu năm" },
@@ -35,7 +35,7 @@ export default function SuggestPage() {
   const [garments, setGarments] = useState<Garment[]>([]);
   const [pinnedGarmentId, setPinnedGarmentId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [outfits, setOutfits] = useState<Outfit[]>([]);
+  const [outfits, setOutfits] = useState<SuggestedOutfit[]>([]);
   const [hasGenerated, setHasGenerated] = useState(false);
   const [garmentError, setGarmentError] = useState(false);
   const [generationError, setGenerationError] = useState(false);
@@ -66,7 +66,7 @@ export default function SuggestPage() {
       });
       setOutfits(res.outfits || []);
     } catch (err) {
-      console.error("AI Stylist error:", err);
+      console.error("Semantic garment search error:", err);
       setOutfits([]);
       setGenerationError(true);
     } finally {
@@ -79,10 +79,10 @@ export default function SuggestPage() {
       {/* Header */}
       <div className="page-intro text-center max-w-2xl mx-auto mb-12">
         <h1 className="font-serif text-3xl sm:text-5xl font-normal text-[#24251F] dark:text-[#EEE8DC]">
-          Tìm bản phối của bạn
+          Tìm mẫu trang phục phù hợp
         </h1>
         <p className="page-lead mt-4 text-xs sm:text-sm text-[#625F56] dark:text-[#B7AFA0] font-serif leading-relaxed">
-          Chọn dịp, phong cách và món đồ tâm điểm. Stylist sẽ gợi ý những cách diện cổ phục phù hợp với bạn.
+          Chọn dịp, phong cách và món đồ tâm điểm để tìm các mẫu cổ phục phù hợp từ kho.
         </p>
       </div>
 
@@ -147,7 +147,7 @@ export default function SuggestPage() {
                 03 / Ghim Món Đồ Tâm Điểm (Tùy Chọn)
               </span>
               <span className="text-[11px] text-[#625F56] dark:text-[#B7AFA0] font-serif">
-                Chọn 1 món đồ làm trung tâm để AI xây dựng toàn bộ outfit xoay quanh nó
+                Chọn 1 món đồ để ưu tiên các mẫu tương tự trong kết quả
               </span>
             </div>
             {pinnedGarmentId && (
@@ -239,11 +239,11 @@ export default function SuggestPage() {
             {loading ? (
               <>
                 <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                <span>AI Đang Phối Tác...</span>
+                <span>Đang tìm mẫu phù hợp...</span>
               </>
             ) : (
               <>
-                <span>Khởi Tạo 3 Công Thức Phối Đồ</span>
+                <span>Tìm Trang Phục Phù Hợp</span>
                 <ArrowRight className="w-3.5 h-3.5 stroke-1" />
               </>
             )}
@@ -259,29 +259,56 @@ export default function SuggestPage() {
               Tuyển Tập Đề Xuất
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#24251F] dark:text-[#EEE8DC]">
-              Công Thức Phối Đồ Dành Riêng Cho Bạn
+              Các Bộ Phối Phù Hợp
             </h2>
           </div>
 
           {loading ? (
             <div className="py-20 text-center text-[#625F56] dark:text-[#B7AFA0] font-serif text-sm flex flex-col items-center gap-3">
               <RefreshCw className="w-5 h-5 animate-spin text-[#9F3B30] dark:text-[#D16F5D]" />
-              <span>Đang tính toán hòa sắc và điển tích...</span>
+              <span>Đang tìm kiếm trong kho trang phục...</span>
             </div>
           ) : generationError ? (
-            <div role="alert" className="text-center py-16 bg-white dark:bg-[#232923] border border-[#D8D0C1] dark:border-[#485047] font-serif text-sm text-[#625F56] dark:text-[#B7AFA0]">Chưa kết nối được với stylist. Vui lòng thử lại sau.</div>
+            <div role="alert" className="text-center py-16 bg-white dark:bg-[#232923] border border-[#D8D0C1] dark:border-[#485047] font-serif text-sm text-[#625F56] dark:text-[#B7AFA0]">Chưa thể tìm kiếm trang phục. Vui lòng thử lại sau.</div>
           ) : outfits.length === 0 ? (
             <div className="text-center py-16 bg-white dark:bg-[#232923] border border-[#D8D0C1] dark:border-[#485047] font-serif text-sm text-[#625F56] dark:text-[#B7AFA0]">
-              Chưa có kết quả. Vui lòng bấm thử lại.
+              Không tìm thấy bộ trang phục hoàn chỉnh và phù hợp trong kho hiện có.
             </div>
           ) : (
             <div className="space-y-8">
-              {outfits.map((outfit) => (
-                <OutfitResultCard
+              {outfits.map((outfit, index) => (
+                <section
                   key={outfit.id}
-                  outfit={outfit}
-                  pinnedGarmentIds={pinnedGarmentId ? [pinnedGarmentId] : []}
-                />
+                  className="bg-white dark:bg-[#232923] border border-[#D8D0C1] dark:border-[#485047] p-5 sm:p-7"
+                >
+                  <div className="flex items-center justify-between gap-4 mb-5">
+                    <h3 className="font-serif text-lg text-[#24251F] dark:text-[#EEE8DC]">
+                      {`Bộ phối ${String(index + 1).padStart(2, "0")}`}
+                    </h3>
+                    <span className="text-[10px] uppercase tracking-widest text-[#625F56] dark:text-[#B7AFA0]">
+                      {outfit.items.length} món
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {outfit.items.map((garment) => (
+                      <article key={garment.id} className="space-y-2">
+                        <GarmentCard garment={garment} />
+                        <div className="px-1 text-xs text-[#625F56] dark:text-[#B7AFA0] space-y-1">
+                          <p>{garment.category.replaceAll("_", " ")}</p>
+                          {garment.material && <p>{garment.material}</p>}
+                          {garment.cultural_description && (
+                            <p className="line-clamp-3">{garment.cultural_description}</p>
+                          )}
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                  {outfit.cultural_warning && (
+                    <p className="mt-5 text-xs text-[#625F56] dark:text-[#B7AFA0]">
+                      {outfit.cultural_warning}
+                    </p>
+                  )}
+                </section>
               ))}
             </div>
           )}

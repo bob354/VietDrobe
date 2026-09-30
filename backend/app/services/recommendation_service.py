@@ -1,273 +1,200 @@
-import logging
-import random
+import asyncio
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.garment import Garment
-from app.schemas import GarmentResponse, OutfitItemResponse, OutfitResponse, SuggestRequest
-from app.services.ai_service import AIService, load_prompt
+from app.schemas import GarmentResponse, SuggestRequest, SuggestedOutfit
 from app.services.cultural_service import CulturalService
 from app.services.garment_service import GarmentService
 from app.services.image_service import ImageService
+from app.services.rag_service import RAGService
 
-logger = logging.getLogger(__name__)
-
-OCCASION_MAP = {
-    "tet": "Du xuân đón Tết Nguyên Đán, dạo phố hoa và chụp ảnh lưu niệm",
-    "ky_yeu": "Lễ tốt nghiệp, chụp ảnh kỷ yếu thanh xuân học đường",
-    "dao_pho": "Dạo phố cuối tuần, cà phê bạn bè theo phong cách hiện đại trẻ trung",
-    "le_hoi": "Trẩy hội Đền Hùng, lễ hội văn hóa dân gian hoặc biểu diễn nghệ thuật",
-    "tiec_cuoi": "Tham dự tiệc cưới, hỷ sự trang trọng",
+OCCASION_QUERY = {
+    "tet": "Tết Nguyên Đán, du xuân, lễ hội đầu năm, dạo phố hoa",
+    "ky_yeu": "chụp ảnh kỷ yếu, lễ tốt nghiệp, học đường",
+    "dao_pho": "dạo phố cuối tuần, cà phê, gặp gỡ bạn bè",
+    "le_hoi": "lễ hội dân gian, di tích, văn hóa truyền thống",
+    "tiec_cuoi": "tiệc cưới, hỷ sự, dịp trang trọng",
 }
 
-STYLE_MAP = {
-    "streetwear": "Streetwear năng động, phá cách, kết hợp sneaker và phụ kiện hiện đại",
-    "minimalist": "Tối giản, trang nhã, tập trung vào đường nét và chất liệu lụa/gấm",
-    "y2k": "Y2K Folk-fusion trẻ trung, sắc màu tươi sáng và điểm nhấn độc đáo",
-    "thanh_lich": "Thanh lịch chuẩn mực, tôn trọng phom dáng cổ truyền",
+STYLE_QUERY = {
+    "streetwear": "streetwear năng động, sneaker, kính râm, phối hiện đại",
+    "minimalist": "tối giản, trang nhã, màu sắc thanh thoát, chất liệu lụa",
+    "y2k": "Y2K folk fusion, trẻ trung, màu sắc tươi sáng, phá cách",
+    "thanh_lich": "cổ phong thanh lịch, nho nhã, giữ phom dáng truyền thống",
 }
+
+TOP_CATEGORIES = {"traditional_top", "modern_top"}
+BOTTOM_CATEGORIES = {"traditional_bottom", "modern_bottom"}
+ONE_PIECE_CATEGORIES = {"traditional_full"}
+OPTIONAL_CATEGORIES = ("footwear", "headwear", "accessory")
+
 
 class RecommendationService:
     def __init__(self, db: AsyncSession):
-        self.db = db
-        self.ai = AIService()
         self.garment_service = GarmentService(db)
+        self.rag_service = RAGService()
         self.cultural_service = CulturalService(db)
 
-    async def suggest(self, req: SuggestRequest) -> list[OutfitResponse]:
-        # 1. Fetch available items
-        all_garments, _ = await self.garment_service.get_list(gender=req.gender, limit=100)
-        if not all_garments:
+    async def suggest(self, req: SuggestRequest) -> list[SuggestedOutfit]:
+        garments, _ = await self.garment_service.get_list(
+            gender=req.gender, limit=100
+        )
+        available = {
+            garment.id: garment
+            for garment in garments
+            if garment.stock_quantity > 0
+        }
+        if not available:
             return []
 
-        # If user explicitly requested deterministic fallback, bypass AI
-        if req.ai_provider == "fallback":
-            return await self._fallback_generation(req, all_garments)
+        pinned = await self.garment_service.get_by_ids(req.pinned_garment_ids)
+        pinned = [garment for garment in pinned if garment.id in available]
+        query_parts = [
+            OCCASION_QUERY.get(req.occasion, req.occasion),
+            STYLE_QUERY.get(req.style, req.style),
+            req.gender,
+        ]
+        for garment in pinned:
+            query_parts.extend(
+                [
+                    garment.display_name,
+                    garment.primary_color or "",
+                    garment.material or "",
+                    garment.pattern or "",
+                    garment.garment_type.name_vi,
+                ]
+            )
 
-        garment_dict = {g.id: g for g in all_garments}
+        candidates = await asyncio.to_thread(
+            self.rag_service.query_candidates,
+            " ".join(part for part in query_parts if part),
+            n_results=max(25, len(available)),
+            gender=req.gender,
+        )
+        similarity = {
+            candidate["id"]: candidate["similarity"]
+            for candidate in candidates
+            if candidate["id"] in available
+        }
+        for garment in pinned:
+            similarity[garment.id] = max(similarity.get(garment.id, 0.0), 1.0)
 
-        # 2. Try AI generation if API configured
-        ai_outfits = await self._try_ai_generation(req, all_garments)
-        if ai_outfits:
-            return ai_outfits
-
-        # 3. Deterministic Heuristic Fallback (Guaranteed to return 3 high-quality curated outfits)
-        return await self._fallback_generation(req, all_garments)
-
-    async def _try_ai_generation(
-        self, req: SuggestRequest, all_garments: list[Garment]
-    ) -> list[OutfitResponse] | None:
-        ai_service = self.ai
-        if req.ai_provider or req.ai_model:
-            ai_service = AIService(provider=req.ai_provider, model=req.ai_model)
-
-        if not ai_service.api_key:
-            return None
-
-        prompt_template = load_prompt("vietphuc_recommendation")
-        if not prompt_template:
-            return None
-
-        items_text = "\n".join(
-            [
-                f"- ID: {g.id} | Tên: {g.display_name} | Nhóm: {g.category} | Kiểu: {g.type} | Màu: {g.primary_color} | Triều đại: {g.era or 'Hiện đại'}"
-                for g in all_garments
-            ]
+        ranked = sorted(
+            (available[item_id] for item_id in similarity),
+            key=lambda garment: similarity[garment.id],
+            reverse=True,
         )
 
-        pinned_text = ""
-        if req.pinned_garment_ids:
-            pinned_text = f"- MÓN ĐỒ BẮT BUỘC CÓ TRONG MỌI BỘ: {', '.join(req.pinned_garment_ids)}"
+        tops = [
+            garment
+            for garment in ranked
+            if garment.category in TOP_CATEGORIES | ONE_PIECE_CATEGORIES
+        ]
+        bottoms = [
+            garment for garment in ranked if garment.category in BOTTOM_CATEGORIES
+        ]
+        pinned_tops = [
+            garment
+            for garment in pinned
+            if garment.category in TOP_CATEGORIES | ONE_PIECE_CATEGORIES
+        ]
+        pinned_bottoms = [
+            garment for garment in pinned if garment.category in BOTTOM_CATEGORIES
+        ]
+        if pinned_tops:
+            tops = pinned_tops
+        if pinned_bottoms:
+            bottoms = pinned_bottoms
 
-        prompt = (
-            prompt_template.replace("{occasion}", OCCASION_MAP.get(req.occasion, req.occasion))
-            .replace("{style}", STYLE_MAP.get(req.style, req.style))
-            .replace("{gender}", req.gender)
-            .replace("{pinned_items_text}", pinned_text)
-            .replace("{items_text}", items_text)
-        )
+        combinations = []
+        for top in tops:
+            bottom_choices = (
+                [None]
+                if top.category in ONE_PIECE_CATEGORIES and not pinned_bottoms
+                else bottoms
+            )
+            for bottom in bottom_choices:
+                core = [top]
+                if bottom is not None:
+                    core.append(bottom)
+                core_ids = {garment.id for garment in core}
+                core.extend(
+                    garment
+                    for garment in pinned
+                    if garment.id not in core_ids
+                )
+                if len({garment.category for garment in core}) != len(core):
+                    continue
+                combinations.append(
+                    (
+                        sum(similarity.get(garment.id, 0.0) for garment in core),
+                        top,
+                        core,
+                    )
+                )
 
-        res = await ai_service.generate_json(
-            system_prompt="You are an expert fashion stylist and cultural researcher of Vietnamese traditional attire (Việt Phục), specializing in contemporary Gen Z 'Việt Phục Remix' fashion.",
-            user_prompt=prompt,
-        )
+        combinations.sort(key=lambda combination: combination[0], reverse=True)
+        outfits: list[SuggestedOutfit] = []
+        seen_pairs: set[tuple[str, str | None]] = set()
+        for _, top, core in combinations:
+            bottom = next(
+                (garment for garment in core if garment.category in BOTTOM_CATEGORIES),
+                None,
+            )
+            pair_key = (top.id, bottom.id if bottom else None)
+            if pair_key in seen_pairs:
+                continue
+            seen_pairs.add(pair_key)
 
-        if not res or "outfits" not in res:
-            return None
-
-        garment_dict = {g.id: g for g in all_garments}
-        outfits: list[OutfitResponse] = []
-
-        for idx, o in enumerate(res["outfits"][:3]):
-            outfit_item_ids = [gid for gid in o.get("items", []) if gid in garment_dict]
-            if len(outfit_item_ids) < 2:
+            cultural_check = await self.cultural_service.check_combination(core)
+            if not cultural_check.is_valid:
                 continue
 
-            selected_garments = [garment_dict[gid] for gid in outfit_item_ids]
-            check_res = await self.cultural_service.check_combination(selected_garments)
+            outfit_items = list(core)
+            occupied_categories = {garment.category for garment in outfit_items}
+            for category in OPTIONAL_CATEGORIES:
+                if category in occupied_categories:
+                    continue
+                for candidate in ranked:
+                    if (
+                        candidate.category != category
+                        or candidate.id in {garment.id for garment in outfit_items}
+                    ):
+                        continue
+                    proposed = [*outfit_items, candidate]
+                    check = await self.cultural_service.check_combination(proposed)
+                    if check.is_valid:
+                        outfit_items.append(candidate)
+                        occupied_categories.add(category)
+                        cultural_check = check
+                        break
 
-            warning_text = None
-            if check_res.violations:
-                warning_text = "; ".join([v.message for v in check_res.violations])
-
-            items_res = []
-            for order, g in enumerate(selected_garments):
-                g_res = GarmentResponse.model_validate(g)
-                g_res.image_url = ImageService.get_public_url(g.image_path)
-                g_res.thumbnail_url = ImageService.get_public_url(g.thumbnail_path or g.image_path)
-                items_res.append(
-                    OutfitItemResponse(garment_id=g.id, layer_order=order, garment=g_res)
+            response_items = []
+            for garment in outfit_items:
+                item = GarmentResponse.model_validate(garment)
+                item.image_url = ImageService.get_public_url(garment.image_path)
+                item.thumbnail_url = ImageService.get_public_url(
+                    garment.thumbnail_path or garment.image_path
                 )
+                response_items.append(item)
 
             outfits.append(
-                OutfitResponse(
-                    id=f"ai-sug-{idx + 1}",
-                    name=o.get("name", f"Gợi ý {idx + 1}"),
-                    headline=o.get("headline", "Việt phục Remix ấn tượng"),
-                    occasion=req.occasion,
-                    style_tag=req.style,
-                    gender=req.gender,
-                    color_harmony_score=o.get("color_harmony_score", 0.92),
-                    cultural_integrity_score=check_res.score,
-                    cultural_warning=warning_text,
-                    ai_highlights=o.get("highlights", []),
-                    ai_styling_tip=o.get("styling_tip", "Diện trang phục tự tin và thoải mái."),
-                    ai_cultural_note=o.get("cultural_note", ""),
-                    source="ai_suggested",
-                    items=items_res,
+                SuggestedOutfit(
+                    id=f"semantic-outfit-{len(outfits) + 1}",
+                    name=f"Bộ phối {len(outfits) + 1}",
+                    items=response_items,
+                    cultural_integrity_score=cultural_check.score,
+                    cultural_warning=(
+                        "; ".join(
+                            violation.message
+                            for violation in cultural_check.violations
+                            if violation.severity == "warning"
+                        )
+                        or None
+                    ),
                 )
             )
-
-        return outfits if len(outfits) >= 1 else None
-
-    async def _fallback_generation(
-        self, req: SuggestRequest, all_garments: list[Garment]
-    ) -> list[OutfitResponse]:
-        """Heuristic generation that guarantees 3 culturally sound outfits."""
-        garment_dict = {g.id: g for g in all_garments}
-
-        # Resolve pinned garments (they must appear in every outfit)
-        pinned = [garment_dict[gid] for gid in req.pinned_garment_ids if gid in garment_dict]
-        pinned_ids = {g.id for g in pinned}
-
-        # Categorize remaining (non-pinned) garments
-        remaining = [g for g in all_garments if g.id not in pinned_ids]
-        trad_tops = [g for g in remaining if g.category in ("traditional_top", "traditional_full")]
-        bottoms = [g for g in remaining if g.category in ("traditional_bottom", "modern_bottom")]
-        footwears = [g for g in remaining if g.category == "footwear"]
-        headwears = [g for g in remaining if g.category == "headwear"]
-        accessories = [g for g in remaining if g.category == "accessory"]
-
-        # Skip categories already covered by pinned items
-        pinned_categories = {g.category for g in pinned}
-        need_top = not pinned_categories.intersection({"traditional_top", "traditional_full"})
-        need_bottom = not pinned_categories.intersection({"traditional_bottom", "modern_bottom"})
-
-        outfits = []
-
-        curated_templates = [
-            {
-                "name": f"Việt Phục Remix {req.style.title()} - Phom Chuẩn",
-                "headline": "Khí chất di sản ngút ngàn",
-                "highlights": [
-                    "Áo cổ phục phối cùng quần suông tạo phom dáng thanh thoát, tôn dáng người mặc.",
-                    "Sự kết hợp màu sắc tương hỗ đậm chất cung đình Á Đông.",
-                    "Phù hợp hoàn hảo cho dịp " + OCCASION_MAP.get(req.occasion, req.occasion),
-                ],
-                "styling_tip": "Nên cài khuy cẩn thận và kết hợp giày/guốc cùng tone màu quần.",
-                "cultural_note": "Trang phục ngũ thân tượng trưng cho tứ thân phụ mẫu và bản thân người mặc, thể hiện đạo hiếu.",
-                "footwear_pref": "guoc" if req.style == "thanh_lich" else "sneaker",
-            },
-            {
-                "name": f"Dạo Phố Gen Z - {req.occasion.upper()}",
-                "headline": "Phá cách cùng Sneaker & Tote",
-                "highlights": [
-                    "Điểm nhấn sneaker trắng tạo nhịp sống năng động, trẻ trung cho tà áo cổ truyền.",
-                    "Túi tote/phụ kiện hiện đại giúp bộ trang phục tiện dụng khi dạo phố cuối tuần.",
-                    "Giữ trọn nét trang nghiêm của vạt áo trong khi vẫn cực kỳ thoải mái di chuyển.",
-                ],
-                "styling_tip": "Thử xắn nhẹ cổ tay áo tấc để lộ phụ kiện vòng tay hoặc đồng hồ vintage.",
-                "cultural_note": "Sự giao thoa giữa áo truyền thống và phụ kiện hiện đại đang là trào lưu phục hưng văn hóa mạnh mẽ của Gen Z.",
-                "footwear_pref": "sneaker",
-            },
-            {
-                "name": f"Tối Giản Tinh Tế - Sắc Lụa {req.style.title()}",
-                "headline": "Thanh xuân hội ngộ",
-                "highlights": [
-                    "Bảng màu trang nhã, không quá cầu kỳ nhưng toát lên vẻ thanh tao của học sinh, sinh viên.",
-                    "Phụ kiện mấn hoặc quạt xếp tạo thần thái chụp ảnh kỷ yếu hoặc dạo phố cực thơ.",
-                    "Chất liệu lụa/đũi nhẹ nhàng, bay bổng trong từng bước đi.",
-                ],
-                "styling_tip": "Cầm quạt xếp ngang ngực khi chụp ảnh để tạo góc nghiêng thanh tú.",
-                "cultural_note": "Mấn đội đầu thời Nguyễn vừa giúp cố định mái tóc gọn gàng vừa tôn lên nét đài các của phụ nữ Việt.",
-                "footwear_pref": "guoc",
-            },
-        ]
-
-        for idx, tmpl in enumerate(curated_templates):
-            selected: list[Garment] = list(pinned)  # Always start with pinned items
-
-            # Pick top (only if not already pinned)
-            if need_top and trad_tops:
-                selected.append(trad_tops[idx % len(trad_tops)])
-
-            # Pick bottom (only if not already pinned)
-            if need_bottom and bottoms:
-                selected.append(bottoms[idx % len(bottoms)])
-
-            # Pick footwear
-            fw = None
-            if tmpl["footwear_pref"] == "sneaker":
-                sneakers = [f for f in footwears if "sneaker" in f.type.lower() or not f.is_traditional]
-                fw = sneakers[0] if sneakers else (footwears[0] if footwears else None)
-            else:
-                trad_fw = [f for f in footwears if f.is_traditional]
-                fw = trad_fw[0] if trad_fw else (footwears[0] if footwears else None)
-            if fw:
-                selected.append(fw)
-
-            # Pick headwear or accessory
-            if idx % 2 == 0 and headwears:
-                selected.append(headwears[idx % len(headwears)])
-            elif accessories:
-                selected.append(accessories[idx % len(accessories)])
-
-            # Deduplicate while preserving order
-            seen = set()
-            deduped = []
-            for g in selected:
-                if g.id not in seen:
-                    seen.add(g.id)
-                    deduped.append(g)
-            selected = deduped
-
-            check_res = await self.cultural_service.check_combination(selected)
-
-            items_res = []
-            for order, g in enumerate(selected):
-                g_res = GarmentResponse.model_validate(g)
-                g_res.image_url = ImageService.get_public_url(g.image_path)
-                g_res.thumbnail_url = ImageService.get_public_url(g.thumbnail_path or g.image_path)
-                items_res.append(
-                    OutfitItemResponse(garment_id=g.id, layer_order=order, garment=g_res)
-                )
-
-            outfits.append(
-                OutfitResponse(
-                    id=f"curated-{idx + 1}",
-                    name=tmpl["name"],
-                    headline=tmpl["headline"],
-                    occasion=req.occasion,
-                    style_tag=req.style,
-                    gender=req.gender,
-                    color_harmony_score=0.94 - (idx * 0.03),
-                    cultural_integrity_score=check_res.score,
-                    cultural_warning=None if check_res.is_valid else "Cần lưu ý kiểm tra độ tương thích chi tiết",
-                    ai_highlights=tmpl["highlights"],
-                    ai_styling_tip=tmpl["styling_tip"],
-                    ai_cultural_note=tmpl["cultural_note"],
-                    source="ai_suggested",
-                    items=items_res,
-                )
-            )
+            if len(outfits) == 3:
+                break
 
         return outfits

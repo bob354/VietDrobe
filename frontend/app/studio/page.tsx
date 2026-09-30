@@ -266,7 +266,6 @@ export default function StudioPage() {
           <StudioChat
             onAddGarments={handleAddGarmentsFromChat}
             selectedGarments={selectedGarments}
-            allGarments={garments}
           />
         </div>
 

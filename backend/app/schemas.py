@@ -137,18 +137,18 @@ class SuggestRequest(BaseModel):
         default_factory=list,
         description="Garment IDs phải có trong outfit",
     )
-    ai_provider: str | None = Field(
-        default=None,
-        description="Tùy chọn AI Provider: 'openai' | 'groq' | 'grok' | 'fallback'",
-    )
-    ai_model: str | None = Field(
-        default=None,
-        description="Tùy chọn Model, ví dụ: 'qwen/qwen3.8-27b' hoặc 'gpt-4o-mini'",
-    )
+
+
+class SuggestedOutfit(BaseModel):
+    id: str
+    name: str
+    items: list[GarmentResponse]
+    cultural_integrity_score: float
+    cultural_warning: str | None = None
 
 
 class SuggestResponse(BaseModel):
-    outfits: list[OutfitResponse]
+    outfits: list[SuggestedOutfit]
 
 
 class CreateOutfitRequest(BaseModel):
@@ -206,22 +206,8 @@ class ChatRequest(BaseModel):
     messages: list[ChatMessage]
     context: ChatContext | None = None
 
-class GarmentSuggestion(BaseModel):
-    garment_id: str
-    display_name: str
-    reason: str
-    etiquette_score: float | None = None
-
-class CulturalCardInfo(BaseModel):
-    title: str
-    description: str
-    era: str | None = None
-
 class ChatResponse(BaseModel):
-    reply: str
-    suggestions: list[GarmentSuggestion] = Field(default_factory=list)
-    cultural_cards: list[CulturalCardInfo] = Field(default_factory=list)
-    etiquette_tips: list[str] = Field(default_factory=list)
+    items: list[GarmentResponse] = Field(default_factory=list)
 
 
 # ============================================================
