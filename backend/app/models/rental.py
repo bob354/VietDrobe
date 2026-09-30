@@ -32,7 +32,7 @@ class RentalBookingItem(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     booking_id: Mapped[str] = mapped_column(String(36), ForeignKey("rental_bookings.id"), nullable=False)
-    garment_id: Mapped[str] = mapped_column(String(36), ForeignKey("garments.id"), nullable=False)
+    garment_id: Mapped[str] = mapped_column(String(100), ForeignKey("inventory_items.item_id"), nullable=False)
     size: Mapped[str] = mapped_column(String(10), nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, default=1)
 

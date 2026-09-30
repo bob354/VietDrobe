@@ -24,6 +24,8 @@ async def lifespan(app: FastAPI):
     # Check and run auto-seed if empty
     from app.seed.seed import seed_database
     await seed_database()
+    from app.seed.migrate_inventory import migrate_inventory_references
+    await migrate_inventory_references()
 
     yield
 

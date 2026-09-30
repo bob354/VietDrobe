@@ -46,6 +46,17 @@
 | **Image Engine** | Pillow (PIL) | Sinh thẻ tranh di sản truyền thống và hoa văn tự động |
 | **Container** | Docker & Docker Compose | Đóng gói và triển khai môi trường đồng nhất |
 
+### Mô hình dữ liệu kho phục trang
+
+Kho được tách thành hai lớp để không lặp tri thức văn hóa giữa các biến thể:
+
+| Lớp | Nguồn dữ liệu | Nội dung |
+|---|---|---|
+| `GarmentType` | `backend/app/seed/garment_types.json` | `type_id`, tên gọi, niên đại, tri thức lịch sử, quy tắc văn hóa và metadata RAG. Mỗi loại chỉ có một bản ghi. |
+| `InventoryItem` | `backend/app/seed/inventory_items.json` | `item_id`, `parent_type_id`, ảnh, màu, chất liệu, size, giá, tiền cọc và tồn kho của SKU thực tế. |
+
+Ví dụ: `ao_tac` là một `GarmentType`; `garment-ao-tac-do` và `garment-ao-tac-xanh` là hai `InventoryItem` cùng tham chiếu về loại này. RAG chỉ cần embed `GarmentType`.
+
 ---
 
 ## 4. Danh Sách API Endpoints Chính
@@ -54,6 +65,7 @@
 |---|---|---|
 | `GET` | `/api/v1/health` | Kiểm tra trạng thái hoạt động của hệ thống |
 | `GET` | `/api/v1/garments` | Danh sách toàn bộ phục trang kèm thông tin văn hóa & giá thuê |
+| `GET` | `/api/v1/garment-types` | Tri thức văn hóa dùng chung theo loại trang phục |
 | `GET` | `/api/v1/garments/{id}` | Chi tiết một món phục trang di sản |
 | `POST` | `/api/v1/cultural/check` | Thẩm định độ tương thích văn hóa của set đồ (Cultural Guardrail) |
 | `POST` | `/api/v1/outfits/suggest` | Gợi ý 3 công thức phối đồ theo bối cảnh qua AI hoặc Heuristic Fallback |
