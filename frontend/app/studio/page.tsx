@@ -52,6 +52,14 @@ export default function StudioPage() {
     });
   };
 
+  const handleSelectCategory = (id: string) => {
+    setSelectedCategory(id);
+    const tabEl = categoryTabsRef.current?.querySelector(`[data-category-id="${id}"]`) as HTMLElement;
+    if (tabEl) {
+      tabEl.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+  };
+
   const resizeFromPointer = (divider: Divider, clientX: number) => {
     const bounds = workspaceRef.current?.getBoundingClientRect();
     if (!bounds) return;
@@ -109,8 +117,30 @@ export default function StudioPage() {
     updateCategoryOverflow();
     const observer = new ResizeObserver(updateCategoryOverflow);
     observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
+
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0 && element.scrollWidth > element.clientWidth) {
+        e.preventDefault();
+        element.scrollLeft += e.deltaY;
+      }
+    };
+
+    element.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      observer.disconnect();
+      element.removeEventListener("wheel", handleWheel);
+    };
+  }, [garments]);
+
+  useEffect(() => {
+    const el = categoryTabsRef.current;
+    if (!el) return;
+    const activeBtn = el.querySelector(`[data-category-id="${selectedCategory}"]`) as HTMLElement;
+    if (activeBtn) {
+      activeBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+  }, [selectedCategory]);
 
   useEffect(() => {
     async function runCheck() {
@@ -198,13 +228,15 @@ export default function StudioPage() {
             <div
               ref={categoryTabsRef}
               onScroll={updateCategoryOverflow}
-              className="studio-category-tabs flex items-center gap-6 overflow-x-auto scrollbar-none border-b border-[#D8D0C1]/60 dark:border-[#485047] pb-3"
+              className="studio-category-tabs flex items-center gap-6 overflow-x-auto border-b border-[#D8D0C1]/60 dark:border-[#485047] pb-2.5 select-none"
             >
               {CATEGORY_TABS.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setSelectedCategory(tab.id)}
-                  className={`text-xs uppercase tracking-wider whitespace-nowrap pb-1 transition-all relative ${
+                  data-category-id={tab.id}
+                  type="button"
+                  onClick={() => handleSelectCategory(tab.id)}
+                  className={`text-xs uppercase tracking-wider whitespace-nowrap pb-1 transition-all relative shrink-0 ${
                     selectedCategory === tab.id
                       ? "text-[#24251F] dark:text-[#EEE8DC] font-semibold border-b-2 border-[#9F3B30] dark:border-[#D16F5D]"
                       : "text-[#625F56] dark:text-[#B7AFA0] hover:text-[#24251F] dark:hover:text-[#EEE8DC]"
