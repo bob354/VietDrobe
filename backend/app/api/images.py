@@ -15,6 +15,7 @@ CONTENT_TYPES = {
 }
 
 @router.get("/{path:path}")
+@router.head("/{path:path}")
 async def get_image(path: str) -> FileResponse:
     image_service = ImageService()
     full_path = image_service.get_image_path(path)
