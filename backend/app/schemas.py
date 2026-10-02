@@ -189,28 +189,6 @@ class CulturalLoreResponse(BaseModel):
 
 
 # ============================================================
-# Chat Schemas
-# ============================================================
-
-class ChatMessage(BaseModel):
-    role: str
-    content: str
-
-class ChatContext(BaseModel):
-    occasion: str | None = None
-    location: str | None = None
-    style: str | None = None
-    canvas_garment_ids: list[str] = Field(default_factory=list)
-
-class ChatRequest(BaseModel):
-    messages: list[ChatMessage]
-    context: ChatContext | None = None
-
-class ChatResponse(BaseModel):
-    items: list[GarmentResponse] = Field(default_factory=list)
-
-
-# ============================================================
 # Rental Schemas
 # ============================================================
 

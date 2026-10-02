@@ -89,23 +89,6 @@ export interface CulturalCheckResponse {
   violations: CulturalViolation[];
 }
 
-// ============ Chat Types ============
-export interface ChatMessage {
-  role: "user" | "assistant" | "system";
-  content: string;
-}
-
-export interface ChatContext {
-  occasion?: string;
-  location?: string;
-  style?: string;
-  canvas_garment_ids?: string[];
-}
-
-export interface ChatResponse {
-  items: Garment[];
-}
-
 // ============ Rental Types ============
 export interface RentalCatalogItem extends Garment {
   rental_price_per_day?: number;

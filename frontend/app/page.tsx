@@ -12,7 +12,7 @@ export default function Home() {
       <div className="hero-copy">
         <h1 id="hero-title">Một nét xưa.<br /><em>Một cách mặc mới.</em></h1>
         <p className="hero-intro">Khám phá cổ phục Việt, tìm một bản phối mang dấu ấn của bạn và chọn trang phục cho khoảnh khắc sắp tới.</p>
-        <div className="hero-actions"><Link href="/catalog" className="button-solid">Khám phá cổ phục <ArrowUpRight aria-hidden="true" size={17} /></Link><Link href="/suggest" className="button-outline">Phối đồ với AI <ArrowUpRight aria-hidden="true" size={17} /></Link></div>
+        <div className="hero-actions"><Link href="/catalog" className="button-solid">Khám phá cổ phục <ArrowUpRight aria-hidden="true" size={17} /></Link><Link href="/suggest" className="button-outline">Gợi ý phối đồ <ArrowUpRight aria-hidden="true" size={17} /></Link></div>
         <div className="hero-note"><span className="hero-note-line" /> Từ tủ đồ di sản đến ngày bạn khoác lên mình</div>
       </div>
       <div className="hero-art" aria-label="Minh họa nét cắt áo ngũ thân bằng đường chỉ">
@@ -29,6 +29,6 @@ export default function Home() {
       <a href="#journey" className="scroll-cue">Cuộn để khám phá <ArrowDownRight size={15} aria-hidden="true" /></a>
     </section>
     <section className="home-paths" id="journey" aria-labelledby="paths-title"><div className="shell"><div className="section-heading"><h2 id="paths-title">Bắt đầu từ điều bạn cần.</h2><p>Chọn một món mình yêu thích, hoặc tìm cảm hứng cho cả bộ trang phục.</p></div><div className="path-grid">{paths.map(path => <Link className="path-link" href={path.href} key={path.href}><div><h3>{path.title}</h3><p>{path.description}</p></div><span className="path-action">{path.action} <ArrowUpRight size={18} aria-hidden="true" /></span></Link>)}</div></div></section>
-    <section className="home-closer shell" aria-labelledby="closer-title"><div className="closer-mark" aria-hidden="true">V</div><div><h2 id="closer-title">Di sản là thứ<br /><em>được tiếp tục mặc.</em></h2><p>Thử kết hợp cổ phục với nhịp sống của riêng bạn trong studio, rồi đặt thuê khi đã tìm được bộ đồ ưng ý.</p></div><Link href="/studio" className="button-outline">Mở studio phối đồ <ArrowUpRight size={17} aria-hidden="true" /></Link></section>
+    <section className="home-closer shell" aria-labelledby="closer-title"><div className="closer-mark" aria-hidden="true">V</div><div><h2 id="closer-title">Di sản là thứ<br /><em>được tiếp tục mặc.</em></h2><p>Thử kết hợp cổ phục với nhịp sống của riêng bạn, rồi đặt thuê khi đã tìm được bộ đồ ưng ý.</p></div><Link href="/suggest" className="button-outline">Bắt đầu phối đồ <ArrowUpRight size={17} aria-hidden="true" /></Link></section>
   </div>;
 }

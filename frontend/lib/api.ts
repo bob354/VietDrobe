@@ -6,9 +6,6 @@ import {
   Outfit,
   SuggestRequest,
   SuggestResponse,
-  ChatMessage,
-  ChatContext,
-  ChatResponse,
   RentalCatalogItem,
   RentalCalculateResponse,
   RentalBookingResponse
@@ -94,13 +91,6 @@ export const api = {
 
   async getLore(garment_type: string) {
     return request(`/cultural/lore/${garment_type}`);
-  },
-
-  async sendChatMessage(messages: ChatMessage[], context?: ChatContext): Promise<ChatResponse> {
-    return request<ChatResponse>("/chat", {
-      method: "POST",
-      body: JSON.stringify({ messages, context }),
-    });
   },
 
   async getRentalCatalog(): Promise<{ items: RentalCatalogItem[]; total: number }> {

@@ -1,6 +1,6 @@
 ---
 name: VietDrobe
-description: An editorial Vietnamese traditional dress catalog, styling studio, and rental experience.
+description: An editorial Vietnamese traditional dress catalog, styling suggestion, and rental experience.
 colors:
   paper: "#f5f1e9"
   ink: "#24251f"
@@ -61,7 +61,6 @@ rounded:
 spacing:
   card-gap: "24px"
   mobile-card-gap: "12px"
-  studio-stack-gap: "28px"
 components:
   button-solid:
     backgroundColor: "{colors.ink}"
@@ -79,10 +78,6 @@ components:
     backgroundColor: "{colors.paper-surface}"
     textColor: "{colors.ink}"
     rounded: "{rounded.square}"
-  studio-chat:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.square}"
 ---
 
 # Design System: VietDrobe
@@ -93,7 +88,7 @@ components:
 
 VietDrobe presents Vietnamese traditional dress as something to explore, combine, and wear today. The interface uses the quiet structure of an editorial page: warm paper, deep ink, fine borders, open space, and expressive serif headings. Rust marks an action or selected state; olive supports the garment illustration and the darker atmosphere.
 
-The catalog and rental path carry the same visual weight as guided styling. The studio has a working, three part composition, with chat given the widest default column. Garment illustrations and cultural context are the visual subject; the app does not use AI generated imagery.
+The catalog and rental path carry the same visual weight as guided styling. Garment illustrations and cultural context are the visual subject; the app does not use AI generated imagery.
 
 **Key Characteristics:**
 - Warm paper and ink in light mode; olive tinted dark surfaces in dark mode.
@@ -144,8 +139,6 @@ The palette takes its warmth from paper and cloth, with rust used as a small but
 
 The shared shell is capped at 1440px with 64px total horizontal inset, reducing to 36px below 760px. The home hero is a two column text and artwork composition; its two main route links have equal columns. At 760px, both become vertical stacks.
 
-The desktop studio uses a wider shell capped at 1900px. Its initial columns are 21% garment picker, a flexible chat column, and 22% outfit canvas, with 12px draggable dividers. Pointer and keyboard resizing preserve at least 34% for chat. At 1100px and below, the studio stacks chat, picker, then canvas; dividers disappear. The panel height tracks the viewport within a 460–800px range on desktop and has separate compact heights on smaller screens.
-
 Catalog cards use a 24px gap on larger screens and 12px below 760px. The interface relies on broad section spacing and controlled local padding rather than a dense tile grid.
 
 **The Equal Entry Rule.** Home page routes to garment browsing and guided styling are parallel choices, neither hidden behind the other.
@@ -159,11 +152,11 @@ The system is flat by default. Paper tones and one pixel borders separate sectio
 - **Hero artwork** (`18px 22px 40px rgba(32,39,31,.12)`): the large garment illustration only.
 - **Garment hover** (`0 16px 30px rgba(28,31,25,.08)`): interactive catalog cards only.
 
-**The Quiet Surface Rule.** Keep resting cards and studio panels border led; reserve lift for hover or overlay hierarchy.
+**The Quiet Surface Rule.** Keep resting cards border led; reserve lift for hover or overlay hierarchy.
 
 ## Shapes
 
-The core form is square: buttons, garment cards, studio panels, fields, and interior page containers use zero radius. Fine one pixel strokes organize content. Pill corners are limited to chat prompt chips; the home closer's circular mark and the hero illustration's rings are deliberate graphic accents, not a general card shape.
+The core form is square: buttons, garment cards, fields, and interior page containers use zero radius. Fine one pixel strokes organize content. The home closer's circular mark and the hero illustration's rings are deliberate graphic accents, not a general card shape.
 
 ## Components
 
@@ -174,15 +167,13 @@ The core form is square: buttons, garment cards, studio panels, fields, and inte
 - **Outline and text:** The outline button has an ink border and fills ink on hover. Text actions use a bottom rule and change to rust on hover.
 - **Focus:** A 2px rust outline with offset is the shared keyboard treatment. Disabled controls reduce opacity where used.
 
-### Chips
+### Category Tabs
 
-- **Style:** Studio prompt chips are the one pill shaped control, with surface fill, thin border, and secondary text.
-- **State:** Hover shifts text and border to rust. Selected category tabs use a rust underline instead of a filled pill.
+- **State:** Selected category tabs use a rust underline.
 
 ### Cards / Containers
 
 - **Garment cards:** Square paper surface, thin border, image first, then serif name and quiet metadata. The category label sits over the image. Hover adds a small rise, accent border, image zoom, and soft shadow.
-- **Studio panels:** Square bordered surfaces. The center chat is the dominant desktop column; picker and canvas flank it. The canvas contains a separately bordered cultural score and direct rental action.
 
 ### Inputs / Fields
 
@@ -193,18 +184,13 @@ The core form is square: buttons, garment cards, studio panels, fields, and inte
 
 The sticky header is 82px high on desktop and 70px below 760px. The brand combines a fine bordered initial mark with Cormorant Garamond wordmark. Desktop links are compact sans serif labels with a rust active underline; mobile uses a menu of larger serif links. Theme switching is a visible bordered square control.
 
-### Studio Dividers
-
-The two narrow vertical dividers have a centered grip and rust hover or focus state. They support pointer dragging, left and right arrow keys, larger Shift key steps, and double click reset. They disappear when the studio stacks.
-
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** keep browse and rent, and AI styling, equally easy to enter.
+- **Do** keep browse and rent, and outfit styling, equally easy to enter.
 - **Do** use supplied garment artwork and show garment identity and cultural context clearly.
 - **Do** pair rust emphasis with visible text or border changes so states remain legible in both themes.
-- **Do** preserve the chat first stack and its roomy desktop column in the studio.
 
 ### Don't:
 

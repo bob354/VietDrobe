@@ -25,12 +25,6 @@
 - **Chạy cục bộ, không cần API key**: SentenceTransformer tạo embeddings và ChromaDB tìm kiếm vector. Không dùng LLM.
 - **Gợi ý theo bộ**: Vector search lấy các SKU phù hợp; hệ thống ghép món chính với quần/váy phù hợp và kiểm tra quy tắc văn hóa trước khi hiển thị bộ trang phục. Đây là bước phối theo danh mục và quy tắc, không phải outfit mẫu cố định.
 - **Hỗ trợ ghim món đồ**: Món được ghim được giữ trong mỗi bộ gợi ý hợp lệ khi còn hàng.
-
-### Mix & Match Studio Canvas 
-- **Không gian phối đồ trực quan**: Kéo thả, chọn lọc trang phục tự do trên nền Canvas mỹ thuật.
-- **Thẩm định tức thời**: Phân tích sự tương thích khi chọn từ 2 món trở lên và cảnh báo vi phạm ngay lập tức.
-- **Chuyển giỏ thuê 1-Click (Rental Modal)**: Nhanh chóng đưa cả bộ đồ đang phối vào giỏ thuê.
-
 ---
 
 ## 3. Kiến Trúc Kỹ Thuật (Tech Stack)
@@ -100,7 +94,6 @@ Sau khi khởi chạy thành công:
 - **Giao diện người dùng (Frontend)**: [http://localhost:3000](http://localhost:3000)
   - Khảo cứu di sản: `/catalog`
   - Tìm trang phục theo ngữ nghĩa: `/suggest`
-  - Studio phối đồ: `/studio`
   - Đặt thuê trang phục: `/rent`
 - **Tài liệu API Swagger (Backend)**: [http://localhost:8000/docs](http://localhost:8000/docs)
 - **Health check**: [http://localhost:8000/api/v1/health](http://localhost:8000/api/v1/health)
@@ -132,7 +125,7 @@ py -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 
 > *Ghi chú:* Không cần API key. Embedding model chạy cục bộ qua SentenceTransformers; ChromaDB lưu chỉ mục dưới `backend/data/chroma` và tự đồng bộ `inventory_items.json` cùng `garment_types.json` khi tìm kiếm. Lần đầu tiên cần tải model nếu model chưa có trong cache cục bộ.
 
-Quiz và tìm kiếm trong studio dùng semantic vector search trực tiếp. Hệ thống trả về dữ liệu SKU và thông tin văn hóa từ loại cha thay vì sinh câu trả lời hay công thức phối đồ.
+Quiz trang phục dùng semantic vector search trực tiếp. Hệ thống trả về dữ liệu SKU và thông tin văn hóa từ loại cha thay vì sinh câu trả lời hay công thức phối đồ.
 
 #### Bước 2: Khởi động Frontend
 

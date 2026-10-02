@@ -8,7 +8,7 @@ import { ThemeToggle } from "./theme-toggle";
 
 const items = [
   { href: "/catalog", label: "Tủ đồ" },
-  { href: "/studio", label: "Studio" },
+  { href: "/suggest", label: "Phối đồ" },
 ];
 
 export function Navbar() {
