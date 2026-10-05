@@ -22,7 +22,7 @@
 ### Tìm Kiếm Trang Phục Theo Ngữ Nghĩa
 - **Tìm theo bối cảnh và phong cách**: Quiz kết hợp dịp diện, phong cách, giới tính và món đồ ghim thành truy vấn để tìm các mẫu gần nghĩa trong kho.
 - **Embeddings hai lớp dữ liệu**: Mỗi SKU vật lý được embed cùng thông tin văn hóa từ loại trang phục cha; kết quả trả về ảnh và thông tin của SKU tương ứng.
-- **Chạy cục bộ, không cần API key**: SentenceTransformer tạo embeddings và ChromaDB tìm kiếm vector. Không dùng LLM.
+- **Chạy cục bộ, không cần API key**: Embeddings được dựng sẵn bằng SentenceTransformer và lưu trong `embeddings.json`; ChromaDB tìm kiếm vector khi chạy. Không dùng LLM, không cần tải model khi sử dụng bình thường.
 - **Gợi ý theo bộ**: Vector search lấy các SKU phù hợp; hệ thống ghép món chính với quần/váy phù hợp và kiểm tra quy tắc văn hóa trước khi hiển thị bộ trang phục. Đây là bước phối theo danh mục và quy tắc, không phải outfit mẫu cố định.
 - **Hỗ trợ ghim món đồ**: Món được ghim được giữ trong mỗi bộ gợi ý hợp lệ khi còn hàng.
 ---
@@ -39,7 +39,7 @@
 | **ORM / DB** | SQLAlchemy 2.0 (Async) + aiosqlite | Quản lý dữ liệu bất đồng bộ (Garments, CulturalRules, Rentals, Bookings) |
 | **Validation** | Pydantic v2 | Kiểm định dữ liệu vào/ra nghiêm ngặt |
 | **Image Engine** | Pillow (PIL) | Sinh thẻ tranh di sản truyền thống và hoa văn tự động |
-| **Semantic Search** | SentenceTransformers + ChromaDB | Tạo embeddings cục bộ và truy xuất SKU theo độ tương đồng ngữ nghĩa |
+| **Semantic Search** | SentenceTransformers + ChromaDB | Embeddings dựng sẵn (`embeddings.json`), truy xuất SKU theo độ tương đồng ngữ nghĩa |
 | **Container** | Docker & Docker Compose | Đóng gói và triển khai môi trường đồng nhất |
 
 ### Mô hình dữ liệu kho phục trang
@@ -103,7 +103,7 @@ Sau khi khởi chạy thành công:
 ### Cách 3: Khởi chạy thủ công từng dịch vụ
 
 #### Yêu cầu tiên quyết:
-- **Python**: Phiên bản 3.11 hoặc 3.12
+- **Python**: Phiên bản 3.11 hoặc 3.12 (chưa khuyến nghị 3.13/3.14 vì một số thư viện như torch có thể chưa có bản dựng sẵn; nếu máy có nhiều bản Python, dùng `py -3.12`)
 - **Node.js**: Phiên bản 18 trở lên (khuyên dùng Node 20 LTS)
 
 #### Bước 1: Khởi động Backend
@@ -123,7 +123,17 @@ py -m pip install -r requirements.txt
 py -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-> *Ghi chú:* Không cần API key. Embedding model chạy cục bộ qua SentenceTransformers; ChromaDB lưu chỉ mục dưới `backend/data/chroma` và tự đồng bộ `inventory_items.json` cùng `garment_types.json` khi tìm kiếm. Lần đầu tiên cần tải model nếu model chưa có trong cache cục bộ.
+> *Embeddings dựng sẵn:* Vector của 25 SKU và 60 tổ hợp truy vấn cố định được lưu trong `backend/app/seed/embeddings.json` (commit lên git). Khi khởi động, backend nạp file này vào ChromaDB mà **không cần tải hay load model**, nên chạy được ngay sau khi pull. Chỉ khi sửa `garment_types.json`, `inventory_items.json`, `OCCASION_QUERY` hoặc `STYLE_QUERY` mới cần dựng lại (cần model, tải một lần):
+>
+> ```bash
+> cd backend
+> py -m scripts.build_embeddings          # dựng lại embeddings.json rồi commit
+> py -m scripts.build_embeddings --check  # kiểm tra file còn khớp dữ liệu không (exit 1 nếu cũ)
+> ```
+
+> *Ghi chú:* Không cần API key. ChromaDB lưu chỉ mục dưới `backend/data/chroma` (tự tạo, không commit) và được nạp từ `embeddings.json` mỗi khi backend khởi động, mất khoảng một giây. Model chỉ được tải khi bạn chạy `scripts.build_embeddings`, hoặc khi có SKU mới chưa có trong `embeddings.json`. Nếu `embeddings.json` bị thiếu hoặc cũ, `/outfits/suggest` sẽ trả 503 ("đang khởi tạo") cho đến khi bạn dựng lại file.
+>
+> *Món được ghim:* Vector của món được ghim được trộn vào vector truy vấn (trọng số `PINNED_WEIGHT` trong `rag_service.py`) thay vì nối thêm tên món vào câu truy vấn.
 
 Quiz trang phục dùng semantic vector search trực tiếp. Hệ thống trả về dữ liệu SKU và thông tin văn hóa từ loại cha thay vì sinh câu trả lời hay công thức phối đồ.
 

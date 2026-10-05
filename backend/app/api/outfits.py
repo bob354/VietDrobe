@@ -12,6 +12,7 @@ from app.services.cultural_service import CulturalService
 from app.services.garment_service import GarmentService
 from app.services.image_service import ImageService
 from app.services.outfit_service import OutfitService
+from app.services.rag_service import EmbeddingUnavailable
 from app.services.recommendation_service import RecommendationService
 
 router = APIRouter(prefix="/outfits", tags=["Outfits"])
@@ -34,7 +35,13 @@ async def suggest_outfits(
     db: AsyncSession = Depends(get_db),
 ):
     service = RecommendationService(db)
-    outfits = await service.suggest(req)
+    try:
+        outfits = await service.suggest(req)
+    except EmbeddingUnavailable:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Hệ thống tìm kiếm đang khởi tạo, vui lòng thử lại sau ít phút.",
+        )
     return SuggestResponse(outfits=outfits)
 
 @router.post("", response_model=OutfitResponse, status_code=status.HTTP_201_CREATED)

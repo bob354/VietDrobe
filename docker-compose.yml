@@ -11,7 +11,18 @@ services:
     environment:
       - DATABASE_URL=sqlite+aiosqlite:///./data/vietphuc.db
       - STORAGE_PATH=/app/data
+      # After the first startup (model downloaded to HF_HOME cache),
+      # these prevent unnecessary online etag checks on every restart.
+      # Remove them temporarily if you need to pull a model update.
+      - HF_HUB_OFFLINE=1
+      - TRANSFORMERS_OFFLINE=1
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
 
   frontend:
     build:
@@ -25,5 +36,6 @@ services:
     environment:
       - BACKEND_URL=http://backend:8000
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     restart: unless-stopped

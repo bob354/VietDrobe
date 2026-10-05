@@ -5,3 +5,9 @@ backend/.env
 # Python bytecode
 __pycache__/
 *.py[cod]
+
+# Runtime artifacts rebuilt from backend/app/seed/embeddings.json
+backend/data/chroma/
+backend/data/huggingface/
+backend/data/query_cache.json
+backend/data/*.db

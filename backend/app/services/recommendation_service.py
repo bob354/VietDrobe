@@ -23,6 +23,17 @@ STYLE_QUERY = {
     "thanh_lich": "cổ phong thanh lịch, nho nhã, giữ phom dáng truyền thống",
 }
 
+def build_fixed_query_map() -> dict[str, str]:
+    """Every occasion x style x gender combination the quiz can produce."""
+    query_map: dict[str, str] = {}
+    for occ_text in OCCASION_QUERY.values():
+        for style_text in STYLE_QUERY.values():
+            for gender in ("unisex", "nu", "nam"):
+                query = " ".join([occ_text, style_text, gender])
+                query_map[query] = query
+    return query_map
+
+
 TOP_CATEGORIES = {"traditional_top", "modern_top"}
 BOTTOM_CATEGORIES = {"traditional_bottom", "modern_bottom"}
 ONE_PIECE_CATEGORIES = {"traditional_full"}
@@ -54,22 +65,15 @@ class RecommendationService:
             STYLE_QUERY.get(req.style, req.style),
             req.gender,
         ]
-        for garment in pinned:
-            query_parts.extend(
-                [
-                    garment.display_name,
-                    garment.primary_color or "",
-                    garment.material or "",
-                    garment.pattern or "",
-                    garment.garment_type.name_vi,
-                ]
-            )
+        # Pinned items are no longer appended as text (that would need the model).
+        # The RAG layer blends their stored vectors into the pre-computed query instead.
 
         candidates = await asyncio.to_thread(
             self.rag_service.query_candidates,
             " ".join(part for part in query_parts if part),
             n_results=max(25, len(available)),
             gender=req.gender,
+            pinned_item_ids=[garment.id for garment in pinned],
         )
         similarity = {
             candidate["id"]: candidate["similarity"]

@@ -36,7 +36,7 @@ if %errorlevel% neq 0 (
 
 :: 3. Backend Dependencies
 echo [1/4] Checking Backend dependencies...
-%PY_CMD% -c "import fastapi, uvicorn, sqlalchemy, aiosqlite, PIL" >nul 2>nul
+%PY_CMD% -c "import fastapi, uvicorn, sqlalchemy, aiosqlite, PIL, chromadb" >nul 2>nul
 if %errorlevel% neq 0 (
     echo Installing backend dependencies...
     %PY_CMD% -m pip install -r "%BACKEND_DIR%\requirements.txt"

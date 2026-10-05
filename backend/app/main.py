@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from contextlib import asynccontextmanager
 
@@ -13,6 +14,28 @@ settings = get_settings()
 logging.basicConfig(level=logging.INFO if settings.debug else logging.WARNING)
 logger = logging.getLogger("vietphuc-remix")
 
+
+def _warm_up_rag_blocking() -> None:
+    from app.services.recommendation_service import build_fixed_query_map
+    from app.services.rag_service import RAGService
+
+    RAGService.pre_encode_queries(build_fixed_query_map())
+    result = RAGService().sync_garments()
+    logger.info("RAG ready: %s", result)
+
+
+async def _warm_up_rag() -> None:
+    """Load pre-computed vectors into Chroma (model-free when embeddings.json is current).
+
+    Runs in the background so startup is never blocked. The model is only touched
+    for items/queries missing from the bundle, and failures are logged, not fatal.
+    """
+    try:
+        await asyncio.to_thread(_warm_up_rag_blocking)
+    except Exception:
+        logger.exception("RAG warm-up failed; /outfits/suggest will return 503 until fixed.")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Starting up Việt Phục Remix Backend...")
@@ -27,10 +50,15 @@ async def lifespan(app: FastAPI):
     from app.seed.migrate_inventory import migrate_inventory_references
     await migrate_inventory_references()
 
+    # Kick off RAG warm-up in the background - server is ready immediately.
+    # With a current embeddings.json this takes about a second and never loads the model.
+    asyncio.create_task(_warm_up_rag())
+
     yield
 
     logger.info("Shutting down...")
     await engine.dispose()
+
 
 app = FastAPI(
     title=settings.app_name,

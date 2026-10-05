@@ -1,6 +1,8 @@
 import hashlib
 import json
 import logging
+import math
+import threading
 from pathlib import Path
 from typing import Any
 
@@ -13,27 +15,99 @@ CHROMA_DIR = Path(settings.storage_path) / "chroma"
 SEED_DIR = Path(__file__).parent.parent / "seed"
 GARMENT_TYPES_FILE = SEED_DIR / "garment_types.json"
 INVENTORY_ITEMS_FILE = SEED_DIR / "inventory_items.json"
+# Pre-computed vectors, committed to git. Built by `python -m scripts.build_embeddings`.
+EMBEDDINGS_BUNDLE_FILE = SEED_DIR / "embeddings.json"
 MODEL_NAME = "bkai-foundation-models/vietnamese-bi-encoder"
 COLLECTION_NAME = "vietphuc_inventory_items"
+
+# How strongly a pinned item pulls the query vector towards itself (0 = ignore).
+PINNED_WEIGHT = 0.5
+
+
+class EmbeddingUnavailable(RuntimeError):
+    """A vector is needed but neither the bundle nor an already-loaded model can supply it."""
 
 
 class RAGService:
     _model = None
+    _model_lock = threading.Lock()
+    _sync_lock = threading.Lock()
+    _synced = False  # True once every inventory item has a vector in Chroma
+    _query_cache: dict[str, list[float]] = {}  # fixed query text -> vector
+    _bundle: dict[str, Any] = {}
+    _bundle_loaded = False
 
     def __init__(self, chroma_dir: Path | None = None):
         self.chroma_dir = chroma_dir or CHROMA_DIR
         self.chroma_dir.mkdir(parents=True, exist_ok=True)
 
+    # ------------------------------------------------------------------ model
     @classmethod
     def get_model(cls):
-        if cls._model is None:
-            logger.info("Initializing SentenceTransformer with %s...", MODEL_NAME)
-            from sentence_transformers import SentenceTransformer
+        """Load the SentenceTransformer lazily. Only needed to (re)build vectors."""
+        with cls._model_lock:
+            if cls._model is None:
+                logger.info("Initializing SentenceTransformer with %s...", MODEL_NAME)
+                from sentence_transformers import SentenceTransformer
 
-            cls._model = SentenceTransformer(MODEL_NAME)
-            logger.info("SentenceTransformer model loaded successfully.")
-        return cls._model
+                cls._model = SentenceTransformer(MODEL_NAME)
+                logger.info("SentenceTransformer model loaded successfully.")
+            return cls._model
 
+    # ----------------------------------------------------------------- bundle
+    @classmethod
+    def load_bundle(cls) -> dict[str, Any]:
+        """Read the committed embeddings bundle (item vectors + fixed query vectors)."""
+        if cls._bundle_loaded:
+            return cls._bundle
+        bundle: dict[str, Any] = {}
+        if not EMBEDDINGS_BUNDLE_FILE.exists():
+            logger.warning(
+                "%s not found - run `python -m scripts.build_embeddings` once and commit it.",
+                EMBEDDINGS_BUNDLE_FILE.name,
+            )
+        else:
+            try:
+                data = json.loads(EMBEDDINGS_BUNDLE_FILE.read_text(encoding="utf-8"))
+                if data.get("model") != MODEL_NAME:
+                    logger.warning(
+                        "Embeddings bundle was built with %s, expected %s - ignoring it.",
+                        data.get("model"),
+                        MODEL_NAME,
+                    )
+                else:
+                    bundle = data
+            except Exception as exc:
+                logger.warning("Failed to read embeddings bundle: %s", exc)
+        cls._bundle = bundle
+        cls._bundle_loaded = True
+        return bundle
+
+    @classmethod
+    def pre_encode_queries(cls, query_map: dict[str, str]) -> None:
+        """Fill the in-memory query cache from the bundle; encode only what is missing."""
+        for text, vector in (cls.load_bundle().get("queries") or {}).items():
+            cls._query_cache.setdefault(text, vector)
+
+        missing = [t for t in query_map.values() if t not in cls._query_cache]
+        if not missing:
+            logger.info(
+                "All %d fixed query vectors loaded from bundle - model not needed.",
+                len(query_map),
+            )
+            return
+        logger.info("%d fixed queries not in bundle; encoding with the model...", len(missing))
+        try:
+            vectors = cls.get_model().encode(
+                missing, normalize_embeddings=True, show_progress_bar=False, batch_size=32
+            ).tolist()
+        except Exception as exc:
+            logger.warning("Could not encode missing queries (%s). Rebuild the bundle.", exc)
+            return
+        for text, vector in zip(missing, vectors):
+            cls._query_cache[text] = vector
+
+    # ----------------------------------------------------------------- chroma
     def get_collection(self):
         import chromadb
 
@@ -84,8 +158,17 @@ class RAGService:
     def compute_doc_hash(text: str) -> str:
         return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-    def sync_garments(self, force: bool = False) -> dict[str, int]:
-        """Sync inventory items while embedding their referenced parent records."""
+    def sync_garments(self, force: bool = False, allow_model: bool = True) -> dict[str, int]:
+        """Make Chroma match the seed files.
+
+        Vectors come from the committed bundle whenever its doc_hash matches the
+        current document text. The model is touched only for items missing from
+        (or stale in) the bundle, and only when allow_model is True.
+        """
+        with RAGService._sync_lock:
+            return self._sync_locked(force, allow_model)
+
+    def _sync_locked(self, force: bool, allow_model: bool) -> dict[str, int]:
         if not GARMENT_TYPES_FILE.exists() or not INVENTORY_ITEMS_FILE.exists():
             raise FileNotFoundError(
                 f"RAG seed files are required: {GARMENT_TYPES_FILE} and {INVENTORY_ITEMS_FILE}"
@@ -119,7 +202,8 @@ class RAGService:
         if ids_to_delete:
             collection.delete(ids=ids_to_delete)
 
-        to_encode = []
+        bundle_items = {} if force else (self.load_bundle().get("items") or {})
+        entries: list[dict[str, Any]] = []
         added_count = 0
         updated_count = 0
         for item in inventory_items:
@@ -128,10 +212,14 @@ class RAGService:
             document = self.format_garment_document(item, parent)
             doc_hash = self.compute_doc_hash(document)
             is_new = item_id not in existing_ids
-            if force or is_new or existing_hashes.get(item_id) != doc_hash:
-                added_count += int(is_new)
-                updated_count += int(not is_new)
-                metadata = {
+            if not (force or is_new or existing_hashes.get(item_id) != doc_hash):
+                continue
+            added_count += int(is_new)
+            updated_count += int(not is_new)
+            entry: dict[str, Any] = {
+                "id": item_id,
+                "document": document,
+                "metadata": {
                     "parent_type_id": item["parent_type_id"],
                     "display_name": item.get("display_name", ""),
                     "display_name_en": item.get("display_name_en") or "",
@@ -142,56 +230,109 @@ class RAGService:
                     "gender_fit": parent.get("gender_fit") or "unisex",
                     "era": parent.get("era") or "",
                     "doc_hash": doc_hash,
-                }
-                to_encode.append(
-                    {"id": item_id, "document": document, "metadata": metadata}
-                )
+                },
+            }
+            cached = bundle_items.get(item_id)
+            if cached and cached.get("doc_hash") == doc_hash:
+                entry["vector"] = cached["vector"]
+            entries.append(entry)
 
-        if to_encode:
+        need_model = [e for e in entries if "vector" not in e]
+        if need_model and allow_model:
             logger.info(
-                "Embedding %d inventory items (%d new, %d updated) with %s...",
-                len(to_encode),
-                added_count,
-                updated_count,
+                "Encoding %d inventory items missing from the bundle with %s...",
+                len(need_model),
                 MODEL_NAME,
             )
-            embeddings = self.get_model().encode(
-                [item["document"] for item in to_encode],
-                normalize_embeddings=True,
-                show_progress_bar=False,
-            ).tolist()
-            collection.upsert(
-                ids=[item["id"] for item in to_encode],
-                embeddings=embeddings,
-                metadatas=[item["metadata"] for item in to_encode],
-                documents=[item["document"] for item in to_encode],
-            )
+            try:
+                vectors = self.get_model().encode(
+                    [e["document"] for e in need_model],
+                    normalize_embeddings=True,
+                    show_progress_bar=False,
+                ).tolist()
+                for entry, vector in zip(need_model, vectors):
+                    entry["vector"] = vector
+            except Exception as exc:
+                logger.error("Could not encode inventory items: %s", exc)
 
+        ready = [e for e in entries if "vector" in e]
+        pending = len(entries) - len(ready)
+        if ready:
+            collection.upsert(
+                ids=[e["id"] for e in ready],
+                embeddings=[e["vector"] for e in ready],
+                metadatas=[e["metadata"] for e in ready],
+                documents=[e["document"] for e in ready],
+            )
+        if pending:
+            logger.warning(
+                "%d inventory items have no vector yet (bundle is stale). "
+                "Run `python -m scripts.build_embeddings` and commit embeddings.json.",
+                pending,
+            )
+        else:
+            RAGService._synced = True
         return {
             "added": added_count,
             "updated": updated_count,
             "deleted": len(ids_to_delete),
+            "pending": pending,
             "total": collection.count(),
         }
+
+    # ------------------------------------------------------------------ query
+    def _query_vector(self, query_text: str) -> list[float]:
+        vector = RAGService._query_cache.get(query_text)
+        if vector is not None:
+            return vector
+        # Free-text query that was not pre-computed. Use the model only if it is
+        # already in memory - never block a request on a model download.
+        if RAGService._model is None:
+            raise EmbeddingUnavailable(
+                "Query is not in the pre-computed bundle and the embedding model is not loaded."
+            )
+        vector = RAGService._model.encode(query_text, normalize_embeddings=True).tolist()
+        RAGService._query_cache[query_text] = vector
+        return vector
+
+    @staticmethod
+    def _blend_pinned(collection, base: list[float], pinned_ids: list[str]) -> list[float]:
+        """Pull the query vector towards the pinned items' own stored vectors."""
+        got = collection.get(ids=list(pinned_ids), include=["embeddings"])
+        embeddings = got.get("embeddings")
+        if embeddings is None or len(embeddings) == 0:
+            return base
+        count = len(embeddings)
+        blended = [
+            base[i] + PINNED_WEIGHT * sum(float(e[i]) for e in embeddings) / count
+            for i in range(len(base))
+        ]
+        norm = math.sqrt(sum(x * x for x in blended)) or 1.0
+        return [x / norm for x in blended]
 
     def query_candidates(
         self,
         query_text: str,
         n_results: int = 12,
         gender: str | None = None,
+        pinned_item_ids: list[str] | None = None,
     ) -> list[dict[str, Any]]:
         if not query_text.strip():
             return []
 
-        self.sync_garments()
+        if not RAGService._synced:
+            # Fast and model-free: copies bundle vectors into Chroma.
+            self.sync_garments(allow_model=False)
         collection = self.get_collection()
         total_items = collection.count()
         if total_items == 0:
-            return []
+            if RAGService._synced:
+                return []
+            raise EmbeddingUnavailable("Vector index is still being built.")
 
-        query_vector = self.get_model().encode(
-            query_text, normalize_embeddings=True
-        ).tolist()
+        query_vector = self._query_vector(query_text)
+        if pinned_item_ids:
+            query_vector = self._blend_pinned(collection, query_vector, pinned_item_ids)
         results = collection.query(
             query_embeddings=[query_vector],
             n_results=min(n_results, total_items),
