@@ -75,7 +75,7 @@ Ví dụ: `ao_tac` là một `GarmentType`; `garment-ao-tac-do` và `garment-ao-
 
 ## 5. Quickstart
 
-### Cách 1: 1-Click
+### Cách 1 (recommend): 1-Click
 
 - **Khởi chạy**: Nhấp đúp chuột vào file **`start.bat`**. Script tự kiểm tra môi trường, cài đặt dependencies nếu thiếu, khởi chạy song song Backend + Frontend và tự động mở trình duyệt.
 
