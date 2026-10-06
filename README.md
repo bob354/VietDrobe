@@ -119,7 +119,7 @@ py -m venv .venv
 # Cài đặt thư viện
 py -m pip install -r requirements.txt
 
-# Khởi chạy server FastAPI (tự động tạo database và ảnh placeholder)
+# Khởi chạy server FastAPI (tự động đồng bộ danh mục và ảnh PNG trong suốt)
 py -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 

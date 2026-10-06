@@ -5,13 +5,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.models.garment import GarmentType
 from app.schemas import GarmentTypeResponse
+from app.seed.catalog import catalog_type_ids
 
 router = APIRouter(prefix="/garment-types", tags=["Garment Types"])
 
 
 @router.get("", response_model=list[GarmentTypeResponse])
 async def list_garment_types(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(GarmentType).order_by(GarmentType.name_vi))
+    result = await db.execute(
+        select(GarmentType).where(GarmentType.type_id.in_(catalog_type_ids())).order_by(GarmentType.name_vi)
+    )
     return result.scalars().all()
 
 

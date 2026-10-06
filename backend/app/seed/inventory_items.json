@@ -1,17 +1,42 @@
 [
   {
-    "item_id": "garment-ao-tac-do",
+    "item_id": "garment-nhat-binh-hoang-cung",
+    "parent_type_id": "ao_nhat_binh",
+    "display_name": "Áo Nhật Bình Hoàng Gia Thêu Phượng",
+    "display_name_en": "Royal Nhat Binh Robe",
+    "image_path": "garments/catalog-v2/ao_nhat_binh_vang.png",
+    "thumbnail_path": "garments/catalog-v2/ao_nhat_binh_vang.png",
+    "primary_color": "Vàng hoàng yến",
+    "colors": [
+      "Vàng hoàng yến",
+      "Đỏ điều",
+      "Xanh ngũ sắc"
+    ],
+    "pattern": "Cổ áo chữ nhật thêu ngũ hành, phượng ổ và hoa mẫu đơn",
+    "material": "Sa đoạn dệt chỉ kim tuyến cao cấp",
+    "rental_price_per_day": 180000,
+    "deposit_per_item": 90000.0,
+    "available_sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "stock_quantity": 3,
+    "includes_inner_robe": true
+  },
+  {
+    "item_id": "garment-ao-tac-do-dieu",
     "parent_type_id": "ao_tac",
-    "display_name": "Áo Tấc Đỏ Điều Thêu Họa Tiết",
+    "display_name": "Áo Tấc Đỏ Điều Tay Thụng Thêu Thủy Ba",
     "display_name_en": "Imperial Red Ao Tac Robe",
-    "image_path": "garments/ao_tac_do.png",
-    "thumbnail_path": "garments/ao_tac_do.png",
+    "image_path": "garments/catalog-v2/ao_tac_do.png",
+    "thumbnail_path": "garments/catalog-v2/ao_tac_do.png",
     "primary_color": "Đỏ điều",
     "colors": [
       "Đỏ điều",
       "Vàng kim"
     ],
-    "pattern": "Họa tiết hoa văn mây sóng thủy ba",
+    "pattern": "Hoa văn mây sóng thủy ba, viền tấc rộng 4cm",
     "material": "Gấm tơ tằm thượng hạng",
     "rental_price_per_day": 150000,
     "deposit_per_item": 75000.0,
@@ -21,124 +46,71 @@
       "L",
       "XL"
     ],
-    "stock_quantity": 3,
-    "is_preset": true
+    "stock_quantity": 4,
+    "includes_inner_robe": true
   },
   {
-    "item_id": "garment-ao-tac-xanh",
-    "parent_type_id": "ao_tac",
-    "display_name": "Áo Tấc Xanh Cổ Vịt Nhã Nhặn",
-    "display_name_en": "Teal Blue Ao Tac Robe",
-    "image_path": "garments/ao_tac_xanh.png",
-    "thumbnail_path": "garments/ao_tac_xanh.png",
-    "primary_color": "Xanh cổ vịt",
-    "colors": [
-      "Xanh cổ vịt",
-      "Trắng ngà"
-    ],
-    "pattern": "Dệt chìm hoa cúc dây",
-    "material": "Lụa Vạn Phúc mềm mại",
-    "rental_price_per_day": 150000,
-    "deposit_per_item": 75000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-nhat-binh-hoang-cung",
-    "parent_type_id": "ao_nhat_binh",
-    "display_name": "Áo Nhật Bình Cung Đình Thêu Phượng",
-    "display_name_en": "Royal Nhat Binh Robe",
-    "image_path": "garments/nhat_binh.png",
-    "thumbnail_path": "garments/nhat_binh.png",
-    "primary_color": "Vàng hoàng yến",
-    "colors": [
-      "Vàng hoàng yến",
-      "Đỏ",
-      "Xanh ngũ sắc"
-    ],
-    "pattern": "Thêu phượng ổ, hoa mẫu đơn và dải ngũ hành",
-    "material": "Sa đoạn dệt chỉ vàng kim",
-    "rental_price_per_day": 150000,
-    "deposit_per_item": 75000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-ngu-than-tay-chen-nam",
-    "parent_type_id": "ao_ngu_than",
-    "display_name": "Áo Ngũ Thân Tay Chẽn Nam Đen Tuyền",
+    "item_id": "garment-ngu-than-tay-chen-den",
+    "parent_type_id": "ao_ngu_than_tay_chen",
+    "display_name": "Áo Ngũ Thân Tay Chẽn Nho Sinh Đen Tuyền",
     "display_name_en": "Men's Fitted Ngu Than Robe",
-    "image_path": "garments/ngu_than_nam.png",
-    "thumbnail_path": "garments/ngu_than_nam.png",
+    "image_path": "garments/catalog-v2/ngu_than_den.png",
+    "thumbnail_path": "garments/catalog-v2/ngu_than_den.png",
     "primary_color": "Đen tuyền",
     "colors": [
-      "Đen",
+      "Đen tuyền",
       "Xám tro"
     ],
-    "pattern": "Trơn tối giản, dệt gân chìm",
-    "material": "Đũi tơ tằm thô mộc",
-    "rental_price_per_day": 150000,
-    "deposit_per_item": 75000.0,
+    "pattern": "Năm thân vải trơn tối giản, dệt gân chìm",
+    "material": "Đũi tơ tằm mộc mạc",
+    "rental_price_per_day": 130000,
+    "deposit_per_item": 65000.0,
     "available_sizes": [
-      "S",
       "M",
       "L",
       "XL"
     ],
-    "stock_quantity": 3,
-    "is_preset": true
+    "stock_quantity": 4,
+    "includes_inner_robe": true
   },
   {
-    "item_id": "garment-giao-linh-le",
+    "item_id": "garment-giao-linh-le-trang",
     "parent_type_id": "ao_giao_linh",
-    "display_name": "Áo Giao Lĩnh Thời Lê Tơ Sống",
-    "display_name_en": "Le Dynasty Cross-collar Robe",
-    "image_path": "garments/giao_linh.png",
-    "thumbnail_path": "garments/giao_linh.png",
+    "display_name": "Áo Giao Lĩnh Cổ Chéo Thời Lê Trắng Ngà",
+    "display_name_en": "Le Dynasty Cross-Collar Robe",
+    "image_path": "garments/catalog-v2/giao_linh_trang.png",
+    "thumbnail_path": "garments/catalog-v2/giao_linh_trang.png",
     "primary_color": "Trắng ngà",
     "colors": [
       "Trắng ngà",
       "Be"
     ],
-    "pattern": "Trơn thuần khiết",
+    "pattern": "Hai vạt chéo đối xứng thuần khiết",
     "material": "Lụa tơ sống thoáng mát",
     "rental_price_per_day": 150000,
     "deposit_per_item": 75000.0,
     "available_sizes": [
       "S",
       "M",
-      "L",
-      "XL"
+      "L"
     ],
     "stock_quantity": 3,
-    "is_preset": true
+    "includes_inner_robe": true
   },
   {
-    "item_id": "garment-tu-than-bac-bo",
-    "parent_type_id": "ao_tu_than",
-    "display_name": "Áo Tứ Thân Nâu Sồng Vạt Buộc",
-    "display_name_en": "Northern Folk Tu Than Dress",
-    "image_path": "garments/tu_than.png",
-    "thumbnail_path": "garments/tu_than.png",
-    "primary_color": "Nâu sồng",
+    "item_id": "garment-vien-linh-xanh-cham",
+    "parent_type_id": "ao_vien_linh",
+    "display_name": "Áo Viên Lĩnh Cổ Tròn Xanh Chàm Đại Việt",
+    "display_name_en": "Round-Collar Vien Linh Robe",
+    "image_path": "garments/catalog-v2/vien_linh_xanh.png",
+    "thumbnail_path": "garments/catalog-v2/vien_linh_xanh.png",
+    "primary_color": "Xanh chàm",
     "colors": [
-      "Nâu sồng",
-      "Hồng cánh sen"
+      "Xanh chàm",
+      "Trắng ngà"
     ],
-    "pattern": "Phối yếm đào bên trong",
-    "material": "Vải thô nhuộm củ nâu truyền thống",
+    "pattern": "Cổ tròn khép kín, dệt hoa thị và mây tản",
+    "material": "Tơ tằm dệt thủ công",
     "rental_price_per_day": 150000,
     "deposit_per_item": 75000.0,
     "available_sizes": [
@@ -148,63 +120,152 @@
       "XL"
     ],
     "stock_quantity": 3,
-    "is_preset": true
+    "includes_inner_robe": true
   },
   {
-    "item_id": "garment-quan-phi-lua-trang",
-    "parent_type_id": "quan_phi_lua",
-    "display_name": "Quần Phi Lụa Trắng Ống Rộng",
+    "item_id": "garment-doi-kham-tim-hue",
+    "parent_type_id": "ao_doi_kham",
+    "display_name": "Áo Đối Khâm Vạt Song Song Tím Lục Bình",
+    "display_name_en": "Parallel-Lapel Doi Kham Robe",
+    "image_path": "garments/catalog-v2/doi_kham_tim.png",
+    "thumbnail_path": "garments/catalog-v2/doi_kham_tim.png",
+    "primary_color": "Tím lục bình",
+    "colors": [
+      "Tím lục bình",
+      "Hồng sen"
+    ],
+    "pattern": "Hai vạt áo đối xứng xẻ dọc ngực tạo hình chữ V",
+    "material": "Gấm tơ lụa mềm mại",
+    "rental_price_per_day": 140000,
+    "deposit_per_item": 70000.0,
+    "available_sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "stock_quantity": 3,
+    "includes_inner_robe": true
+  },
+  {
+    "item_id": "garment-tu-than-kinh-bac",
+    "parent_type_id": "ao_tu_than",
+    "display_name": "Áo Tứ Thân Bắc Bộ Vạt Nâu Sồng",
+    "display_name_en": "Northern Folk Tu Than Robe",
+    "image_path": "garments/catalog-v2/tu_than_nau.png",
+    "thumbnail_path": "garments/catalog-v2/tu_than_nau.png",
+    "primary_color": "Nâu sồng",
+    "colors": [
+      "Nâu sồng",
+      "Hồng cánh sen"
+    ],
+    "pattern": "Bốn thân vạt buông buộc chéo",
+    "material": "Vải đũi thô nhuộm củ nâu tự nhiên",
+    "rental_price_per_day": 120000,
+    "deposit_per_item": 60000.0,
+    "available_sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "stock_quantity": 5,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-yem-dao-to-tam",
+    "parent_type_id": "yem",
+    "display_name": "Áo Yếm Đào Tơ Tằm Cổ Truyền",
+    "display_name_en": "Traditional Pink Silk Halter Top",
+    "image_path": "garments/catalog-v2/yem_dao.png",
+    "thumbnail_path": "garments/catalog-v2/yem_dao.png",
+    "primary_color": "Hồng cánh sen",
+    "colors": [
+      "Hồng cánh sen",
+      "Đỏ thắm"
+    ],
+    "pattern": "Trơn ôm sát người, dây buộc cổ và lưng",
+    "material": "Lụa tơ tằm bóng nhẹ",
+    "rental_price_per_day": 50000,
+    "deposit_per_item": 25000.0,
+    "available_sizes": [
+      "Freesize"
+    ],
+    "stock_quantity": 6,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-quan-lua-trang-ong-rong",
+    "parent_type_id": "quan_lua",
+    "display_name": "Quần Lụa Trắng Ống Rộng Cổ Phục",
     "display_name_en": "White Silk Wide-leg Pants",
-    "image_path": "garments/quan_phi_trang.png",
-    "thumbnail_path": "garments/quan_phi_trang.png",
-    "primary_color": "Trắng ngọc",
+    "image_path": "garments/catalog-v2/quan_lua_trang.png",
+    "thumbnail_path": "garments/catalog-v2/quan_lua_trang.png",
+    "primary_color": "Trắng ngà",
     "colors": [
-      "Trắng ngọc"
+      "Trắng ngà"
     ],
-    "pattern": "Trơn bóng mượt",
-    "material": "Lụa phi bóng cao cấp",
-    "rental_price_per_day": 80000,
-    "deposit_per_item": 40000.0,
+    "pattern": "Trơn suông dài mắt cá",
+    "material": "Lụa phi bóng mềm rủ",
+    "rental_price_per_day": 60000,
+    "deposit_per_item": 30000.0,
     "available_sizes": [
       "S",
       "M",
       "L",
       "XL"
     ],
-    "stock_quantity": 3,
-    "is_preset": true
+    "stock_quantity": 10,
+    "includes_inner_robe": false
   },
   {
-    "item_id": "garment-quan-lua-den",
-    "parent_type_id": "quan_lua_den",
-    "display_name": "Quần Lụa Đen Lãnh Mỹ A",
-    "display_name_en": "Black Silk Flowing Pants",
-    "image_path": "garments/quan_lua_den.png",
-    "thumbnail_path": "garments/quan_lua_den.png",
-    "primary_color": "Đen huyền",
+    "item_id": "garment-thuong-quay-do-son",
+    "parent_type_id": "thuong_quay",
+    "display_name": "Thường Quây Xếp Ly Đỏ Son Quý Phái",
+    "display_name_en": "Pleated Wrap Skirt",
+    "image_path": "garments/catalog-v2/thuong_quay_do.png",
+    "thumbnail_path": "garments/catalog-v2/thuong_quay_do.png",
+    "primary_color": "Đỏ son",
     "colors": [
-      "Đen huyền"
+      "Đỏ son",
+      "Đen"
     ],
-    "pattern": "Bề mặt đanh mượt",
-    "material": "Lụa dệt tự nhiên",
-    "rental_price_per_day": 80000,
-    "deposit_per_item": 40000.0,
+    "pattern": "Xếp ly dọc buông rủ tha thướt",
+    "material": "Sa lụa dập ly",
+    "rental_price_per_day": 70000,
+    "deposit_per_item": 35000.0,
     "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "Freesize"
     ],
-    "stock_quantity": 3,
-    "is_preset": true
+    "stock_quantity": 5,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-vay-dup-den-bac-bo",
+    "parent_type_id": "vay_dup",
+    "display_name": "Váy Đụp Đen Dân Gian Bắc Bộ",
+    "display_name_en": "Black Folk Skirt",
+    "image_path": "garments/catalog-v2/vay_dup_den.png",
+    "thumbnail_path": "garments/catalog-v2/vay_dup_den.png",
+    "primary_color": "Đen tuyền",
+    "colors": [
+      "Đen tuyền"
+    ],
+    "pattern": "Trơn mộc mạc, dáng xòe rộng",
+    "material": "Vải thô mộc nhuộm bùn",
+    "rental_price_per_day": 50000,
+    "deposit_per_item": 25000.0,
+    "available_sizes": [
+      "Freesize"
+    ],
+    "stock_quantity": 6,
+    "includes_inner_robe": false
   },
   {
     "item_id": "garment-quan-jeans-ong-suong",
     "parent_type_id": "quan_jeans_remix",
     "display_name": "Quần Jeans Xanh Ống Suông Vintage (Remix)",
     "display_name_en": "Vintage Baggy Jeans",
-    "image_path": "garments/jeans_remix.png",
-    "thumbnail_path": "garments/jeans_remix.png",
+    "image_path": "garments/catalog-v2/jeans_remix.png",
+    "thumbnail_path": "garments/catalog-v2/jeans_remix.png",
     "primary_color": "Xanh denim",
     "colors": [
       "Xanh denim wash"
@@ -223,135 +284,12 @@
     "is_preset": true
   },
   {
-    "item_id": "garment-man-do-gam",
-    "parent_type_id": "man_gam",
-    "display_name": "Mấn Gấm Đỏ Khuy Ngọc",
-    "display_name_en": "Imperial Red Headdress",
-    "image_path": "garments/man_do.png",
-    "thumbnail_path": "garments/man_do.png",
-    "primary_color": "Đỏ điều",
-    "colors": [
-      "Đỏ điều",
-      "Vàng"
-    ],
-    "pattern": "Vải gấm hoa chìm",
-    "material": "Gấm bọc cốt",
-    "rental_price_per_day": 50000,
-    "deposit_per_item": 25000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-khan-dong-nam",
-    "parent_type_id": "khan_dong",
-    "display_name": "Khăn Đóng Nam Đen Tuyền",
-    "display_name_en": "Men's Black Turban",
-    "image_path": "garments/khan_dong.png",
-    "thumbnail_path": "garments/khan_dong.png",
-    "primary_color": "Đen tuyền",
-    "colors": [
-      "Đen"
-    ],
-    "pattern": "Xếp nếp chữ Nhân hoặc Nhất",
-    "material": "Vải the mỏng bọc khung",
-    "rental_price_per_day": 50000,
-    "deposit_per_item": 25000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-non-quai-thao",
-    "parent_type_id": "non_quai_thao",
-    "display_name": "Nón Quai Thao Duyên Dáng",
-    "display_name_en": "Quai Thao Folk Hat",
-    "image_path": "garments/non_quai_thao.png",
-    "thumbnail_path": "garments/non_quai_thao.png",
-    "primary_color": "Vàng rơm",
-    "colors": [
-      "Vàng rơm",
-      "Đỏ tím"
-    ],
-    "pattern": "Lá gồi đan thủ công phẳng phiu",
-    "material": "Lá gồi và quai tơ tằm",
-    "rental_price_per_day": 50000,
-    "deposit_per_item": 25000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-sneaker-trang-remix",
-    "parent_type_id": "sneaker_trang",
-    "display_name": "Sneaker Trắng Biti's Hunter Remix",
-    "display_name_en": "White Chunky Sneaker",
-    "image_path": "garments/sneaker_trang.png",
-    "thumbnail_path": "garments/sneaker_trang.png",
-    "primary_color": "Trắng tinh",
-    "colors": [
-      "Trắng"
-    ],
-    "pattern": "Minimalist thể thao",
-    "material": "Da tổng hợp & đế cao su",
-    "rental_price_per_day": 60000,
-    "deposit_per_item": 30000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-guoc-moc-truyen-thong",
-    "parent_type_id": "guoc_moc",
-    "display_name": "Guốc Mộc Quai Ngang Khảm Hoa",
-    "display_name_en": "Traditional Wooden Clogs",
-    "image_path": "garments/guoc_moc.png",
-    "thumbnail_path": "garments/guoc_moc.png",
-    "primary_color": "Gỗ tự nhiên",
-    "colors": [
-      "Nâu gỗ",
-      "Đỏ nhung"
-    ],
-    "pattern": "Quai nhung đỏ thêu chỉ vàng",
-    "material": "Gỗ xoan đào nhẹ",
-    "rental_price_per_day": 60000,
-    "deposit_per_item": 30000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
     "item_id": "garment-tui-tote-dong-ho",
     "parent_type_id": "tui_tote",
     "display_name": "Túi Tote Canvas In Tranh Đông Hồ (Remix)",
     "display_name_en": "Dong Ho Folk Art Tote Bag",
-    "image_path": "garments/tui_tote.png",
-    "thumbnail_path": "garments/tui_tote.png",
+    "image_path": "garments/catalog-v2/tui_tote.png",
+    "thumbnail_path": "garments/catalog-v2/tui_tote.png",
     "primary_color": "Màu chàm / Be",
     "colors": [
       "Be",
@@ -376,8 +314,8 @@
     "parent_type_id": "quat_tram",
     "display_name": "Quạt Xếp Trầm Hương Khắc Thơ",
     "display_name_en": "Carved Agarwood Hand Fan",
-    "image_path": "garments/quat_tram.png",
-    "thumbnail_path": "garments/quat_tram.png",
+    "image_path": "garments/catalog-v2/quat_tram.png",
+    "thumbnail_path": "garments/catalog-v2/quat_tram.png",
     "primary_color": "Nâu trầm",
     "colors": [
       "Nâu trầm",
@@ -401,8 +339,8 @@
     "parent_type_id": "kinh_ram",
     "display_name": "Kính Râm Gọng Tròn Đen Retro (Remix)",
     "display_name_en": "Retro Round Sunglasses",
-    "image_path": "garments/kinh_ram.png",
-    "thumbnail_path": "garments/kinh_ram.png",
+    "image_path": "garments/catalog-v2/kinh_ram.png",
+    "thumbnail_path": "garments/catalog-v2/kinh_ram.png",
     "primary_color": "Đen bóng",
     "colors": [
       "Đen",
@@ -422,138 +360,12 @@
     "is_preset": true
   },
   {
-    "item_id": "garment-vien-linh-ly-tran-le",
-    "parent_type_id": "ao_vien_linh",
-    "display_name": "Áo Viên Lĩnh Cổ Tròn Thời Lý - Lê",
-    "display_name_en": "Round-Collar Vien Linh Robe",
-    "image_path": "garments/vien_linh.png",
-    "thumbnail_path": "garments/vien_linh.png",
-    "primary_color": "Xanh chàm",
-    "colors": [
-      "Xanh chàm",
-      "Trắng ngà"
-    ],
-    "pattern": "Dệt chìm hoa văn mây tản và hoa thị cổ truyền",
-    "material": "Tơ tằm dệt thủ công",
-    "rental_price_per_day": 150000,
-    "deposit_per_item": 75000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-doi-kham-dai-viet",
-    "parent_type_id": "ao_doi_kham",
-    "display_name": "Áo Đối Khâm Cổ Đại Việt",
-    "display_name_en": "Parallel-Lapel Doi Kham Robe",
-    "image_path": "garments/doi_kham.png",
-    "thumbnail_path": "garments/doi_kham.png",
-    "primary_color": "Tím lục bình",
-    "colors": [
-      "Tím lục bình",
-      "Hồng sen"
-    ],
-    "pattern": "Viền thêu hoa văn đối xứng chữ Y/V",
-    "material": "Gấm tơ lụa mềm",
-    "rental_price_per_day": 150000,
-    "deposit_per_item": 75000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-ao-lot-trung-don",
-    "parent_type_id": "ao_lot_trong",
-    "display_name": "Áo Lót Trong Cổ Phục (Trung Đơn)",
-    "display_name_en": "Traditional Inner Robe (Trung Don)",
-    "image_path": "garments/ao_lot_trong.png",
-    "thumbnail_path": "garments/ao_lot_trong.png",
-    "primary_color": "Trắng tinh",
-    "colors": [
-      "Trắng tinh",
-      "Trắng ngà"
-    ],
-    "pattern": "Trơn thuần khiết",
-    "material": "Vải bông mộc hoặc lụa tơ sống thoáng mát",
-    "rental_price_per_day": 150000,
-    "deposit_per_item": 75000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-thuong-quay-chan-vay",
-    "parent_type_id": "thuong_quay",
-    "display_name": "Thường Quây Xếp Ly Truyền Thống",
-    "display_name_en": "Traditional Pleated Wrap Skirt",
-    "image_path": "garments/thuong_quay.png",
-    "thumbnail_path": "garments/thuong_quay.png",
-    "primary_color": "Đỏ son",
-    "colors": [
-      "Đỏ son",
-      "Đen tuyền",
-      "Xanh lam"
-    ],
-    "pattern": "Xếp ly dọc thanh thoát, dải đai lưng buộc",
-    "material": "Lụa phi sa cao cấp",
-    "rental_price_per_day": 80000,
-    "deposit_per_item": 40000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
-    "item_id": "garment-hai-theu-cung-dinh",
-    "parent_type_id": "hai_theu",
-    "display_name": "Hài Thêu Mũi Cong Cung Đình",
-    "display_name_en": "Royal Embroidered Shoes",
-    "image_path": "garments/hai_theu.png",
-    "thumbnail_path": "garments/hai_theu.png",
-    "primary_color": "Đỏ thắm",
-    "colors": [
-      "Đỏ thắm",
-      "Vàng kim"
-    ],
-    "pattern": "Thêu hoa sen và mây cuộn kim tuyến",
-    "material": "Gấm bọc cốt, đế vải ép thủ công",
-    "rental_price_per_day": 60000,
-    "deposit_per_item": 30000.0,
-    "available_sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock_quantity": 3,
-    "is_preset": true
-  },
-  {
     "item_id": "garment-o-giay-dau",
     "parent_type_id": "o_giay_dau",
     "display_name": "Ô Giấy Dầu Cổ Phong Vẽ Hoa Mai",
     "display_name_en": "Traditional Oiled Paper Umbrella",
-    "image_path": "garments/o_giay_dau.png",
-    "thumbnail_path": "garments/o_giay_dau.png",
+    "image_path": "garments/catalog-v2/o_giay_dau.png",
+    "thumbnail_path": "garments/catalog-v2/o_giay_dau.png",
     "primary_color": "Vàng mơ",
     "colors": [
       "Vàng mơ",
@@ -577,8 +389,8 @@
     "parent_type_id": "tram_cai_toc",
     "display_name": "Trâm Cài Tóc Phượng Hoàng Cẩn Ngọc",
     "display_name_en": "Imperial Jade & Phoenix Hairpin",
-    "image_path": "garments/tram_cai_toc.png",
-    "thumbnail_path": "garments/tram_cai_toc.png",
+    "image_path": "garments/catalog-v2/tram_cai_toc.png",
+    "thumbnail_path": "garments/catalog-v2/tram_cai_toc.png",
     "primary_color": "Vàng kim",
     "colors": [
       "Vàng kim",
@@ -602,8 +414,8 @@
     "parent_type_id": "chuoi_ngoc",
     "display_name": "Chuỗi Hạt Ngọc Bích Cung Đình",
     "display_name_en": "Imperial Jade Pearl Necklace",
-    "image_path": "garments/chuoi_ngoc.png",
-    "thumbnail_path": "garments/chuoi_ngoc.png",
+    "image_path": "garments/catalog-v2/chuoi_ngoc.png",
+    "thumbnail_path": "garments/catalog-v2/chuoi_ngoc.png",
     "primary_color": "Xanh ngọc",
     "colors": [
       "Xanh ngọc",
@@ -621,5 +433,167 @@
     ],
     "stock_quantity": 3,
     "is_preset": true
+  },
+  {
+    "item_id": "garment-khan-van-nhung-den",
+    "parent_type_id": "khan_van",
+    "display_name": "Khăn Vấn Vải Nhung Đoan Trang",
+    "display_name_en": "Velvet Wrap Headband",
+    "image_path": "garments/catalog-v2/khan_van.png",
+    "thumbnail_path": "garments/catalog-v2/khan_van.png",
+    "primary_color": "Đen tuyền",
+    "colors": [
+      "Đen tuyền",
+      "Đỏ mận"
+    ],
+    "pattern": "Nếp quấn vải trơn ôm sát đầu",
+    "material": "Nhung lụa bọc cốt êm ái",
+    "rental_price_per_day": 40000,
+    "deposit_per_item": 20000.0,
+    "available_sizes": [
+      "Freesize"
+    ],
+    "stock_quantity": 8,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-non-quai-thao-kinh-bac",
+    "parent_type_id": "non_quai_thao",
+    "display_name": "Nón Quai Thao Quai Tơ Liền Chị",
+    "display_name_en": "Kinh Bac Quai Thao Hat",
+    "image_path": "garments/catalog-v2/non_quai_thao.png",
+    "thumbnail_path": "garments/catalog-v2/non_quai_thao.png",
+    "primary_color": "Vàng rơm",
+    "colors": [
+      "Vàng rơm",
+      "Tím quai thao"
+    ],
+    "pattern": "Dáng tròn dẹt phẳng, chùm quai tơ tằm buông trước ngực",
+    "material": "Lá cọ/gồi phơi khô, quai tơ tằm dệt thủ công",
+    "rental_price_per_day": 50000,
+    "deposit_per_item": 30000.0,
+    "available_sizes": [
+      "Tiêu chuẩn"
+    ],
+    "stock_quantity": 4,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-non-ba-tam-co-phong",
+    "parent_type_id": "non_ba_tam",
+    "display_name": "Nón Ba Tầm Vành Rộng Bắc Bộ",
+    "display_name_en": "Traditional Ba Tam Wide Flat Hat",
+    "image_path": "garments/catalog-v2/non_ba_tam.png",
+    "thumbnail_path": "garments/catalog-v2/non_ba_tam.png",
+    "primary_color": "Vàng mộc",
+    "colors": [
+      "Vàng mộc"
+    ],
+    "pattern": "Đường kính rộng ba tầm tay, vành nón phẳng",
+    "material": "Lá cọ khô đan nan tre chuốt mỏng",
+    "rental_price_per_day": 50000,
+    "deposit_per_item": 30000.0,
+    "available_sizes": [
+      "Tiêu chuẩn"
+    ],
+    "stock_quantity": 4,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-non-la-16-vanh",
+    "parent_type_id": "non_la",
+    "display_name": "Nón Lá Chuông 16 Vành Thanh Thoát",
+    "display_name_en": "Traditional 16-Ring Conical Hat",
+    "image_path": "garments/catalog-v2/non_la.png",
+    "thumbnail_path": "garments/catalog-v2/non_la.png",
+    "primary_color": "Trắng xanh ngà",
+    "colors": [
+      "Trắng xanh ngà"
+    ],
+    "pattern": "Dáng chóp nón vuốt nhọn, khâu chỉ cước tỉ mỉ trên 16 vành tre",
+    "material": "Lá lụi non, khung cật tre",
+    "rental_price_per_day": 30000,
+    "deposit_per_item": 20000.0,
+    "available_sizes": [
+      "Tiêu chuẩn"
+    ],
+    "stock_quantity": 8,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-hai-theu-mui-cong-gam",
+    "parent_type_id": "hai",
+    "display_name": "Hài Thêu Mũi Cong Cung Đình Cổ Truyền",
+    "display_name_en": "Royal Embroidered Slippers",
+    "image_path": "garments/catalog-v2/hai_mui_cong.png",
+    "thumbnail_path": "garments/catalog-v2/hai_mui_cong.png",
+    "primary_color": "Đỏ thắm",
+    "colors": [
+      "Đỏ thắm",
+      "Vàng kim"
+    ],
+    "pattern": "Thêu hoa sen uốn lượn, mũi cong thanh thoát",
+    "material": "Gấm bọc cốt, đế nhiều lớp vải ép thủ công",
+    "rental_price_per_day": 50000,
+    "deposit_per_item": 25000.0,
+    "available_sizes": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41"
+    ],
+    "stock_quantity": 6,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-hia-quan-lai-trieu-dinh",
+    "parent_type_id": "hia",
+    "display_name": "Hia Quan Lại Cổ Cao Triều Đình",
+    "display_name_en": "Court Official Mandarin Boots",
+    "image_path": "garments/catalog-v2/hia_nam.png",
+    "thumbnail_path": "garments/catalog-v2/hia_nam.png",
+    "primary_color": "Đen tuyền",
+    "colors": [
+      "Đen tuyền",
+      "Đỏ viền"
+    ],
+    "pattern": "Ủng cổ cao đĩnh đạc, đế vuông cứng cáp",
+    "material": "Da thuộc tổng hợp ép gấm dày dặn",
+    "rental_price_per_day": 80000,
+    "deposit_per_item": 40000.0,
+    "available_sizes": [
+      "40",
+      "41",
+      "42",
+      "43"
+    ],
+    "stock_quantity": 3,
+    "includes_inner_robe": false
+  },
+  {
+    "item_id": "garment-dep-guoc-go-quai-nhung",
+    "parent_type_id": "guoc_go",
+    "display_name": "Guốc Gỗ Mộc Quai Nhung Đỏ Nền Nã",
+    "display_name_en": "Traditional Wooden Clogs",
+    "image_path": "garments/catalog-v2/guoc_go.png",
+    "thumbnail_path": "garments/catalog-v2/guoc_go.png",
+    "primary_color": "Nâu gỗ mít",
+    "colors": [
+      "Nâu gỗ mộc",
+      "Đỏ nhung"
+    ],
+    "pattern": "Đế gỗ đẽo mộc vát eo, quai bọc nhung êm ái",
+    "material": "Gỗ mít/xoan tự nhiên siêu nhẹ",
+    "rental_price_per_day": 40000,
+    "deposit_per_item": 20000.0,
+    "available_sizes": [
+      "36-37",
+      "38-39",
+      "40-41"
+    ],
+    "stock_quantity": 8,
+    "includes_inner_robe": false
   }
 ]

@@ -44,7 +44,7 @@ async def lifespan(app: FastAPI):
         await conn.run_sync(Base.metadata.create_all)
     logger.info("Database tables initialized.")
 
-    # Check and run auto-seed if empty
+    # Sync the current supplied catalog and install its transparent sprites.
     from app.seed.seed import seed_database
     await seed_database()
     from app.seed.migrate_inventory import migrate_inventory_references

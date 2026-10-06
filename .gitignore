@@ -11,3 +11,7 @@ backend/data/chroma/
 backend/data/huggingface/
 backend/data/query_cache.json
 backend/data/*.db
+
+# Local verification dependencies and artifacts
+.tmp/
+backend/data/garments/catalog-v2/

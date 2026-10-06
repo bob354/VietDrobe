@@ -6,6 +6,7 @@ from app.database import async_session_maker
 from app.models.garment import Garment
 from app.schemas import RentalCatalogItem, RentalCalculateRequest, RentalCalculateResponse, RentalBookingRequest, RentalBookingResponse
 from app.services.rental_service import RentalService
+from app.seed.catalog import catalog_item_ids
 
 router = APIRouter(prefix="/rentals", tags=["Rentals"])
 
@@ -15,7 +16,11 @@ async def get_db():
 
 @router.get("/catalog", response_model=list[RentalCatalogItem])
 async def get_rental_catalog(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Garment).where(Garment.rental_price_per_day != None))
+    result = await db.execute(
+        select(Garment).where(
+            Garment.id.in_(catalog_item_ids()), Garment.rental_price_per_day.is_not(None)
+        )
+    )
     return result.scalars().all()
 
 @router.post("/calculate", response_model=RentalCalculateResponse)

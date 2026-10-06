@@ -2,6 +2,7 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.garment import Garment, GarmentType
+from app.seed.catalog import catalog_item_ids
 
 
 class GarmentService:
@@ -33,7 +34,7 @@ class GarmentService:
         limit: int = 100,
         offset: int = 0,
     ) -> tuple[list[Garment], int]:
-        query = select(Garment).join(GarmentType)
+        query = select(Garment).join(GarmentType).where(Garment.id.in_(catalog_item_ids()))
 
         if category:
             query = query.where(GarmentType.category == category)
@@ -66,6 +67,7 @@ class GarmentService:
         query = (
             select(GarmentType.category, func.count(Garment.id))
             .join(GarmentType)
+            .where(Garment.id.in_(catalog_item_ids()))
             .group_by(GarmentType.category)
             .order_by(func.count(Garment.id).desc())
         )
