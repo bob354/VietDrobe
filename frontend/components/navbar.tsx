@@ -1,5 +1,6 @@
 "use client";
 
+import { BrandMark } from "@/components/brand-mark";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -17,7 +18,7 @@ export function Navbar() {
 
   return <header className="site-header">
     <div className="site-header-inner shell">
-      <Link href="/" className="brand" onClick={() => setOpen(false)} aria-label="VietDrobe, trang chủ"><span className="brand-mark">V<span>.</span></span><span className="brand-name">VietDrobe<small>TRANG PHỤC VIỆT</small></span></Link>
+      <Link href="/" className="brand" onClick={() => setOpen(false)} aria-label="VietDrobe, trang chủ"><BrandMark className="brand-mark" /><span className="brand-name">VietDrobe<small>TRANG PHỤC VIỆT</small></span></Link>
       <nav className="desktop-nav" aria-label="Điều hướng chính">{items.map(item => <Link href={item.href} key={item.href} className={pathname.startsWith(item.href) ? "active" : ""}>{item.label}</Link>)}</nav>
       <div className="header-actions"><ThemeToggle /><Link className="header-rent" href="/rent">Giỏ thuê <ArrowUpRight size={15} aria-hidden="true" /></Link><button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Đóng menu" : "Mở menu"}>{open ? <X size={22} /> : <Menu size={22} />}</button></div>
     </div>

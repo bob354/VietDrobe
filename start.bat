@@ -11,6 +11,10 @@ set "ROOT_DIR=%~dp0"
 set "BACKEND_DIR=%ROOT_DIR%backend"
 set "FRONTEND_DIR=%ROOT_DIR%frontend"
 
+:: TEMPORARY: backend port. Default is 8000; change back to 8000 when it is free again.
+:: (stop.bat has the same line - keep the two in sync.)
+set "BACKEND_PORT=8010"
+
 :: 1. Detect Python
 where py >nul 2>nul
 if %errorlevel% equ 0 (
@@ -56,12 +60,12 @@ if not exist "%FRONTEND_DIR%\node_modules" (
 )
 
 :: 5. Launch Backend
-echo [3/4] Starting Backend on http://127.0.0.1:8000...
-start "Viet Phuc Remix - Backend (:8000)" cmd /k "cd /d "%BACKEND_DIR%" && set PYTHONIOENCODING=utf-8 && %PY_CMD% -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload"
+echo [3/4] Starting Backend on http://127.0.0.1:%BACKEND_PORT%...
+start "Viet Phuc Remix - Backend (:%BACKEND_PORT%)" cmd /k "cd /d "%BACKEND_DIR%" && set PYTHONIOENCODING=utf-8 && %PY_CMD% -m uvicorn app.main:app --host 127.0.0.1 --port %BACKEND_PORT% --reload"
 
 :: 6. Launch Frontend
 echo [4/4] Starting Frontend on http://localhost:3000...
-start "Viet Phuc Remix - Frontend (:3000)" cmd /k "cd /d "%FRONTEND_DIR%" && npm run dev"
+start "Viet Phuc Remix - Frontend (:3000)" cmd /k "cd /d "%FRONTEND_DIR%" && set BACKEND_URL=http://127.0.0.1:%BACKEND_PORT%&& npm run dev"
 
 timeout /t 3 /nobreak >nul
 start http://localhost:3000
@@ -70,7 +74,7 @@ echo.
 echo ========================================================
 echo    SYSTEM READY
 echo    - Frontend: http://localhost:3000
-echo    - Backend:  http://127.0.0.1:8000/docs
+echo    - Backend:  http://127.0.0.1:%BACKEND_PORT%/docs
 echo    (Run stop.bat to terminate)
 echo ========================================================
 echo.
