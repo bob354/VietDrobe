@@ -15,6 +15,7 @@ interface GarmentDetailModalProps {
 const ERA_LABELS: Record<string, string> = {
   nguyen: "Triều Nguyễn (1802 — 1945)",
   le: "Thời Hậu Lê (1428 — 1789)",
+  ly_tran_le: "Thời Lý - Trần - Lê",
   folk: "Dân gian Bắc Bộ / Quan Họ",
   modern: "Phong cách Đương đại / Gen Z",
   toan_quoc: "Toàn quốc",
@@ -46,12 +47,12 @@ export function GarmentDetailModal({ garment, onClose }: GarmentDetailModalProps
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start">
           {/* The product details live alongside the artwork, not inside it. */}
           <div className="sm:col-span-5 flex flex-col items-center">
-            <div className="relative w-full aspect-square bg-[#FAF7F2] border border-[#D8D0C1] dark:border-[#485047] p-2 shadow-2xs">
+            <div className="relative w-full aspect-square bg-[#FAF7F2] border border-[#D8D0C1] dark:border-[#485047] shadow-2xs">
               <Image
                 src={garment.image_url || `/api/v1/images/${garment.image_path}`}
                 alt={garment.display_name}
                 fill
-                className="object-contain p-2"
+                className="object-contain"
               />
             </div>
 

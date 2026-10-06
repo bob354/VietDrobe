@@ -146,6 +146,11 @@ input, textarea, select { caret-color:var(--accent); }
 .garment-details strong { font:600 16px/1.35 var(--font-serif),serif; color:var(--foreground); }
 .garment-meta { display:flex; justify-content:space-between; gap:8px; margin-top:auto; padding-top:10px; color:var(--text-secondary); font-size:11px; }
 .garment-meta span:last-child { color:var(--accent); }
+/* Outfit result rows: five pieces fit in one row, so the cards are more compact. */
+.outfit-grid .garment-details { min-height:0; padding:10px 10px 12px; }
+.outfit-grid .garment-details strong { font-size:13px; line-height:1.3; }
+.outfit-grid .garment-meta { flex-wrap:wrap; padding-top:8px; font-size:10px; }
+.outfit-grid .garment-category { top:8px; left:8px; padding:3px 6px; font-size:8px; }
 .detail-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:15px; }
 .detail-actions button,.detail-actions a { display:inline-flex; align-items:center; justify-content:center; min-height:40px; padding:0 14px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; }
 .detail-actions button { background:var(--foreground); color:var(--background); }.detail-actions button:hover { background:var(--accent);color:white; }.detail-actions a { border:1px solid var(--foreground);color:var(--foreground); }

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { RefreshCw, ArrowRight, Pin, X } from "lucide-react";
 import { api } from "@/lib/api";
 import { Garment, SuggestedOutfit } from "@/lib/types";
 import { GarmentCard } from "@/components/garment-card";
+import { GarmentDetailModal } from "@/components/garment-detail-modal";
 
 const OCCASIONS = [
   { id: "tet", label: "Du Xuân Đón Tết", desc: "Dạo phố hoa, lễ Tết gia đình, lễ hội đầu năm" },
@@ -39,6 +40,10 @@ export default function SuggestPage() {
   const [hasGenerated, setHasGenerated] = useState(false);
   const [garmentError, setGarmentError] = useState(false);
   const [generationError, setGenerationError] = useState(false);
+  const [activeGarment, setActiveGarment] = useState<Garment | null>(null);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+  const firstOutfitRef = useRef<HTMLElement | null>(null);
+  const shouldScrollRef = useRef(false);
 
   useEffect(() => {
     async function loadGarments() {
@@ -53,7 +58,17 @@ export default function SuggestPage() {
     loadGarments();
   }, []);
 
+  // After a search finishes, glide down to the first outfit (or to the message if there is none).
+  useEffect(() => {
+    if (loading || !shouldScrollRef.current) return;
+    shouldScrollRef.current = false;
+    const target = firstOutfitRef.current ?? resultsRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }, [loading, outfits, generationError]);
+
   const handleGenerate = async () => {
+    shouldScrollRef.current = true;
     setLoading(true);
     setHasGenerated(true);
     setGenerationError(false);
@@ -253,7 +268,7 @@ export default function SuggestPage() {
 
       {/* Results */}
       {hasGenerated && (
-        <div className="mt-16">
+        <div ref={resultsRef} className="mt-16 scroll-mt-24">
           <div className="text-center mb-10">
             <span className="text-[11px] uppercase tracking-[0.25em] text-[#9F3B30] dark:text-[#D16F5D] font-serif block mb-1">
               Tuyển Tập Đề Xuất
@@ -279,7 +294,8 @@ export default function SuggestPage() {
               {outfits.map((outfit, index) => (
                 <section
                   key={outfit.id}
-                  className="bg-white dark:bg-[#232923] border border-[#D8D0C1] dark:border-[#485047] p-5 sm:p-7"
+                  ref={index === 0 ? firstOutfitRef : undefined}
+                  className="scroll-mt-24 bg-white dark:bg-[#232923] border border-[#D8D0C1] dark:border-[#485047] p-5 sm:p-7"
                 >
                   <div className="flex items-center justify-between gap-4 mb-5">
                     <h3 className="font-serif text-lg text-[#24251F] dark:text-[#EEE8DC]">
@@ -289,18 +305,13 @@ export default function SuggestPage() {
                       {outfit.items.length} món
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  <div className="outfit-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                     {outfit.items.map((garment) => (
-                      <article key={garment.id} className="space-y-2">
-                        <GarmentCard garment={garment} />
-                        <div className="px-1 text-xs text-[#625F56] dark:text-[#B7AFA0] space-y-1">
-                          <p>{garment.category.replaceAll("_", " ")}</p>
-                          {garment.material && <p>{garment.material}</p>}
-                          {garment.cultural_description && (
-                            <p className="line-clamp-3">{garment.cultural_description}</p>
-                          )}
-                        </div>
-                      </article>
+                      <GarmentCard
+                        key={garment.id}
+                        garment={garment}
+                        onClickDetail={setActiveGarment}
+                      />
                     ))}
                   </div>
                   {outfit.cultural_warning && (
@@ -314,6 +325,8 @@ export default function SuggestPage() {
           )}
         </div>
       )}
+
+      <GarmentDetailModal garment={activeGarment} onClose={() => setActiveGarment(null)} />
     </div>
   );
 }
