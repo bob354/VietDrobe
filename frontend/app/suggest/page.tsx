@@ -2,11 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { RefreshCw, ArrowRight, Pin, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { RefreshCw, ArrowRight, Pin, X, ShoppingBag, CheckCheck } from "lucide-react";
 import { api } from "@/lib/api";
 import { Garment, SuggestedOutfit } from "@/lib/types";
 import { GarmentCard } from "@/components/garment-card";
 import { GarmentDetailModal } from "@/components/garment-detail-modal";
+import { useRentalCart } from "@/lib/rental-context";
 
 const OCCASIONS = [
   { id: "tet", label: "Du Xuân Đón Tết", desc: "Dạo phố hoa, lễ Tết gia đình, lễ hội đầu năm" },
@@ -30,6 +32,8 @@ const GENDERS = [
 ];
 
 export default function SuggestPage() {
+  const router = useRouter();
+  const { addToCart } = useRentalCart();
   const [occasion, setOccasion] = useState("tet");
   const [style, setStyle] = useState("streetwear");
   const [gender, setGender] = useState("unisex");
@@ -41,9 +45,20 @@ export default function SuggestPage() {
   const [garmentError, setGarmentError] = useState(false);
   const [generationError, setGenerationError] = useState(false);
   const [activeGarment, setActiveGarment] = useState<Garment | null>(null);
+  const [rentedOutfitId, setRentedOutfitId] = useState<string | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
   const firstOutfitRef = useRef<HTMLElement | null>(null);
   const shouldScrollRef = useRef(false);
+
+  const handleRentOutfit = (outfit: SuggestedOutfit) => {
+    outfit.items.forEach((garment) => {
+      addToCart(garment, "M", 1);
+    });
+    setRentedOutfitId(outfit.id);
+    setTimeout(() => {
+      router.push("/rent");
+    }, 600);
+  };
 
   useEffect(() => {
     async function loadGarments() {
@@ -319,6 +334,32 @@ export default function SuggestPage() {
                       {outfit.cultural_warning}
                     </p>
                   )}
+                  {/* Rent Outfit CTA */}
+                  <div className="mt-5 pt-5 border-t border-[#D8D0C1] dark:border-[#485047] flex items-center justify-end gap-4">
+                    <button
+                      type="button"
+                      id={`rent-outfit-${outfit.id}`}
+                      onClick={() => handleRentOutfit(outfit)}
+                      disabled={rentedOutfitId === outfit.id}
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 text-xs uppercase tracking-widest font-serif transition-all duration-300 shrink-0 ${
+                        rentedOutfitId === outfit.id
+                          ? "bg-[#2C6E49] text-white cursor-default"
+                          : "bg-[#9F3B30] dark:bg-[#D16F5D] text-white hover:bg-[#7D2E26] dark:hover:bg-[#B85947] active:scale-95"
+                      }`}
+                    >
+                      {rentedOutfitId === outfit.id ? (
+                        <>
+                          <CheckCheck className="w-3.5 h-3.5" />
+                          <span>Đã thêm vào giỏ!</span>
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingBag className="w-3.5 h-3.5" />
+                          <span>Thuê Cả Bộ</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </section>
               ))}
             </div>
