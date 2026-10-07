@@ -11,9 +11,9 @@ set "ROOT_DIR=%~dp0"
 set "BACKEND_DIR=%ROOT_DIR%backend"
 set "FRONTEND_DIR=%ROOT_DIR%frontend"
 
-:: TEMPORARY: backend port. Default is 8000; change back to 8000 when it is free again.
+:: Backend port (default 8000). Change it here if the port is busy.
 :: (stop.bat has the same line - keep the two in sync.)
-set "BACKEND_PORT=8010"
+set "BACKEND_PORT=8000"
 
 :: 1. Detect Python
 where py >nul 2>nul
