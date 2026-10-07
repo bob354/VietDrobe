@@ -1,156 +1,188 @@
-# VietDrobe
+<p align="center">
+  <img src="docs/images/brand-mark.svg" alt="VietDrobe" width="96" height="96">
+</p>
 
-> Nền tảng số hóa, trải nghiệm thời trang di sản và dịch vụ cho thuê cổ phục Việt Nam dành cho thế hệ trẻ, với tìm kiếm ngữ nghĩa và thẩm định chuẩn mực văn hóa.
+<h1 align="center">VietDrobe</h1>
 
----
+<p align="center">
+  <strong>Một nét xưa. Một cách mặc mới.</strong><br>
+  Explore Vietnamese heritage. Find your outfit. Make it your own.
+</p>
 
-## 1. Tổng Quan 
+<p align="center">
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-16-24251F?style=for-the-badge&amp;logo=nextdotjs&amp;logoColor=white" alt="Next.js 16"></a>
+  <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-354239?style=for-the-badge&amp;logo=fastapi&amp;logoColor=white" alt="FastAPI"></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.12-9F3B30?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="Python 3.12"></a>
+  <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-354239?style=for-the-badge&amp;logo=docker&amp;logoColor=white" alt="Docker"></a>
+</p>
 
-**VietDrobe** là giải pháp toàn diện kết nối kho tàng di sản trang phục truyền thống Việt Nam (thời Lê, Nguyễn, dân gian Bắc Bộ...) với văn hóa thời trang đời thường và nhu cầu thực tế của giới trẻ:
-1. **Khảo cứu & chiêm ngưỡng di sản**: Tiếp cận thông tin chuẩn xác về phom dáng, hoa văn, điển tích, niên đại và ý nghĩa của 17 cổ phục tiêu biểu.
-2. **Sáng tạo & phối đồ đa phong cách**: Phối ngẫu linh hoạt cổ phục (Áo Tấc, Nhật Bình, Ngũ Thân, Giao Lĩnh...) cùng phụ kiện hiện đại (Sneaker, Jeans ống suông, Túi tote Đông Hồ, Kính râm retro) theo bối cảnh sự kiện thực tế (Tết, Kỷ yếu, Dạo phố, Dạ tiệc, Lễ hội).
-3. **Bảo tồn chuẩn mực**: Đảm bảo tính tôn nghiêm và giá trị cội nguồn nhờ thuật toán tự động kiểm định văn hóa, ngăn ngừa các lỗi sai phạm phẩm hàm, giới tính, niên đại hoặc thuần phong mỹ tục.
-4. **Dịch vụ cho thuê cổ phục**: Tích hợp mô hình cho thuê trang phục di sản, cho phép chọn size, số lượng, ngày thuê, tính giá, chiết khấu combo 15% và quản lý tiền đặt cọc.
+<p align="center">
+  <a href="https://viet-drobe.vercel.app"><strong>Live demo</strong></a> ·
+  <a href="#features">Features</a> ·
+  <a href="#screenshots">Screenshots</a> ·
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#deployment">Deployment</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#contributing">Contributing</a>
+</p>
 
----
+VietDrobe brings Vietnamese traditional clothing into everyday outfit planning. Browse the collection, choose an occasion and style, explore suggested combinations, and create a rental booking. The app interface is in Vietnamese.
 
-## 2. Tính Năng Nổi Bật
+## Features
 
-### Tủ Đồ Di Sản & Kho Phục Trang Cho Thuê 
-- **17 phục trang chuẩn hóa**: Chia theo nhóm chi tiết (*Áo Cổ Phục, Quần & Váy Lụa, Mấn & Nón, Guốc & Sneaker, Phụ Kiện*).
+- **Heritage catalog** — 25 garments with cultural context, category filters, traditional/modern filters, and name search.
+- **Semantic outfit suggestions** — choose from 5 occasions, 4 styles, and 3 gender options to receive up to 3 complete outfit suggestions.
+- **Pin a favorite** — select an item in the quiz and keep it in compatible suggestions while it is in stock.
+- **Cultural checks** — evaluate combinations against the repository's clothing rules, with scores and warnings shown alongside results.
+- **Rental flow** — select sizes, quantities, and dates; preview pricing, a 15% discount for at least 3 distinct items, and a deposit equal to 30% of the discounted rental price.
+- **Light and dark themes** — a responsive interface with square, transparent catalog sprites and an editorial design inspired by Vietnamese heritage.
 
-### Tìm Kiếm Trang Phục Theo Ngữ Nghĩa
-- **Tìm theo bối cảnh và phong cách**: Quiz kết hợp dịp diện, phong cách, giới tính và món đồ ghim thành truy vấn để tìm các mẫu gần nghĩa trong kho.
-- **Embeddings hai lớp dữ liệu**: Mỗi SKU vật lý được embed cùng thông tin văn hóa từ loại trang phục cha; kết quả trả về ảnh và thông tin của SKU tương ứng.
-- **Chạy cục bộ, không cần API key**: Embeddings được dựng sẵn bằng SentenceTransformer và lưu trong `embeddings.json`; ChromaDB tìm kiếm vector khi chạy. Không dùng LLM, không cần tải model khi sử dụng bình thường.
-- **Gợi ý theo bộ**: Vector search lấy các SKU phù hợp; hệ thống ghép món chính với quần/váy phù hợp và kiểm tra quy tắc văn hóa trước khi hiển thị bộ trang phục. Đây là bước phối theo danh mục và quy tắc, không phải outfit mẫu cố định.
-- **Hỗ trợ ghim món đồ**: Món được ghim được giữ trong mỗi bộ gợi ý hợp lệ khi còn hàng.
----
+## Screenshots
 
-## 3. Kiến Trúc Kỹ Thuật (Tech Stack)
+### Landing page
 
-| Thành phần | Công nghệ sử dụng | Vai trò |
-|---|---|---|
-| **Frontend** | Next.js 16 (Turbopack, App Router) | Giao diện SSR/SSG hiện đại, tối ưu SEO và hiệu năng cao |
-| **Styling** | Tailwind CSS v4 + Custom Eastern Variant | Hệ thống bảng màu Á Đông cổ điển, responsive toàn diện |
-| **State & Context** | React Context (`rental-context`) | Quản lý giỏ hàng thuê đồ và tính toán tức thời ở client |
-| **Icons** | Lucide React | Hệ thống biểu tượng tối giản |
-| **Backend** | FastAPI + Uvicorn | High-performance Asynchronous Python REST API |
-| **ORM / DB** | SQLAlchemy 2.0 (Async) + aiosqlite | Quản lý dữ liệu bất đồng bộ (Garments, CulturalRules, Rentals, Bookings) |
-| **Validation** | Pydantic v2 | Kiểm định dữ liệu vào/ra nghiêm ngặt |
-| **Image Engine** | Pillow (PIL) | Sinh thẻ tranh di sản truyền thống và hoa văn tự động |
-| **Semantic Search** | SentenceTransformers + ChromaDB | Embeddings dựng sẵn (`embeddings.json`), truy xuất SKU theo độ tương đồng ngữ nghĩa |
-| **Container** | Docker & Docker Compose | Đóng gói và triển khai môi trường đồng nhất |
+| Light theme | Dark theme |
+|---|---|
+| [![VietDrobe landing page in light mode](docs/images/landing-light.png)](docs/images/landing-light.png) | [![VietDrobe landing page in dark mode](docs/images/landing-dark.png)](docs/images/landing-dark.png) |
 
-### Mô hình dữ liệu kho phục trang
+### Catalog and outfit suggestions
 
-Kho được tách thành hai lớp để không lặp tri thức văn hóa giữa các biến thể:
+| Browse traditional clothing | Find an outfit |
+|---|---|
+| [![VietDrobe catalog filtered to traditional tops](docs/images/catalog.png)](docs/images/catalog.png) | [![Real outfit suggestions from the live app](docs/images/suggestions.png)](docs/images/suggestions.png) |
 
-| Lớp | Nguồn dữ liệu | Nội dung |
-|---|---|---|
-| `GarmentType` | `backend/app/seed/garment_types.json` | `type_id`, tên gọi, niên đại, tri thức lịch sử, quy tắc văn hóa và metadata RAG. Mỗi loại chỉ có một bản ghi. |
-| `InventoryItem` | `backend/app/seed/inventory_items.json` | `item_id`, `parent_type_id`, ảnh, màu, chất liệu, size, giá, tiền cọc và tồn kho của SKU thực tế. |
+Screenshots use the live catalog and real suggestion results. Click an image to view it at full size. [Screenshot details](docs/images/README.md).
 
-Ví dụ: `ao_tac` là một `GarmentType`; `garment-ao-tac-do` và `garment-ao-tac-xanh` là hai `InventoryItem` cùng tham chiếu về loại này. Mỗi `InventoryItem` được embed riêng cùng thông tin từ `GarmentType` cha để tìm được đúng biến thể mà vẫn giữ tri thức văn hóa.
+## Quick start
 
----
+### Docker Compose
 
-## 4. Danh Sách API Endpoints Chính
-
-| Phương thức | Endpoint | Chức năng |
-|---|---|---|
-| `GET` | `/api/v1/health` | Kiểm tra trạng thái hoạt động của hệ thống |
-| `GET` | `/api/v1/garments` | Danh sách toàn bộ phục trang kèm thông tin văn hóa & giá thuê |
-| `GET` | `/api/v1/garment-types` | Tri thức văn hóa dùng chung theo loại trang phục |
-| `GET` | `/api/v1/garments/{id}` | Chi tiết một món phục trang di sản |
-| `POST` | `/api/v1/cultural/check` | Thẩm định độ tương thích văn hóa của set đồ (Cultural Guardrail) |
-| `POST` | `/api/v1/outfits/suggest` | Tìm SKU bằng semantic search, ghép thành bộ theo danh mục và kiểm tra quy tắc văn hóa |
-| `POST` | `/api/v1/chat` | Tìm SKU bằng mô tả ngữ nghĩa, có thể kết hợp ngữ cảnh Canvas |
-| `GET` | `/api/v1/rentals/catalog` | Danh mục phục trang cho thuê cùng phân loại size và tồn kho |
-| `POST` | `/api/v1/rentals/calculate` | Tính toán tiền thuê, chiết khấu Combo 15% và tiền cọc theo số ngày |
-| `POST` | `/api/v1/rentals/book` | Tạo đơn đặt thuê mới và lưu trữ vào database |
-| `GET` | `/api/v1/rentals/booking/{id}` | Tra cứu chi tiết đơn thuê theo mã booking |
-
----
-
-## 5. Quickstart
-
-### Cách 1 (recommend): 1-Click
-
-- **Khởi chạy**: Nhấp đúp chuột vào file **`start.bat`**. Script tự kiểm tra môi trường, cài đặt dependencies nếu thiếu, khởi chạy song song Backend + Frontend và tự động mở trình duyệt.
-
----
-
-### Cách 2: Sử dụng Docker Compose
-
-Yêu cầu máy đã cài đặt [Docker Desktop](https://www.docker.com/).
+Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) and Git, then run:
 
 ```bash
-# Khởi chạy toàn bộ hệ thống (Frontend + Backend + Tự động seed DB)
-docker compose up --build
+git clone https://github.com/bob354/VietDrobe.git
+cd VietDrobe
+docker compose up --build -d
 ```
 
-Sau khi khởi chạy thành công:
-- **Giao diện người dùng (Frontend)**: [http://localhost:3000](http://localhost:3000)
-  - Khảo cứu di sản: `/catalog`
-  - Tìm trang phục theo ngữ nghĩa: `/suggest`
-  - Đặt thuê trang phục: `/rent`
-- **Tài liệu API Swagger (Backend)**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **Health check**: [http://localhost:8000/api/v1/health](http://localhost:8000/api/v1/health)
+The containers are built from source. On startup, the backend creates its tables, syncs the catalog and sprites, and loads the committed embedding vectors. SQLite and the Chroma index persist in `backend/data/` through the Compose volume.
 
----
-
-### Cách 3: Khởi chạy thủ công từng dịch vụ
-
-#### Yêu cầu tiên quyết:
-- **Python**: Phiên bản 3.11 hoặc 3.12 (chưa khuyến nghị 3.13/3.14 vì một số thư viện như torch có thể chưa có bản dựng sẵn; nếu máy có nhiều bản Python, dùng `py -3.12`)
-- **Node.js**: Phiên bản 18 trở lên (khuyên dùng Node 20 LTS)
-
-#### Bước 1: Khởi động Backend
+| Service | Local address |
+|---|---|
+| Website | http://localhost:3000 |
+| API documentation, with `DEBUG=true` | http://localhost:8000/docs |
+| Health check | http://localhost:8000/api/v1/health |
 
 ```bash
-cd backend
-
-# Tạo và kích hoạt virtual environment (tùy chọn)
-py -m venv .venv
-# Windows PowerShell:
-.venv\Scripts\Activate.ps1
-
-# Cài đặt thư viện
-py -m pip install -r requirements.txt
-
-# Khởi chạy server FastAPI (tự động đồng bộ danh mục và ảnh PNG trong suốt)
-py -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+docker compose logs -f backend frontend
+docker compose down
 ```
 
-> *Embeddings dựng sẵn:* Vector của 25 SKU và 60 tổ hợp truy vấn cố định được lưu trong `backend/app/seed/embeddings.json` (commit lên git). Khi khởi động, backend nạp file này vào ChromaDB mà **không cần tải hay load model**, nên chạy được ngay sau khi pull. Chỉ khi sửa `garment_types.json`, `inventory_items.json`, `OCCASION_QUERY` hoặc `STYLE_QUERY` mới cần dựng lại (cần model, tải một lần):
->
-> ```bash
-> cd backend
-> py -m scripts.build_embeddings          # dựng lại embeddings.json rồi commit
-> py -m scripts.build_embeddings --check  # kiểm tra file còn khớp dữ liệu không (exit 1 nếu cũ)
-> ```
+### Windows launcher
 
-> *Ghi chú:* Không cần API key. ChromaDB lưu chỉ mục dưới `backend/data/chroma` (tự tạo, không commit) và được nạp từ `embeddings.json` mỗi khi backend khởi động, mất khoảng một giây. Model chỉ được tải khi bạn chạy `scripts.build_embeddings`, hoặc khi có SKU mới chưa có trong `embeddings.json`. Nếu `embeddings.json` bị thiếu hoặc cũ, `/outfits/suggest` sẽ trả 503 ("đang khởi tạo") cho đến khi bạn dựng lại file.
->
-> *Món được ghim:* Vector của món được ghim được trộn vào vector truy vấn (trọng số `PINNED_WEIGHT` trong `rag_service.py`) thay vì nối thêm tên món vào câu truy vấn.
+With Python 3.12 and Node.js 20.9 or later installed, run `start.bat` from the repository root. It checks dependencies, starts both services, and opens the website. Use `stop.bat` to stop the local services.
 
-Quiz trang phục dùng semantic vector search trực tiếp. Hệ thống trả về dữ liệu SKU và thông tin văn hóa từ loại cha thay vì sinh câu trả lời hay công thức phối đồ.
+For virtual environments, manual setup, and build checks, see the [development guide](docs/DEVELOPMENT.md).
 
-#### Bước 2: Khởi động Frontend
+## Deployment
 
-Mở một cửa sổ Terminal mới:
+The live demo uses **Vercel for the frontend** and **Railway for the backend**.
 
-```bash
-cd frontend
+| Service | Project root | Required setup |
+|---|---|---|
+| Railway | `backend` | Dockerfile, persistent volume at `/app/data`, public domain |
+| Vercel | `frontend` | Next.js, `BACKEND_URL` set to the Railway public HTTPS origin |
 
-# Cài đặt dependencies
-npm install
+Frontend requests use `/api/v1/*` on the website's own origin. A rewrite forwards them to the backend. Update `BACKEND_URL` and redeploy the frontend whenever the backend domain changes.
 
-# Khởi chạy dev server Next.js
-npm run dev
+The [deployment guide](docs/DEPLOYMENT.md) covers the exact variables, volume configuration, port, health checks, and troubleshooting.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    Browser["Browser"] -->|"/api/v1/*"| Web["Next.js / Vercel"]
+    Web -->|"BACKEND_URL"| API["FastAPI / Railway"]
+    API --> DB[("SQLite")]
+    API --> Index[("ChromaDB")]
+    Bundle["embeddings.json"] -->|"Load on startup"| Index
 ```
 
-Truy cập trình duyệt tại: **`http://localhost:3000`**.
+### How suggestions work
 
----
+Each garment's search document combines inventory details with cultural information from its parent garment type. The Vietnamese SentenceTransformer `bkai-foundation-models/vietnamese-bi-encoder` creates embeddings, and ChromaDB retrieves relevant items. The backend assembles tops, bottoms, and optional accessories, blends in pinned items, and checks each combination against the cultural rules.
+
+The committed bundle contains **25 garment vectors and 60 quiz vectors**. With a current bundle, the standard quiz works without downloading the model or providing an API key.
+
+**Rebuild and commit `embeddings.json` whenever catalog text or quiz queries change.** A stale bundle can leave suggestions empty, incomplete, or unavailable. See [catalog and embedding maintenance](docs/DEVELOPMENT.md#cập-nhật-catalog-và-embeddings).
+
+### Tech stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 16.3.5, React 19, TypeScript |
+| Styling | Tailwind CSS 4, Lucide React |
+| Backend | FastAPI, Uvicorn, Pydantic 2 |
+| Database | SQLAlchemy async, SQLite / aiosqlite |
+| Semantic search | SentenceTransformers, ChromaDB |
+| Image handling | Pillow |
+| Hosting | Docker Compose, Vercel, Railway |
+
+<details>
+<summary><strong>Repository structure and catalog data</strong></summary>
+
+```text
+backend/
+  app/
+    api/              # REST endpoints
+    models/           # Garment types, inventory, outfits, bookings
+    services/         # Recommendations, cultural checks, rentals, images
+    seed/             # Catalog JSON, source sprites, embedding bundle
+  scripts/            # Build and validate embeddings
+  tests/              # Catalog, images, SQLite startup
+frontend/
+  app/                # Landing, catalog, suggestions, rental cart
+  components/         # Shared interface components
+  lib/                # API client, types, rental context
+docs/                 # Setup guides and screenshots
+docker-compose.yml
+start.bat / stop.bat
+```
+
+`garment_types.json` holds shared cultural information by `type_id`. `inventory_items.json` holds each SKU by `item_id`, linked through `parent_type_id`. The current source sprites are 1254 × 1254 transparent PNGs in `backend/app/seed/garments/`.
+
+Startup installs sprites into storage and syncs the catalog. Older database records are retained for saved outfits and bookings, while browsing uses only the current catalog.
+
+</details>
+
+<details>
+<summary><strong>API overview</strong></summary>
+
+All endpoints use the `/api/v1` prefix. Swagger is available locally at `/docs` when `DEBUG=true`.
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/health` | Startup health |
+| GET | `/garments`, `/garments/{id}` | Browse garments and details |
+| GET | `/garments/categories`, `/garment-types` | Categories and garment types |
+| GET / HEAD | `/images/{path}` | Catalog images |
+| POST | `/outfits/suggest` | Suggest outfits |
+| POST / GET | `/outfits`, `/outfits/{id}` | Save and retrieve outfits |
+| POST | `/cultural/check` | Check a clothing combination |
+| GET | `/rentals/catalog` | Rental sizes, prices, and stock |
+| POST | `/rentals/calculate`, `/rentals/book` | Calculate pricing and create a booking |
+| GET | `/rentals/booking/{id}` | Retrieve a booking |
+
+The health endpoint confirms the server has started. Test catalog loading and suggestions separately to verify those features.
+
+</details>
+
+## Contributing
+
+Bug reports, documentation improvements, and pull requests are welcome. Include reproduction steps and relevant logs when reporting an issue.
+
+Before submitting changes, run the applicable checks in the [development guide](docs/DEVELOPMENT.md#kiểm-tra). Catalog or quiz changes should include a rebuilt, validated embedding bundle. UI changes should refresh the README screenshots when needed.
+
+## Current scope
+
+VietDrobe is a prototype. Bookings are stored in SQLite; the rental cart uses React Context and resets on page reload. Online payments and booking administration are not integrated. Cultural checks implement the rules maintained in this repository.
